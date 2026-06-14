@@ -365,7 +365,7 @@ footer li a:hover{color:#fff}
 .ic-chip.done{background:var(--leaf);color:#fff}
 .ic-board{display:inline-grid;gap:6px;margin:16px 0 18px}
 .ic-cell{width:40px;height:48px;border-radius:9px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:22px;color:var(--teal);text-transform:uppercase;background:#fff}
-.ic-cell.empty{border:0;background:transparent}
+.ic-cell.ic-empty{border:0;background:transparent;padding:0;grid-column:auto}
 .ic-cell.center{border-color:var(--coral);border-width:2.5px}
 .ic-cell.filled{border-color:var(--teal);background:var(--teal-50)}
 .ic-clue{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:15px}
@@ -605,15 +605,7 @@ footer li a:hover{color:#fff}
   <div class="wrap" style="padding-bottom:64px" id="archive">
     <div class="eyebrow g">The archive</div>
     <h2 class="sec" style="font-size:26px">Every issue, kept</h2>
-    <div class="arch-filters" style="margin-top:18px">
-      <button class="filt on" data-a="all" onclick="setArch(this,'all')">All</button>
-      <button class="filt" data-a="weekend" onclick="setArch(this,'weekend')">Weekend</button>
-      <button class="filt" data-a="schools" onclick="setArch(this,'schools')">Schools</button>
-      <button class="filt" data-a="sports" onclick="setArch(this,'sports')">Sports</button>
-      <button class="filt" data-a="food" onclick="setArch(this,'food')">Food &amp; drink</button>
-      <button class="filt" data-a="history" onclick="setArch(this,'history')">History</button>
-    </div>
-    <div class="issues" id="issueGrid"></div>
+    <div class="issues" id="issueGrid" style="margin-top:20px"></div>
   </div>
 </section>
 
@@ -624,62 +616,12 @@ footer li a:hover{color:#fff}
     <h2 class="sec">Play Ashburn Pulse</h2>
     <p class="lede">Two daily local word games, built to share. Your scores live on this device — no account needed.</p>
 
-    <!-- W&OD -->
-    <div class="game2" id="wod">
-      <div class="g2head">
-        <div class="g2titlewrap">
-          <div class="gs-title">W<b>&amp;</b>OD</div>
-          <div class="g2sub">Words &amp; Omitted Details — fill every blank. The missing words are all anagrams of the same letters.</div>
-        </div>
-        <div class="g2chips">
-          <span class="g2meta"><span id="wodNum">#001</span> · <span id="wodDiff">Trailhead</span></span>
-          <span class="g2scorechip"><span id="wodScore">10</span><span class="u">pts</span></span>
-        </div>
-      </div>
-      <div class="g2body">
-        <div class="wod-title" id="wodTitle"></div>
-        <p class="wod-sentence" id="wodSentence"></p>
-        <div class="wod-rackwrap">
-          <div class="meta">Shared letters <span id="wodRackInfo"></span></div>
-          <div class="wod-rack" id="wodRack"></div>
-        </div>
-        <div class="wod-actions">
-          <button class="gbtn" onclick="wodCheck()">Check answers</button>
-          <button class="gbtn sec" onclick="wodReveal()">Reveal a letter (&minus;1)</button>
-          <button class="gbtn sec" onclick="wodGiveUp()">Give up</button>
-        </div>
-        <div class="msg hint" id="wodMsg"></div>
-        <div class="g2foot"><span class="g2hint-sm" id="wodLabel"></span><button class="linkbtn" onclick="wodNext()">Try another ↻</button></div>
-        <div class="share-box" id="wodShare"><div class="eyebrow" style="color:#bcd2d8">Spoiler-free — paste anywhere</div><pre id="wodShareText"></pre><button class="cp" onclick="wodCopy()">Copy result</button></div>
-      </div>
-    </div>
-
-    <!-- The Interchange -->
-    <div class="game2" id="interchange">
-      <div class="g2head">
-        <div class="g2titlewrap">
-          <div class="gs-title">The <b>Interchange</b></div>
-          <div class="g2sub">Two words cross at one shared middle letter. Read the clue, work out the word, and name that letter.</div>
-        </div>
-        <div class="g2chips">
-          <span class="g2meta"><span id="icEdLabel">#001</span> · <span id="icDiff">Easy</span></span>
-          <span class="g2scorechip"><span id="icScore">0</span><span class="u">/15</span></span>
-        </div>
-      </div>
-      <div class="g2body ic-center">
-        <div class="ic-progress" id="icProg"></div>
-        <div class="ic-board" id="icBoard"></div>
-        <div class="ic-clue"><span class="lbl" id="icClue1Dir">Left-to-right</span><span id="icClue1"></span></div>
-        <div class="ic-clue" id="icClue2wrap" style="display:none"><span class="lbl" id="icClue2Dir">Top-to-bottom</span><span id="icClue2"></span></div>
-        <div class="ic-input">
-          <input id="icInput" type="text" maxlength="1" placeholder="?" autocomplete="off" spellcheck="false" aria-label="Shared middle letter">
-          <button class="gbtn" onclick="icGuess()">Guess letter</button>
-          <button class="gbtn sec" id="icRevealBtn" onclick="icReveal2()">2nd clue (&minus;2)</button>
-        </div>
-        <div class="msg hint" id="icMsg"></div>
-        <div class="g2foot"><span class="g2hint-sm">Three puzzles a day · 5 points each</span><button class="linkbtn" onclick="icNextEdition()">Try another edition ↻</button></div>
-      </div>
-    </div>
+    <!-- Games embedded from the master players in /games (single source of truth).
+         Update the master build (the-wod / the-interchange) and the site inherits. -->
+    <iframe src="games/wod.html?embed=1" title="W&amp;OD — today's puzzle" loading="lazy"
+            style="width:100%;max-width:720px;height:560px;border:1px solid #d9e1e7;border-radius:16px;background:#fff;display:block;margin:22px auto 0"></iframe>
+    <iframe src="games/interchange.html?embed=1" title="The Interchange — today's puzzle" loading="lazy"
+            style="width:100%;max-width:720px;height:700px;border:1px solid #d9e1e7;border-radius:16px;background:#fff;display:block;margin:22px auto 0"></iframe>
   </div>
 </section>
 
@@ -706,15 +648,11 @@ footer li a:hover{color:#fff}
 <!-- ====================================================== HISTORY ====================================================== -->
 <section class="page" id="page-history">
   <div class="wrap section-pad" style="padding-bottom:30px">
-    <div class="hist-hero">
+    <div class="hist-hero" style="grid-template-columns:1fr">
       <div>
         <div class="eyebrow y">The story of a place</div>
         <h2 class="sec">How a burning tree<br>became Data Center Alley</h2>
         <p class="lede">Ashburn's story begins before it was called Ashburn — as Farmwell, a quiet Loudoun farm town on a rail line. Two hundred years later, a town named for a creek (or maybe a lightning strike) carries a major share of the world's internet traffic. Here's the whole arc.</p>
-      </div>
-      <div class="glyph">
-        <span class="ash">A</span>
-        <span class="sub">Farmwell · est. before 1802</span>
       </div>
     </div>
   </div>
@@ -962,7 +900,7 @@ function icRenderBoard(reveal){
   for(let r=0;r<rows;r++){for(let c=0;c<cols;c++){
     let letter=null; const center=(r===aRow&&c===sCol);
     if(r===aRow)letter=p.across.word[c]; else if(c===sCol)letter=p.down.word[r];
-    if(letter===null){h+='<div class="ic-cell empty"></div>';continue;}
+    if(letter===null){h+='<div class="ic-cell ic-empty"></div>';continue;}
     const show=reveal?letter:(center?'':'');
     h+='<div class="ic-cell'+(center?' center':'')+(reveal?' filled':'')+'">'+show+'</div>';
   }}
@@ -1051,23 +989,19 @@ function buildGuide(){
 
 /* ============ newsletter archive ============ */
 const ISSUES=[
-  {badge:'The Pulse',color:'#FF5A47',dt:'Jun 12',tag:'history',h:'The data-center power fight comes home',li:['Dominion\u2019s proposed rate hike','What it means for your bill','Where the supervisors stand']},
-  {badge:'The Pulse',color:'#FF5A47',dt:'Jun 13',tag:'weekend',h:'Markets, music, and a brewery release',li:['EatLoco returns to One Loudoun','Rocknoceros plays free Monday','Old Ox summer pour']},
-  {badge:'The Pulse',color:'#FF5A47',dt:'Jun 8',tag:'schools',h:'Summer camps still have openings',li:['LCPS registration is live','FCA PROVEN camp 6/22','Loudoun Soccer sessions']},
-  {badge:'The Pulse',color:'#FF5A47',dt:'Jun 5',tag:'sports',h:'Why everyone\u2019s playing pickleball now',li:['New courts at the rec center','The leagues filling up fast','Where to find open play']},
-  {badge:'The Pulse',color:'#FF5A47',dt:'May 30',tag:'food',h:'Five patios for a long weekend',li:['Best shade after 4pm','Kid-friendly picks','Where to park']},
-  {badge:'The Pulse',color:'#FF5A47',dt:'May 25',tag:'history',h:'The trail under your feet',li:['A short W&OD history','Then-and-now photos','Where the depot stood']}
+  {badge:'The Pulse',color:'#FF5A47',dt:'Jun 13',tag:'weekend',h:'Live music on the farm, Orville Peck under the stars, and pro sports galore',li:['Vanish Farmwoods: free live music all weekend','Loudoun United hosts Rhode Island FC tonight','One Loudoun Carnival\u2019s last week \u2014 free admission'],url:'issues/2026-06-13.html'}
 ];
 let aFilter='all';
 function renderIssues(){
   const list=ISSUES.filter(i=>aFilter==='all'||i.tag===aFilter);
-  document.getElementById('issueGrid').innerHTML=list.map(i=>
-    '<div class="issue" onclick="alert(\'Demo: opens the full issue (hosted on your email platform).\')">'+
+  document.getElementById('issueGrid').innerHTML=list.map(i=>{
+    const act=i.url?('window.open(\''+i.url+'\',\'_blank\',\'noopener\')'):'alert(\'This issue isn\\u2019t hosted yet.\')';
+    return '<div class="issue" onclick="'+act+'">'+
       '<div class="ih"><span class="badge" style="background:'+i.color+'">'+i.badge+'</span><span class="dt">'+i.dt+'</span></div>'+
       '<div class="ib"><h4>'+i.h+'</h4><ul>'+i.li.map(x=>'<li>'+x+'</li>').join('')+'</ul>'+
       '<span class="read">Read full issue →</span></div>'+
-    '</div>'
-  ).join('');
+    '</div>';
+  }).join('');
 }
 function setArch(btn,a){aFilter=a;document.querySelectorAll('.arch-filters .filt').forEach(b=>b.classList.toggle('on',b===btn));renderIssues();}
 
@@ -1087,10 +1021,22 @@ function photoFallback2(img){if(img.getAttribute('data-cdn')){var u=img.getAttri
 function scrollToId(id){var e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
 
 /* ============ init ============ */
-wodInit();
-icInit();
+if(document.getElementById('wodSentence'))wodInit();
+if(document.getElementById('icBoard'))icInit();
 buildGuide();
 renderIssues();
+</script>
+<script>
+/* Auto-size the embedded game iframes to their content (same-origin players). */
+(function(){
+  function fit(){
+    document.querySelectorAll('iframe[src^="games/"]').forEach(function(f){
+      try{ var d=f.contentDocument; if(d&&d.body){ var h=Math.max(d.body.scrollHeight,d.documentElement.scrollHeight); if(h>60) f.style.height=(h+6)+'px'; } }catch(e){}
+    });
+  }
+  window.addEventListener('load',function(){ fit(); setInterval(fit,800); });
+  document.querySelectorAll('iframe[src^="games/"]').forEach(function(f){ f.addEventListener('load',function(){ setTimeout(fit,60); }); });
+})();
 </script>
 </body>
 </html>
