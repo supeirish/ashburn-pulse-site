@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashburn Pulse — your four minutes on Ashburn</title>
+<meta name="description" content="Your four minutes on Ashburn — one sharp local brief, the weekend plan, a daily local puzzle, and the only Ashburn (ZIP 20147) reference you'll bookmark. Free.">
+<meta name="theme-color" content="#0F3D4C">
+
+<!-- Social share preview (Facebook, iMessage, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ashburn Pulse">
+<meta property="og:title" content="Ashburn Pulse — your four minutes on Ashburn">
+<meta property="og:description" content="One sharp local brief, the weekend plan, a daily local puzzle, and the only Ashburn reference you'll bookmark. Free.">
+<meta property="og:url" content="https://ashburnpulse.com">
+<meta property="og:image" content="https://ashburnpulse.com/share-card.png">
+
+<!-- Social share preview (X / Twitter) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ashburn Pulse — your four minutes on Ashburn">
+<meta name="twitter:description" content="One sharp local brief, the weekend plan, a daily local puzzle, and the only Ashburn reference you'll bookmark. Free.">
+<meta name="twitter:image" content="https://ashburnpulse.com/share-card.png">
+
+<!-- Favicon: the pulse mark, drawn inline so there's no extra file to host -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='1' y='1' width='38' height='38' rx='9' fill='%230F3D4C'/%3E%3Cpath d='M5 23 L13 23 L16 14 L21 30 L25 19 L28 23 L35 23' stroke='%23FFB341' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='35' cy='23' r='2.4' fill='%23FF5A47'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ MORNING CLEAR — token system ============ */
+:root{
+  --ink:#181b20; --paper:#ffffff; --soft:#f7f8f6; --panel:#fbfcfb;
+  --teal:#0F3D4C; --teal-700:#16566b; --teal-50:#eaf2f4;
+  --coral:#FF5A47; --sky:#3D9BD9; --leaf:#3FA776; --sun:#FFB341;
+  --mute:#62707A; --line:#e7e6e2; --line-2:#eceae5;
+  --disp:'Plus Jakarta Sans',sans-serif;
+  --body:'Inter',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --wrap:1080px;
+  --r:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 22px}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+::selection{background:var(--sun);color:var(--ink)}
+:focus-visible{outline:2.5px solid var(--sky);outline-offset:2px;border-radius:4px}
+
+/* ============ sunrise bar — the signature device ============ */
+.sunrise{height:4px;display:flex}
+.sunrise i{flex:1}
+.sunrise i:nth-child(1){background:var(--coral)}
+.sunrise i:nth-child(2){background:var(--sky)}
+.sunrise i:nth-child(3){background:var(--leaf)}
+.sunrise i:nth-child(4){background:var(--sun)}
+
+/* ============ top nav ============ */
+header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:8px;height:62px}
+.brand{display:flex;align-items:center;gap:11px;margin-right:auto}
+.mark{position:relative;width:38px;height:38px;flex:none}
+.mark svg{width:100%;height:100%;display:block}
+.brand .name{font-family:var(--disp);font-weight:800;font-size:20px;letter-spacing:-.02em;color:var(--teal);line-height:1}
+.brand .name b{color:var(--coral);font-weight:800}
+.brand .sub{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+nav.menu{display:flex;gap:2px}
+.tab{appearance:none;background:none;border:0;padding:9px 14px;border-radius:9px;font-weight:600;font-size:14.5px;color:var(--mute);letter-spacing:-.01em;transition:.15s}
+.tab:hover{color:var(--teal);background:var(--teal-50)}
+.tab.on{color:var(--teal);background:var(--teal-50)}
+.tab .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--coral);margin-left:6px;vertical-align:middle;animation:pulse 2.4s ease-in-out infinite}
+.navsub{display:flex;align-items:center;gap:6px}
+.btn-sub{background:var(--teal);color:#fff;border:0;border-radius:10px;padding:9px 15px;font-weight:700;font-size:14px;letter-spacing:-.01em;transition:.15s}
+.btn-sub:hover{background:var(--teal-700)}
+.hamb{display:none;background:none;border:1px solid var(--line);border-radius:9px;width:40px;height:40px;align-items:center;justify-content:center}
+.hamb svg{width:20px;height:20px;stroke:var(--teal)}
+
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
+
+/* ============ page system ============ */
+.page{display:none;animation:fade .35s ease}
+.page.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ============ shared bits ============ */
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.eyebrow.c{color:var(--coral)}.eyebrow.s{color:var(--sky)}.eyebrow.g{color:var(--leaf)}.eyebrow.y{color:#cf8a14}
+h2.sec{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.6vw,38px);letter-spacing:-.03em;line-height:1.05;margin:10px 0 0}
+.lede{font-size:18px;color:#3a4047;max-width:62ch;margin-top:14px}
+.factstrip{font-family:var(--mono);font-size:12px;color:var(--mute);letter-spacing:.02em;display:flex;flex-wrap:wrap;gap:6px 14px}
+.factstrip b{color:var(--teal);font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:4px 9px;border-radius:999px;border:1px solid var(--line)}
+.pill .sw{width:7px;height:7px;border-radius:50%}
+.section-pad{padding:64px 0}
+.divider{height:1px;background:var(--line)}
+
+/* ============ HOME ============ */
+.hero{padding:54px 0 30px}
+.hero .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:46px;align-items:center}
+.hero h1{font-family:var(--disp);font-weight:800;font-size:clamp(38px,6vw,62px);line-height:.98;letter-spacing:-.045em;color:var(--teal)}
+.hero h1 em{font-style:normal;color:var(--coral)}
+.hero p.tag{font-size:20px;color:#3a4047;margin-top:18px;max-width:46ch}
+.hero .cta-row{display:flex;gap:11px;margin-top:26px;flex-wrap:wrap}
+.cta{border:0;border-radius:11px;padding:13px 20px;font-weight:700;font-size:15.5px;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:9px;transition:.15s}
+.cta.primary{background:var(--coral);color:#fff}
+.cta.primary:hover{filter:brightness(.94)}
+.cta.ghost{background:#fff;color:var(--teal);border:1.5px solid var(--line)}
+.cta.ghost:hover{border-color:var(--teal);background:var(--teal-50)}
+.hero-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 1px 0 rgba(0,0,0,.02),0 18px 40px -28px rgba(15,61,76,.4)}
+.hero-card .hc-top{padding:18px 20px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line-2)}
+.hero-card .hc-body{padding:20px}
+.hc-tile{aspect-ratio:5/3;border-radius:12px;background:
+   linear-gradient(135deg,#0F3D4C,#16566b 60%,#3D9BD9);
+   position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:16px}
+.hc-tile .qm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:120px;color:rgba(255,255,255,.13)}
+.hc-tile .lbl{position:relative;color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.25);padding:5px 10px;border-radius:7px}
+.hc-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px}
+.hc-row .s{font-family:var(--mono);font-size:12px;color:var(--mute)}
+
+/* stat band */
+.statband{background:var(--teal);color:#fff}
+.statband .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:26px 22px}
+.stat .n{font-family:var(--disp);font-weight:800;font-size:30px;letter-spacing:-.03em;line-height:1}
+.stat .n em{font-style:normal;color:var(--sun)}
+.stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#bcd2d8;margin-top:7px}
+
+/* explore cards */
+.explore{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.xcard{border:1px solid var(--line);border-radius:var(--r);padding:20px;background:#fff;transition:.18s;cursor:pointer;position:relative;overflow:hidden}
+.xcard:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:0 16px 30px -24px rgba(15,61,76,.5)}
+.xcard .ic{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.xcard .ic svg{width:22px;height:22px}
+.xcard h3{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:-.02em}
+.xcard p{font-size:14px;color:var(--mute);margin-top:6px}
+.xcard .go{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-top:14px;display:inline-flex;gap:5px;align-items:center}
+
+/* today list */
+.today-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:40px}
+.tlist{list-style:none}
+.tlist li{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line-2)}
+.tlist li:first-child{padding-top:0}
+.tflag{flex:none;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:6px;height:fit-content;white-space:nowrap}
+.tlist h4{font-family:var(--disp);font-weight:600;font-size:16.5px;letter-spacing:-.01em}
+.tlist p{font-size:14px;color:var(--mute);margin-top:2px}
+
+/* weekend planner card (the screenshot-able growth feature) */
+.planner{border:2px solid var(--teal);border-radius:16px;overflow:hidden}
+.planner .ph{background:var(--teal);color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
+.planner .ph .t{font-family:var(--disp);font-weight:800;font-size:16px;letter-spacing:-.01em}
+.planner .ph .d{font-family:var(--mono);font-size:11px;color:#bcd2d8}
+.planner ul{list-style:none;padding:6px 18px 16px}
+.planner li{padding:12px 0;border-bottom:1px dashed var(--line);display:flex;gap:10px;align-items:flex-start}
+.planner li:last-child{border:0}
+.planner .tag{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.06em;padding:3px 6px;border-radius:5px;flex:none;margin-top:2px}
+.tag.free{background:#e7f5ee;color:#1f7a51}
+.tag.kids{background:#fff1dd;color:#b9791a}
+.tag.new{background:#ffe9e6;color:#d23b2a}
+.planner h5{font-size:15px;font-weight:600;font-family:var(--disp);letter-spacing:-.01em}
+.planner p{font-size:13px;color:var(--mute)}
+
+/* signup band */
+.signup{background:linear-gradient(120deg,var(--teal),var(--teal-700));color:#fff;border-radius:22px;padding:44px 40px;position:relative;overflow:hidden}
+.signup::after{content:"";position:absolute;right:-40px;top:-40px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(255,179,65,.35),transparent 70%)}
+.signup h2{font-family:var(--disp);font-weight:800;font-size:clamp(24px,3vw,34px);letter-spacing:-.03em;position:relative}
+.signup p{color:#cfe2e7;margin-top:10px;max-width:50ch;position:relative}
+.signup .form{display:flex;gap:10px;margin-top:22px;max-width:480px;position:relative;flex-wrap:wrap}
+.signup input{flex:1;min-width:200px;border:0;border-radius:11px;padding:14px 16px;font-size:15px;font-family:inherit}
+.signup .cta.primary{background:var(--sun);color:var(--ink)}
+.signup .edrow{display:flex;gap:18px;margin-top:18px;position:relative;flex-wrap:wrap}
+.signup .ed{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:#cfe2e7;display:flex;align-items:center;gap:7px}
+.signup .ed .sw{width:8px;height:8px;border-radius:50%}
+
+/* ============ PLAY ============ */
+.play-hero{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:stretch}
+.game-stage{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px}
+.gs-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.gs-head .meta{font-family:var(--mono);font-size:11.5px;color:var(--mute);letter-spacing:.04em}
+.gs-title{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.02em;color:var(--teal)}
+.gs-title b{color:var(--coral)}
+.clue{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0 16px}
+.clue .q{font-size:16px;font-weight:500;color:var(--ink)}
+.scramble{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.scramble span{font-family:var(--disp);font-weight:800;font-size:20px;width:38px;height:46px;border-radius:9px;background:var(--teal-50);color:var(--teal);display:flex;align-items:center;justify-content:center;border:1px solid #d3e3e7}
+.slots{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0;min-height:46px}
+.slot{width:38px;height:46px;border-radius:9px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:20px;text-transform:uppercase;color:var(--teal)}
+.slot.filled{border-color:var(--teal);background:#fff}
+.guess-input{display:flex;gap:9px;margin-top:6px}
+.guess-input input{flex:1;border:1.5px solid var(--line);border-radius:11px;padding:12px 14px;font-size:16px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase}
+.guess-input input:focus{border-color:var(--teal);outline:none}
+.gbtn{background:var(--teal);color:#fff;border:0;border-radius:11px;padding:0 20px;font-weight:700;font-size:15px}
+.gbtn.sec{background:#fff;color:var(--teal);border:1.5px solid var(--line)}
+.tries{display:flex;gap:7px;margin:16px 0 4px}
+.try{width:26px;height:26px;border-radius:7px;background:var(--line);display:flex;align-items:center;justify-content:center;font-size:13px}
+.try.miss{background:#ffe2dd}
+.try.hit{background:#cdeede}
+.msg{font-size:14px;margin-top:12px;min-height:22px;font-weight:600}
+.msg.win{color:var(--leaf)}.msg.lose{color:var(--coral)}.msg.hint{color:var(--mute);font-weight:500}
+.share-box{margin-top:14px;background:var(--teal);color:#fff;border-radius:12px;padding:16px;display:none}
+.share-box.show{display:block}
+.share-box pre{font-family:var(--mono);font-size:13px;line-height:1.7;white-space:pre-wrap;color:#eaf2f4}
+.share-box .cp{margin-top:10px;background:var(--sun);color:var(--ink);border:0;border-radius:9px;padding:9px 16px;font-weight:700;font-size:13px}
+
+/* stats panel */
+.stats-panel{border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column}
+.sp-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0 20px}
+.sp-cell{text-align:center}
+.sp-cell .n{font-family:var(--disp);font-weight:800;font-size:28px;letter-spacing:-.03em;color:var(--teal)}
+.sp-cell .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+.dist{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.dist-row{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px}
+.dist-row .k{width:14px;color:var(--mute)}
+.dist-row .bar{height:20px;border-radius:5px;background:var(--teal);min-width:22px;color:#fff;font-size:11px;display:flex;align-items:center;justify-content:flex-end;padding:0 7px;font-weight:600;transition:width .5s}
+.dist-row .bar.cur{background:var(--coral)}
+
+/* other games */
+.gcards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.gcard{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff}
+.gcard .top{height:96px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.gcard.g1 .top{background:linear-gradient(135deg,#0F3D4C,#3D9BD9)}
+.gcard.g2 .top{background:linear-gradient(135deg,#3FA776,#FFB341)}
+.gcard .top .big{font-family:var(--disp);font-weight:800;color:rgba(255,255,255,.9);font-size:22px;letter-spacing:-.02em;text-align:center;padding:0 16px}
+.gcard .body{padding:18px}
+.gcard h4{font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:-.01em}
+.gcard .freq{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:5px 0 8px}
+.gcard p{font-size:13.5px;color:var(--mute)}
+.gcard .soon{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#cf8a14;background:#fff7eb;padding:5px 10px;border-radius:7px}
+
+/* ============ GUIDE ============ */
+.guide-search{display:flex;gap:10px;margin:24px 0 10px;flex-wrap:wrap}
+.guide-search input{flex:1;min-width:240px;border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;font-size:15px;font-family:inherit}
+.guide-search input:focus{border-color:var(--teal);outline:none}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 26px}
+.filt{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 15px;font-size:13.5px;font-weight:600;color:var(--mute);transition:.15s}
+.filt:hover{border-color:var(--teal);color:var(--teal)}
+.filt.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{border:1px solid var(--line);border-radius:var(--r);padding:18px;background:#fff;display:flex;flex-direction:column;transition:.16s}
+.card:hover{border-color:var(--teal-700);box-shadow:0 14px 28px -24px rgba(15,61,76,.5)}
+.card .cat{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--mute);margin-bottom:9px}
+.card .cat .sw{width:7px;height:7px;border-radius:50%}
+.card h4{font-family:var(--disp);font-weight:700;font-size:17.5px;letter-spacing:-.02em;line-height:1.15}
+.card .area{font-family:var(--mono);font-size:11px;color:var(--sky);margin-top:4px;font-weight:500}
+.card p{font-size:13.5px;color:#4a5158;margin-top:9px;flex:1}
+.card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--line-2)}
+.card .ext{font-weight:700;font-size:13px;color:var(--teal);display:inline-flex;gap:5px;align-items:center}
+.card .ext:hover{color:var(--coral)}
+.card .ver{font-family:var(--mono);font-size:10px;color:#9aa0a6}
+.guide-help{margin-top:30px;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.guide-help h4{font-family:var(--disp);font-weight:700;font-size:18px}
+.guide-help p{font-size:14px;color:var(--mute);margin-top:4px;max-width:54ch}
+.empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--mute);font-size:15px}
+
+/* ============ HISTORY ============ */
+.hist-hero{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end}
+.hist-hero .glyph{aspect-ratio:1;border-radius:18px;background:radial-gradient(120% 120% at 30% 20%,#16566b,#0F3D4C 70%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hist-hero .glyph .ash{font-family:var(--disp);font-weight:800;font-size:90px;color:rgba(255,179,65,.92);line-height:.8}
+.hist-hero .glyph .sub{position:absolute;bottom:16px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#bcd2d8}
+.timeline{position:relative;margin-top:18px;padding-left:30px}
+.timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl{position:relative;padding:14px 0}
+.tl::before{content:"";position:absolute;left:-25px;top:20px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--teal)}
+.tl.coral::before{border-color:var(--coral)}.tl.sky::before{border-color:var(--sky)}.tl.leaf::before{border-color:var(--leaf)}.tl.sun::before{border-color:var(--sun)}
+.tl .yr{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--coral)}
+.tl h4{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:-.01em;margin-top:3px}
+.tl p{font-size:14.5px;color:#4a5158;margin-top:5px;max-width:64ch}
+.era{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:12px}
+.era summary{padding:18px 20px;cursor:pointer;display:flex;align-items:center;gap:14px;list-style:none;background:#fff;transition:.15s}
+.era summary::-webkit-details-marker{display:none}
+.era summary:hover{background:var(--soft)}
+.era .chip{font-family:var(--mono);font-size:11px;font-weight:600;color:#fff;padding:4px 9px;border-radius:6px;flex:none}
+.era[data-c="teal"] .chip{background:var(--teal)}
+.era[data-c="coral"] .chip{background:var(--coral)}
+.era[data-c="sky"] .chip{background:var(--sky)}
+.era[data-c="leaf"] .chip{background:var(--leaf)}
+.era[data-c="sun"] .chip{background:#cf8a14}
+.era summary .et{font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:-.01em;flex:1}
+.era summary .ar{font-family:var(--mono);font-size:18px;color:var(--mute);transition:.2s}
+.era[open] summary .ar{transform:rotate(90deg)}
+.era .ebody{padding:4px 20px 22px;border-top:1px solid var(--line-2)}
+.era .ebody p{font-size:15px;color:#3a4047;margin-top:14px}
+.then-now{background:var(--teal);color:#fff;border-radius:18px;padding:30px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.then-now h3{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.02em}
+.then-now p{color:#cfe2e7;margin-top:8px;max-width:52ch}
+.sources{font-family:var(--mono);font-size:12px;color:var(--mute);line-height:1.9}
+.sources a{color:var(--teal);text-decoration:underline;text-underline-offset:3px}
+
+/* ============ NEWSLETTER ============ */
+.nl-hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.ed-stack{display:flex;flex-direction:column;gap:12px}
+.edrow2{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:#fff}
+.edrow2 .bar{width:5px;align-self:stretch;border-radius:3px;flex:none}
+.edrow2 h4{font-family:var(--disp);font-weight:700;font-size:16px}
+.edrow2 .when{font-family:var(--mono);font-size:11px;color:var(--mute);margin-left:8px;font-weight:500}
+.edrow2 p{font-size:13.5px;color:var(--mute);margin-top:3px}
+.arch-filters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 24px}
+.issues{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.issue{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;transition:.16s;cursor:pointer}
+.issue:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:0 14px 28px -24px rgba(15,61,76,.5)}
+.issue .ih{padding:14px 16px 12px;border-bottom:1px solid var(--line-2);display:flex;align-items:center;justify-content:space-between}
+.issue .badge{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:4px 8px;border-radius:6px}
+.issue .dt{font-family:var(--mono);font-size:11px;color:var(--mute)}
+.issue .ib{padding:14px 16px 16px}
+.issue h4{font-family:var(--disp);font-weight:700;font-size:16.5px;letter-spacing:-.01em;line-height:1.2}
+.issue ul{list-style:none;margin-top:10px}
+.issue li{font-size:13px;color:#4a5158;padding-left:16px;position:relative;margin-top:5px}
+.issue li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--leaf)}
+.issue .read{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-top:13px;display:inline-flex;gap:5px}
+
+/* ============ footer ============ */
+footer.site{background:var(--teal);color:#cfe2e7;margin-top:30px}
+footer .wrap{padding:46px 22px 30px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+footer .name{font-family:var(--disp);font-weight:800;font-size:22px;color:#fff;letter-spacing:-.02em}
+footer .name b{color:var(--sun)}
+footer p.f{font-size:14px;margin-top:10px;max-width:34ch;color:#bcd2d8}
+footer h5{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8fb4bd;margin-bottom:12px}
+footer ul{list-style:none}
+footer li{margin-bottom:9px}
+footer li a{font-size:14px;color:#cfe2e7}
+footer li a:hover{color:#fff}
+.fbar{border-top:1px solid rgba(255,255,255,.13);margin-top:34px;padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:var(--mono);font-size:11px;color:#8fb4bd}
+
+/* ============ responsive ============ */
+@media (max-width:920px){
+  nav.menu{position:fixed;inset:62px 0 auto 0;background:#fff;flex-direction:column;padding:10px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:.25s;box-shadow:0 20px 40px -30px rgba(0,0,0,.4)}
+  nav.menu.open{transform:none}
+  .tab{text-align:left;width:100%;padding:13px 16px;font-size:16px}
+  .hamb{display:flex}
+  .navsub .btn-sub{display:none}
+  .hero .grid,.today-grid,.play-hero,.hist-hero,.nl-hero{grid-template-columns:1fr}
+  .explore,.cards,.issues{grid-template-columns:1fr 1fr}
+  .statband .wrap{grid-template-columns:1fr 1fr;gap:18px}
+  .gcards{grid-template-columns:1fr}
+  .then-now{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .explore,.cards,.issues{grid-template-columns:1fr}
+  .sp-row{grid-template-columns:1fr 1fr}
+  .fgrid{grid-template-columns:1fr}
+  .hero{padding:34px 0 20px}
+  .section-pad{padding:46px 0}
+}
+
+/* ============ hero signup (added) ============ */
+.hero-signup{display:flex;gap:10px;margin-top:18px;max-width:440px;flex-wrap:wrap}
+.hero-signup input{flex:1;min-width:200px;border:1.5px solid var(--line);border-radius:11px;padding:13px 15px;font-size:15px;font-family:inherit}
+.hero-signup input:focus{border-color:var(--teal);outline:none}
+.hero-sublabel{font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:9px;letter-spacing:.01em}
+
+/* ============ mission (added) ============ */
+.mission{max-width:760px}
+.mission-lede{font-size:19px;line-height:1.6;color:#3a4047;margin-top:14px}
+
+/* ============ The Interchange game (added) ============ */
+.ic-wrap{margin-top:48px}
+.ic-stage{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;max-width:580px;margin-top:18px}
+.ic-progress{display:flex;gap:8px;margin:6px 0 6px}
+.ic-chip{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:6px;background:var(--line);color:var(--mute)}
+.ic-chip.on{background:var(--teal);color:#fff}
+.ic-chip.done{background:var(--leaf);color:#fff}
+.ic-board{display:inline-grid;gap:6px;margin:16px 0 18px}
+.ic-cell{width:40px;height:48px;border-radius:9px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:22px;color:var(--teal);text-transform:uppercase;background:#fff}
+.ic-cell.empty{border:0;background:transparent}
+.ic-cell.center{border-color:var(--coral);border-width:2.5px}
+.ic-cell.filled{border-color:var(--teal);background:var(--teal-50)}
+.ic-clue{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:15px}
+.ic-clue .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);display:block;margin-bottom:4px}
+.ic-input{display:flex;gap:9px;margin-top:14px}
+.ic-input input{width:64px;text-align:center;border:1.5px solid var(--line);border-radius:11px;padding:12px;font-size:22px;font-family:var(--disp);font-weight:800;text-transform:uppercase;color:var(--teal)}
+.ic-input input:focus{border-color:var(--teal);outline:none}
+
+/* ============ Guide — sectioned list (added) ============ */
+.guide-toc{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 8px}
+.guide-toc a{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.03em;border:1px solid var(--line);border-radius:999px;padding:8px 14px;color:var(--teal);cursor:pointer}
+.guide-toc a:hover{background:var(--teal-50);border-color:var(--teal)}
+.gsec{padding:30px 0 6px;border-top:1px solid var(--line);margin-top:4px}
+.gsec h3{font-family:var(--disp);font-weight:800;font-size:23px;letter-spacing:-.02em;color:var(--teal);display:flex;align-items:center;gap:10px;scroll-margin-top:80px}
+.gsec h3 .sw{width:11px;height:11px;border-radius:50%;flex:none}
+.gsec .intro{font-size:15px;color:#4a5158;margin:9px 0 16px;max-width:72ch}
+.glist{list-style:none}
+.glist li{padding:13px 0;border-bottom:1px solid var(--line-2);display:grid;grid-template-columns:230px 1fr;gap:20px;align-items:start}
+.glist li:last-child{border-bottom:0}
+.gname{font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:-.01em;color:var(--ink)}
+.gname a{color:var(--teal)}
+.gname a:hover{text-decoration:underline;text-underline-offset:3px}
+.gsub{font-family:var(--mono);font-size:11px;color:var(--sky);font-weight:500;margin-top:3px}
+.gdesc{font-size:14.5px;color:#4a5158;line-height:1.55}
+@media(max-width:620px){.glist li{grid-template-columns:1fr;gap:4px}}
+
+
+/* ============ Play: two-game cards (added) ============ */
+.game2{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;margin-top:28px}
+.g2head{background:var(--panel);border-bottom:1px solid var(--line);padding:18px 22px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.g2head .gs-title{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.02em;color:var(--teal)}
+.g2head .gs-title b{color:var(--coral)}
+.g2sub{font-size:13.5px;color:var(--mute);margin-top:4px;max-width:60ch}
+.g2meta{font-family:var(--mono);font-size:12px;color:var(--teal);background:var(--teal-50);padding:6px 11px;border-radius:8px;white-space:nowrap;font-weight:600}
+.g2body{display:grid;grid-template-columns:1.5fr .85fr;gap:26px;padding:22px}
+.g2side{display:flex;flex-direction:column;gap:14px}
+.g2score{background:var(--teal);color:#fff;border-radius:14px;padding:18px;text-align:center}
+.g2score .n{font-family:var(--disp);font-weight:800;font-size:40px;line-height:1;letter-spacing:-.03em}
+.g2score .l{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#bcd2d8;margin-top:8px}
+.g2label{font-family:var(--mono);font-size:11.5px;color:var(--mute);text-align:center}
+.g2how{font-size:13px;line-height:1.55;color:#4a5158;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.g2how b{color:var(--teal)}
+.wod-title{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--teal);margin-bottom:8px}
+.wod-sentence{font-size:18px;line-height:2.1;color:var(--ink)}
+.wod-blank{border:0;border-bottom:2px solid var(--coral);background:var(--teal-50);border-radius:5px 5px 0 0;font-family:var(--mono);font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.12em;text-align:center;padding:3px 6px;color:var(--teal);min-width:74px}
+.wod-blank:focus{outline:none;background:#fff;border-bottom-color:var(--teal)}
+.wod-blank.good{background:#e7f5ee;border-bottom-color:var(--leaf);color:#1f7a51}
+.wod-blank.bad{background:#ffe9e6;border-bottom-color:var(--coral);color:#d23b2a}
+.wod-rackwrap{margin:18px 0 6px}
+.wod-rack{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.wod-rack .rk{width:38px;height:46px;border-radius:9px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:20px;color:#c2c8cd;background:#fff}
+.wod-rack .rk.on{border-color:var(--teal);background:var(--teal-50);color:var(--teal)}
+.wod-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+@media(max-width:760px){.g2body{grid-template-columns:1fr}.wod-sentence{font-size:16px;line-height:2}}
+
+
+/* ============ History timeline thumbnails (added) ============ */
+.tl{display:grid;grid-template-columns:1fr 140px;gap:20px;align-items:start}
+.tl .tlc{min-width:0}
+.tl .thumb{width:140px}
+.tl .thumb img,.tl .thumb svg{width:140px;height:96px;object-fit:cover;border-radius:11px;border:1px solid var(--line);display:block;background:var(--soft)}
+.tl .cred{display:block;font-family:var(--mono);font-size:9px;color:#9aa0a6;margin-top:5px;line-height:1.3}
+.tl .cred a{color:#9aa0a6;text-decoration:underline}
+@media(max-width:620px){.tl{grid-template-columns:1fr}.tl .thumb,.tl .thumb img,.tl .thumb svg{width:100%}}
+
+
+/* ============ Guide groups (added) ============ */
+.ggroup{margin:14px 0 4px}
+.gghead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:10px 0 2px;border-bottom:2px solid var(--teal-50)}
+.ggname{font-family:var(--disp);font-weight:700;font-size:16.5px;letter-spacing:-.01em;color:var(--ink)}
+.ggname a{color:var(--teal)}
+.ggname a:hover{text-decoration:underline;text-underline-offset:3px}
+.ggnote{font-family:var(--mono);font-size:11px;color:var(--mute)}
+.ggroup .glist li{grid-template-columns:200px 1fr}
+@media(max-width:620px){.ggroup .glist li{grid-template-columns:1fr}}
+
+
+.statband .wrap{grid-template-columns:repeat(3,1fr)}
+@media(max-width:560px){.statband .wrap{grid-template-columns:1fr}}
+
+/* ============ Play layout v2 (added) ============ */
+.g2head{align-items:center}
+.g2titlewrap{min-width:0;flex:1}
+.g2chips{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.g2scorechip{font-family:var(--disp);font-weight:800;font-size:20px;color:#fff;background:var(--teal);border-radius:10px;padding:7px 13px;white-space:nowrap;line-height:1}
+.g2scorechip .u{font-size:12px;color:#bcd2d8;margin-left:3px;font-weight:600}
+.g2body{display:block;padding:24px}
+.wod-sentence{max-width:660px}
+.g2foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.g2hint-sm{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+.linkbtn{background:none;border:0;color:var(--teal);font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;padding:0}
+.linkbtn:hover{color:var(--coral)}
+.ic-center{max-width:520px;margin:0 auto;text-align:center}
+.ic-center .ic-progress{justify-content:center}
+.ic-center .ic-clue{text-align:left}
+.ic-center .ic-input{justify-content:center}
+.ic-cell{width:44px;height:52px;font-size:23px}
+@media(max-width:480px){.ic-cell{width:38px;height:46px;font-size:20px}}
+
+
+/* ============ History timeline thumbnails v2 (bigger) ============ */
+.tl{grid-template-columns:1fr 200px;gap:22px}
+.tl .thumb{width:200px}
+.tl .thumb img,.tl .thumb svg{width:200px;height:130px;object-fit:cover;border-radius:12px;border:1px solid var(--line);display:block;background:var(--soft)}
+@media(max-width:620px){.tl{grid-template-columns:1fr}.tl .thumb,.tl .thumb img,.tl .thumb svg{width:100%;height:auto;aspect-ratio:200/130}}
+
+
+/* history timeline: text-only (images removed) */
+.tl{display:block}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<div class="sunrise"><i></i><i></i><i></i><i></i></div>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#" onclick="go('home');return false">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="none">
+          <rect x="1" y="1" width="38" height="38" rx="9" fill="#0F3D4C"/>
+          <path d="M5 23 L13 23 L16 14 L21 30 L25 19 L28 23 L35 23" stroke="#FFB341" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="35" cy="23" r="2.4" fill="#FF5A47"/>
+        </svg>
+      </span>
+      <span>
+        <span class="name">Ashburn <b>Pulse</b></span>
+        <span class="sub">Loudoun · ZIP 20147</span>
+      </span>
+    </a>
+    <nav class="menu" id="menu">
+      <button class="tab on" data-p="home" onclick="go('home')">Newsletter</button>
+      <button class="tab" data-p="play" onclick="go('play')">Play <span class="dot"></span></button>
+      <button class="tab" data-p="guide" onclick="go('guide')">Local Links</button>
+      <button class="tab" data-p="history" onclick="go('history')">Ashburn History</button>
+    </nav>
+    <div class="navsub">
+      <button class="btn-sub" onclick="go('home')">Subscribe</button>
+      <button class="hamb" onclick="document.getElementById('menu').classList.toggle('open')" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ====================================================== HOME ====================================================== -->
+<main>
+<section class="page on" id="page-home">
+  <div class="wrap hero">
+    <div class="grid">
+      <div>
+        <div class="eyebrow c">Ashburn Pulse · a weekly local read</div>
+        <h1>Your four minutes<br>on <em>Ashburn.</em></h1>
+        <p class="tag">One sharp local read, every Thursday — what's worth your time, where to go, and the people making it happen. Free.</p>
+        <form class="hero-signup" onsubmit="fakeSub(this.querySelector('button'));return false">
+          <input type="email" placeholder="you@email.com" aria-label="Email address">
+          <button class="cta primary" type="submit">Get the Pulse — free</button>
+        </form>
+        <div class="hero-sublabel">A new issue every Thursday. No spam · unsubscribe anytime.</div>
+        <div class="cta-row" style="margin-top:18px">
+          <button class="cta ghost" onclick="scrollToId('archive')">See past issues ↓</button>
+          <button class="cta ghost" onclick="go('play')">Play today's game</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hc-top">
+          <div class="eyebrow">Today's puzzle</div>
+          <div class="pill"><span class="sw" style="background:var(--coral)"></span>W&amp;OD</div>
+        </div>
+        <div class="hc-body">
+          <div class="hc-tile">
+            <span class="qm">?</span>
+            <span class="lbl">Words &amp; Omitted Details</span>
+          </div>
+          <div class="hc-row">
+            <span class="s">🔥 Build a streak</span>
+            <button class="cta primary" style="padding:9px 16px;font-size:14px" onclick="go('play')">Play →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mission (above the stats, so it's seen early) -->
+  <div class="wrap" style="padding:42px 22px 10px">
+    <div class="mission">
+      <div class="eyebrow c">Why we're here</div>
+      <h2 class="sec">Get out. Together.</h2>
+      <p class="mission-lede">We believe people are made for connection — and that the best moments happen when they're shared with other people. But life is busy. So every week we gather what's worth your time, to make it a little easier to get out, enjoy where you live, and do it together.</p>
+    </div>
+  </div>
+
+  <!-- stat band -->
+  <div class="statband">
+    <div class="wrap">
+      <div class="stat"><div class="n">Thu</div><div class="l">New issue, every week</div></div>
+      <div class="stat"><div class="n">4<em>min</em></div><div class="l">Start to finish</div></div>
+      <div class="stat"><div class="n">~46<em>k</em></div><div class="l">Neighbors in Ashburn</div></div>
+    </div>
+  </div>
+
+  <!-- what's inside -->
+  <div class="wrap section-pad" style="padding-bottom:18px">
+    <div class="nl-hero">
+      <div>
+        <div class="eyebrow">What's inside</div>
+        <h2 class="sec" style="font-size:26px">One read, every Thursday</h2>
+        <p class="lede">Free, four minutes, no fluff. Here's what lands in your inbox each week.</p>
+        <div style="margin-top:16px;font-size:13.5px;color:var(--mute)">Got a tip or an event? <a onclick="alert('Demo: opens the tip form.')" style="color:var(--teal);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px">Send it here →</a></div>
+      </div>
+      <div>
+        <div class="ed-stack">
+          <div class="edrow2"><span class="bar" style="background:var(--coral)"></span><div><h4>The one story that matters<span class="when">the lead</span></h4><p>The week's most important local story, told straight — no fluff, no filler.</p></div></div>
+          <div class="edrow2"><span class="bar" style="background:var(--sky)"></span><div><h4>Where to go<span class="when">the plan</span></h4><p>The weekend worth screenshotting — events, openings, and family-friendly picks.</p></div></div>
+          <div class="edrow2"><span class="bar" style="background:var(--leaf)"></span><div><h4>The local notes<span class="when">the rest</span></h4><p>Schools, sports, roads, and the small things that make living here easier.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- signup band -->
+  <div class="wrap" style="padding:14px 22px 52px">
+    <div class="signup">
+      <h2>Get the Pulse.</h2>
+      <p>One sharp local read, every Thursday — the week that matters in Ashburn. Free, four minutes, no fluff.</p>
+      <div class="form">
+        <input type="email" placeholder="you@ashburn.com" aria-label="Email address">
+        <button class="cta primary" onclick="fakeSub(this)">Subscribe</button>
+      </div>
+      <div class="edrow">
+        <span class="ed"><span class="sw" style="background:var(--coral)"></span>The Pulse — every Thursday, always free</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- archive -->
+  <div class="wrap" style="padding-bottom:64px" id="archive">
+    <div class="eyebrow g">The archive</div>
+    <h2 class="sec" style="font-size:26px">Every issue, kept</h2>
+    <div class="arch-filters" style="margin-top:18px">
+      <button class="filt on" data-a="all" onclick="setArch(this,'all')">All</button>
+      <button class="filt" data-a="weekend" onclick="setArch(this,'weekend')">Weekend</button>
+      <button class="filt" data-a="schools" onclick="setArch(this,'schools')">Schools</button>
+      <button class="filt" data-a="sports" onclick="setArch(this,'sports')">Sports</button>
+      <button class="filt" data-a="food" onclick="setArch(this,'food')">Food &amp; drink</button>
+      <button class="filt" data-a="history" onclick="setArch(this,'history')">History</button>
+    </div>
+    <div class="issues" id="issueGrid"></div>
+  </div>
+</section>
+
+<!-- ====================================================== PLAY ====================================================== -->
+<section class="page" id="page-play">
+  <div class="wrap section-pad" style="padding-bottom:50px">
+    <div class="eyebrow c">The daily habit</div>
+    <h2 class="sec">Play Ashburn Pulse</h2>
+    <p class="lede">Two daily local word games, built to share. Your scores live on this device — no account needed.</p>
+
+    <!-- W&OD -->
+    <div class="game2" id="wod">
+      <div class="g2head">
+        <div class="g2titlewrap">
+          <div class="gs-title">W<b>&amp;</b>OD</div>
+          <div class="g2sub">Words &amp; Omitted Details — fill every blank. The missing words are all anagrams of the same letters.</div>
+        </div>
+        <div class="g2chips">
+          <span class="g2meta"><span id="wodNum">#001</span> · <span id="wodDiff">Trailhead</span></span>
+          <span class="g2scorechip"><span id="wodScore">10</span><span class="u">pts</span></span>
+        </div>
+      </div>
+      <div class="g2body">
+        <div class="wod-title" id="wodTitle"></div>
+        <p class="wod-sentence" id="wodSentence"></p>
+        <div class="wod-rackwrap">
+          <div class="meta">Shared letters <span id="wodRackInfo"></span></div>
+          <div class="wod-rack" id="wodRack"></div>
+        </div>
+        <div class="wod-actions">
+          <button class="gbtn" onclick="wodCheck()">Check answers</button>
+          <button class="gbtn sec" onclick="wodReveal()">Reveal a letter (&minus;1)</button>
+          <button class="gbtn sec" onclick="wodGiveUp()">Give up</button>
+        </div>
+        <div class="msg hint" id="wodMsg"></div>
+        <div class="g2foot"><span class="g2hint-sm" id="wodLabel"></span><button class="linkbtn" onclick="wodNext()">Try another ↻</button></div>
+        <div class="share-box" id="wodShare"><div class="eyebrow" style="color:#bcd2d8">Spoiler-free — paste anywhere</div><pre id="wodShareText"></pre><button class="cp" onclick="wodCopy()">Copy result</button></div>
+      </div>
+    </div>
+
+    <!-- The Interchange -->
+    <div class="game2" id="interchange">
+      <div class="g2head">
+        <div class="g2titlewrap">
+          <div class="gs-title">The <b>Interchange</b></div>
+          <div class="g2sub">Two words cross at one shared middle letter. Read the clue, work out the word, and name that letter.</div>
+        </div>
+        <div class="g2chips">
+          <span class="g2meta"><span id="icEdLabel">#001</span> · <span id="icDiff">Easy</span></span>
+          <span class="g2scorechip"><span id="icScore">0</span><span class="u">/15</span></span>
+        </div>
+      </div>
+      <div class="g2body ic-center">
+        <div class="ic-progress" id="icProg"></div>
+        <div class="ic-board" id="icBoard"></div>
+        <div class="ic-clue"><span class="lbl" id="icClue1Dir">Left-to-right</span><span id="icClue1"></span></div>
+        <div class="ic-clue" id="icClue2wrap" style="display:none"><span class="lbl" id="icClue2Dir">Top-to-bottom</span><span id="icClue2"></span></div>
+        <div class="ic-input">
+          <input id="icInput" type="text" maxlength="1" placeholder="?" autocomplete="off" spellcheck="false" aria-label="Shared middle letter">
+          <button class="gbtn" onclick="icGuess()">Guess letter</button>
+          <button class="gbtn sec" id="icRevealBtn" onclick="icReveal2()">2nd clue (&minus;2)</button>
+        </div>
+        <div class="msg hint" id="icMsg"></div>
+        <div class="g2foot"><span class="g2hint-sm">Three puzzles a day · 5 points each</span><button class="linkbtn" onclick="icNextEdition()">Try another edition ↻</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== GUIDE ====================================================== -->
+<section class="page" id="page-guide">
+  <div class="wrap section-pad" style="padding-bottom:40px">
+    <div class="eyebrow g">The Ashburn Guide</div>
+    <h2 class="sec">Everything local, one place</h2>
+    <p class="lede">A comprehensive rundown of what to know about Ashburn and the area — schools by cluster, neighborhoods, parks, places to go, youth sports by sport, adult leagues, and faith communities. Entries link out to an official or authoritative source, so the guide stays current. We're the index, not the source of record.</p>
+
+    <div class="guide-toc" id="guideToc"></div>
+    <div id="guideBody"></div>
+
+    <div class="guide-help">
+      <div>
+        <h4>Ashburn changes fast. Found something off?</h4>
+        <p>If a listing is missing, outdated, or wrong — or you run a school, church, league, or business that belongs here — send it over. Reader submissions keep the guide honest.</p>
+      </div>
+      <button class="cta primary" onclick="alert('Demo: this opens the Submit a Listing form (a simple Google Form at launch).')">Submit a listing →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== HISTORY ====================================================== -->
+<section class="page" id="page-history">
+  <div class="wrap section-pad" style="padding-bottom:30px">
+    <div class="hist-hero">
+      <div>
+        <div class="eyebrow y">The story of a place</div>
+        <h2 class="sec">How a burning tree<br>became Data Center Alley</h2>
+        <p class="lede">Ashburn's story begins before it was called Ashburn — as Farmwell, a quiet Loudoun farm town on a rail line. Two hundred years later, a town named for a creek (or maybe a lightning strike) carries a major share of the world's internet traffic. Here's the whole arc.</p>
+      </div>
+      <div class="glyph">
+        <span class="ash">A</span>
+        <span class="sub">Farmwell · est. before 1802</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-bottom:20px">
+    <div class="eyebrow">The short version, on a line</div>
+    <div class="timeline">
+      <div class="tl"><div class="yr">1802</div><h4>Farmwell on the Lee land</h4><p>The Farmwell name appears in Lee-family records by 1802. For most of the 1800s, that's what this corner of Loudoun is called.</p></div>
+      <div class="tl coral"><div class="yr">1841</div><h4>John Janney’s farm</h4><p>John Janney, a Quaker lawyer from Leesburg, acquires part of the Lee-family land that becomes associated with Ashburn. Janney had lost the Whig vice-presidential nomination to John Tyler by a single vote — and Tyler became president a month later.</p></div>
+      <div class="tl sky"><div class="yr">1860</div><h4>The railroad reaches Farmwell</h4><p>By January 1860 the tracks reach Farmwell, and the first train runs to the station on what is now Ashburn Road — the line that becomes the Washington &amp; Old Dominion.</p></div>
+      <div class="tl"><div class="yr">~1870</div><h4>The name “Ashburn” appears</h4><p>The first recorded use of “Ashburn” dates to around 1870. Its origin is disputed: some credit the area's ash trees and a small stream (“burn”), others a local legend of a lightning-struck ash tree that smouldered for days.</p></div>
+      <div class="tl sun"><div class="yr">1896</div><h4>Farmwell becomes Ashburn</h4><p>The village officially takes the name Ashburn, ending years of mail confusion with Farmville. The Ashburn Station marker dates the change to this year.</p></div>
+      <div class="tl leaf"><div class="yr">1968</div><h4>The last train — and the trail era begins</h4><p>W&amp;OD trains, which had run since 1859, stop in 1968. The rail bed later becomes the W&amp;OD Trail — its first segment opened in 1974 and the route reached Purcellville by 1988 — now ridden by thousands.</p></div>
+      <div class="tl coral"><div class="yr">1985</div><h4>The boom is approved</h4><p>Loudoun approves Ashburn Village, a 5,000-home planned community. It opens in 1988 and grows past 5,300 homes, followed by Ashburn Farm, Broadlands, and Brambleton.</p></div>
+      <div class="tl sky"><div class="yr">1992</div><h4>Redskins Park opens</h4><p>Washington's NFL team — now the Commanders — opens its Ashburn headquarters and training facility in 1992, putting the town's name on national broadcasts.</p></div>
+      <div class="tl sun"><div class="yr">late&nbsp;1990s</div><h4>AOL, and Data Center Alley</h4><p>Building on MAE-East, a key early internet exchange, and AOL's late-1990s presence, data centers begin clustering in Ashburn — growing into one of the world's densest hubs, carrying a major share of global internet traffic.</p></div>
+      <div class="tl"><div class="yr">2020</div><h4>46,349 neighbors</h4><p>The census counts an Ashburn of 46,349 — a community that was just a few hundred people in 1980.</p></div>
+      <div class="tl leaf"><div class="yr">2022</div><h4>Metro reaches Ashburn</h4><p>On November 15, 2022, the Silver Line extension opens, bringing Metrorail to Ashburn — the western end of the line.</p></div>
+    </div>
+  </div>
+
+  <div class="wrap section-pad" style="padding-top:30px">
+    <div class="eyebrow">Go deeper</div>
+    <h2 class="sec" style="font-size:26px;margin-bottom:22px">The chapters</h2>
+
+    <details class="era" data-c="teal">
+      <summary><span class="chip">01</span><span class="et">Before Ashburn: Farmwell and the Lees</span><span class="ar">›</span></summary>
+      <div class="ebody"><p>The land under today's townhomes was once part of the vast holdings of the Lee family of Virginia. In his 1802 will, George Lee — heir of Thomas Ludwell Lee II — named his plantation "Farmwell," and for most of the 1800s that's what this place was called: Farmwell, and later Farmwell Station once the trains came. A post office operated at the crossroads of Ox Road and Church Road as early as 1800. This was rural, agrarian Loudoun — Quaker farmers, dairy herds, and rolling fields.</p></div>
+    </details>
+
+    <details class="era" data-c="coral">
+      <summary><span class="chip">02</span><span class="et">How Ashburn got its name</span><span class="ar">›</span></summary>
+      <div class="ebody"><p>In 1841, John Janney — a Quaker lawyer who, at the 1840 Whig convention, lost the vice-presidential nomination to John Tyler by a single vote — acquired part of the Lee-family land that became Ashburn Farm. Since Tyler became president when William Henry Harrison died a month into office, Janney missed the presidency by about as narrow a margin as American history allows. Later, he presided over Virginia's 1861 Secession Convention, where he personally opposed secession.</p><p>His farm gave Ashburn its name — though how is the town's oldest argument. The beloved legend says lightning struck a giant ash tree on the property, and it burned and smoldered for days while crowds came to watch. Historian Eugene Scheel offers a quieter reading: "ash" for the groves of ash trees, "burn" from the Old English word for a small stream. Either way, the first recorded "Ashburn" appears around 1870, and the village officially took the name in 1896.</p></div>
+    </details>
+
+    <details class="era" data-c="sky">
+      <summary><span class="chip">03</span><span class="et">The railroad century</span><span class="ar">›</span></summary>
+      <div class="ebody"><p>The rail line that became the Washington &amp; Old Dominion defined Ashburn for a hundred years. Confederate forces tore up the tracks during the Civil War; the rebuilt line afterward made Ashburn a shipping point for dairy bound for Washington. The village that grew around the station — the stretch of Ashburn Road still standing today, now a designated historic district — was a classic Virginia railroad hamlet: a general store, a mill, churches, and farmhouses built by local craftsmen. When the last W&amp;OD train ran in 1968, the corridor became the trail at the center of community life today.</p></div>
+    </details>
+
+    <details class="era" data-c="leaf">
+      <summary><span class="chip">04</span><span class="et">The suburban boom</span><span class="ar">›</span></summary>
+      <div class="ebody"><p>For decades after the trains stopped, Ashburn stayed a quiet crossroads ringed by dairy farms. Loudoun approved Ashburn Village in 1985, and it opened in 1988 — 5,000+ homes on 1,500 acres — followed by Ashburn Farm, Broadlands, Belmont, and eventually Brambleton. The Dulles Greenway opened in 1995 and tied it all to the airport and the Toll Road. In 1992 the Redskins moved their training facility here. A community of a few hundred in 1980 passed 46,000 by 2020, with some of Virginia's top-rated schools and the nation's highest county median income.</p></div>
+    </details>
+
+    <details class="era" data-c="sun">
+      <summary><span class="chip">05</span><span class="et">Data Center Alley</span><span class="ar">›</span></summary>
+      <div class="ebody"><p>Ashburn's second transformation was nearly invisible until the buildings grew too big to ignore. Thanks to early-internet fiber, cheap land, AOL's presence, and proximity to Washington, data centers began clustering here in the 1990s and accelerated sharply after 2013. Loudoun now hosts roughly 200 data centers with 100+ more in development, and by many accounts a major share of the world's internet traffic flows through "Data Center Alley". The industry pays a remarkable share of the county's taxes — and drives its loudest debates over power lines, land use, and what Ashburn should become next.</p></div>
+    </details>
+
+    <details class="era" data-c="teal">
+      <summary><span class="chip">06</span><span class="et">Metro, and Ashburn today</span><span class="ar">›</span></summary>
+      <div class="ebody"><p>The Silver Line's Ashburn Metro station opened in November 2022, making this the end of the line — or the beginning, depending on your direction. One Loudoun has become the de facto downtown. A town named for a burning tree (or maybe just a creek) now carries a major share of the world's internet traffic — while still running youth basketball leagues, packing the trail on Saturday mornings, and arguing about school boundaries like any other town.</p></div>
+    </details>
+  </div>
+
+  <div class="wrap" style="padding-bottom:64px">
+    <div class="eyebrow">Sources &amp; further reading</div>
+    <p class="sources" style="margin-top:10px">
+      Virginia Dept. of Historic Resources — Ashburn Historic District nomination · <a href="https://www.dhr.virginia.gov" target="_blank" rel="noopener">dhr.virginia.gov</a><br>
+      The Washington Post / Eugene Scheel, “Ashburn’s Agrarian Roots” · <a href="https://www.washingtonpost.com" target="_blank" rel="noopener">washingtonpost.com</a><br>
+      Loudoun County historical society · <a href="https://www.loudounhistory.org" target="_blank" rel="noopener">loudounhistory.org</a><br>
+      Ashburn Magazine (railroad &amp; the 1985 decision) · <a href="https://www.ashburnmagazine.com" target="_blank" rel="noopener">ashburnmagazine.com</a><br>
+      The Burn, “How Ashburn Got Its Name” · <a href="https://theburn.com" target="_blank" rel="noopener">theburn.com</a><br>
+      Friends of the W&amp;OD Trail / NOVA Parks · <a href="https://wodfriends.org" target="_blank" rel="noopener">wodfriends.org</a><br>
+      Thomas Balch Library — Loudoun railroad collections · <a href="https://www.leesburgva.gov/departments/thomas-balch-library" target="_blank" rel="noopener">leesburgva.gov</a><br>
+      Virginia Economic Development Partnership, “The Dawn of Data” · <a href="https://www.vedp.org/news/dawn-data" target="_blank" rel="noopener">vedp.org</a><br>
+      U.S. Census Bureau, Ashburn CDP · <a href="https://www.census.gov/quickfacts/fact/table/ashburncdpvirginia" target="_blank" rel="noopener">census.gov</a><br>
+      WMATA — Silver Line extension · <a href="https://www.wmata.com" target="_blank" rel="noopener">wmata.com</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="name">Ashburn <b>Pulse</b></div>
+        <p class="f">Your four minutes on Ashburn — news, weekends, a daily puzzle, and the only local reference you'll bookmark.</p>
+      </div>
+      <div>
+        <h5>The site</h5>
+        <ul>
+          <li><a onclick="go('home')">Newsletter</a></li>
+          <li><a onclick="go('play')">Play</a></li>
+          <li><a onclick="go('guide')">Local Links</a></li>
+          <li><a onclick="go('history')">Ashburn History</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Newsletter</h5>
+        <ul>
+          <li><a onclick="go('home')">Subscribe</a></li>
+          <li><a onclick="go('home')">Archive</a></li>
+          <li><a onclick="alert('Demo: tip form')">Submit a tip</a></li>
+          <li><a onclick="alert('Demo: sponsor inquiry')">Sponsor the Pulse</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Community</h5>
+        <ul>
+          <li><a onclick="go('guide')">Submit a listing</a></li>
+          <li><a onclick="alert('Demo: correction form')">Send a correction</a></li>
+          <li><a onclick="alert('Demo: about page')">About</a></li>
+          <li><a href="#" onclick="return false">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbar">
+      <span>© 2026 Ashburn Pulse · Built for ZIP 20147</span>
+      <span>Made in Ashburn · ZIP 20147</span>
+    </div>
+  </div>
+  <div class="sunrise"><i></i><i></i><i></i><i></i></div>
+</footer>
+
+<script>
+/* ============ page routing ============ */
+function go(p){
+  document.querySelectorAll('.page').forEach(s=>s.classList.remove('on'));
+  document.getElementById('page-'+p).classList.add('on');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.p===p));
+  document.getElementById('menu').classList.remove('open');
+  window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
+}
+
+/* ============ tiny resilient store (localStorage w/ in-memory fallback) ============ */
+const Store=(()=>{
+  let mem={};
+  function ok(){try{const k='__t';localStorage.setItem(k,'1');localStorage.removeItem(k);return true;}catch(e){return false;}}
+  const has=ok();
+  return {
+    get(k){ if(has){try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}} return mem[k]??null; },
+    set(k,v){ if(has){try{localStorage.setItem(k,JSON.stringify(v));return;}catch(e){}} mem[k]=v; }
+  };
+})();
+
+/* ============ W&OD game ============ */
+const WOD=[{"id": "wod-001", "number": 1, "title": "Trailhead Warmup", "difficulty": "Trailhead", "letter_count": 4, "word_count": 4, "sentence": "The chef couldn't {1} stirring the three {2} bubbling on the stove long enough to grab a parking {3} at One Loudoun or read the neighborhood {4} about the new taco place by the trail.", "answer_order": ["STOP", "POTS", "SPOT", "POST"], "rack": ["O", "P", "S", "T"]}, {"id": "wod-002", "number": 2, "title": "HOA Cartography", "difficulty": "Greenway", "letter_count": 5, "word_count": 3, "sentence": "At the HOA meeting, Dana tried to {1} calmly, but someone brought a {2} of traffic cones and drew a chalk {3} showing exactly where the new turn lane should go.", "answer_order": ["REACT", "CRATE", "TRACE"], "rack": ["A", "C", "E", "R", "T"]}, {"id": "wod-003", "number": 3, "title": "Quiet Please", "difficulty": "Trailhead", "letter_count": 6, "word_count": 2, "sentence": "The librarian asked the field trip to {1}, which briefly made the entire bus go {2} — a miracle still under review by county officials.", "answer_order": ["LISTEN", "SILENT"], "rack": ["E", "I", "L", "N", "S", "T"]}, {"id": "wod-004", "number": 4, "title": "Cone of Authority", "difficulty": "Greenway", "letter_count": 5, "word_count": 3, "sentence": "The crossing guard stayed {1} all morning, then had to {2} her entire route when a goose claimed the intersection, promising to file the paperwork {3}.", "answer_order": ["ALERT", "ALTER", "LATER"], "rack": ["A", "E", "L", "R", "T"]}, {"id": "wod-005", "number": 5, "title": "Four-Blank Friday", "difficulty": "Headwind", "letter_count": 5, "word_count": 4, "sentence": "After three {1} on the trail the kids still managed a {2}, right up until the smoothie truck ran out of {3} and someone found mysterious green {4} on the picnic table.", "answer_order": ["MILES", "SMILE", "LIMES", "SLIME"], "rack": ["E", "I", "L", "M", "S"]}, {"id": "wod-006", "number": 6, "title": "Civic Gardening", "difficulty": "Greenway", "letter_count": 6, "word_count": 2, "sentence": "The new community {1} by the W&OD Trail looked perfectly peaceful until the posted sign warned of mild {2} from aggressively confident geese.", "answer_order": ["GARDEN", "DANGER"], "rack": ["A", "D", "E", "G", "N", "R"]}, {"id": "wod-007", "number": 7, "title": "Out West", "difficulty": "Trailhead", "letter_count": 4, "word_count": 3, "sentence": "Grandpa let his famous {1} simmer all afternoon while the sprinkler {2} the whole patio, and the sunset to the {3} did the rest.", "answer_order": ["STEW", "WETS", "WEST"], "rack": ["E", "S", "T", "W"]}, {"id": "wod-008", "number": 8, "title": "Block Party", "difficulty": "Trailhead", "letter_count": 5, "word_count": 3, "sentence": "Nobody {1} much about the old {2} fence until a squirrel {3} across it during the block party and made off with a whole hot dog.", "answer_order": ["CARED", "CEDAR", "RACED"], "rack": ["A", "C", "D", "E", "R"]}, {"id": "wod-009", "number": 9, "title": "Lawn Games", "difficulty": "Greenway", "letter_count": 5, "word_count": 3, "sentence": "It took one good {1} from the inflatable skeleton to end the backyard {2} running across all two {3} of the Hendersons' lawn.", "answer_order": ["SCARE", "RACES", "ACRES"], "rack": ["A", "C", "E", "R", "S"]}, {"id": "wod-010", "number": 10, "title": "Toll Road Buffering", "difficulty": "Greenway", "letter_count": 6, "word_count": 2, "sentence": "The kids tried to {1} the cartoon from the back seat, but only Grandma had truly {2} the art of finding a signal on the toll road.", "answer_order": ["STREAM", "MASTER"], "rack": ["A", "E", "M", "R", "S", "T"]}, {"id": "wod-011", "number": 11, "title": "Cleats On", "difficulty": "Greenway", "letter_count": 5, "word_count": 3, "sentence": "The youth coach told the team to play with {1}, keep their cleats planted in the {2}, and tune out every {3} up in the bleachers.", "answer_order": ["HEART", "EARTH", "HATER"], "rack": ["A", "E", "H", "R", "T"]}, {"id": "wod-012", "number": 12, "title": "Before Seven A.M.", "difficulty": "Headwind", "letter_count": 7, "word_count": 4, "sentence": "The new parents {1} to a calm morning, {2} the baby's good mood, stocked up on the soft {3} — and then quietly {4} when all three plans collapsed before 7 a.m.", "answer_order": ["ASPIRED", "PRAISED", "DIAPERS", "DESPAIR"], "rack": ["A", "D", "E", "I", "P", "R", "S"]}, {"id": "wod-013", "number": 13, "title": "Parade Formation", "difficulty": "Greenway", "letter_count": 6, "word_count": 3, "sentence": "At the Loudoun veterans' parade, the old {1} asked the two visiting {3} to {2} in formation while the marching band sorted out which way was forward.", "answer_order": ["MARINE", "REMAIN", "AIRMEN"], "rack": ["A", "E", "I", "M", "N", "R"]}, {"id": "wod-014", "number": 14, "title": "Market Sour", "difficulty": "Trailhead", "letter_count": 5, "word_count": 2, "sentence": "One sour {1} in the bin nearly ruined the farmers-market display, but the giant {2} beside it was somehow sweeter than candy.", "answer_order": ["LEMON", "MELON"], "rack": ["E", "L", "M", "N", "O"]}, {"id": "wod-015", "number": 15, "title": "Pride of the Bakery", "difficulty": "Trailhead", "letter_count": 5, "word_count": 3, "sentence": "The baker's prized sourdough {1} earned more compliments than his very impressive {2}, at least until the bakery dog {3} its teeth at the mailman.", "answer_order": ["BREAD", "BEARD", "BARED"], "rack": ["A", "B", "D", "E", "R"]}, {"id": "wod-016", "number": 16, "title": "School Play", "difficulty": "Greenway", "letter_count": 5, "word_count": 3, "sentence": "The school-play director called the lead an absolute {1}, nudged the spotlight to a more flattering {2}, and tried to {3} one more rehearsal from the exhausted third graders.", "answer_order": ["ANGEL", "ANGLE", "GLEAN"], "rack": ["A", "E", "G", "L", "N"]}, {"id": "wod-017", "number": 17, "title": "Eye Exam", "difficulty": "Greenway", "letter_count": 6, "word_count": 2, "sentence": "The eye doctor had to {2} the patient's pupils before she could point out every tiny {1} on the very bottom line of the chart.", "answer_order": ["DETAIL", "DILATE"], "rack": ["A", "D", "E", "I", "L", "T"]}, {"id": "wod-018", "number": 18, "title": "Gate Delay", "difficulty": "Greenway", "letter_count": 5, "word_count": 3, "sentence": "Stuck at the gate, the {1} full of travelers somehow turned a delay into a heated {2} discussion about {3} reform, narrated by a toddler making jet noises.", "answer_order": ["PLANE", "PANEL", "PENAL"], "rack": ["A", "E", "L", "N", "P"]}, {"id": "wod-019", "number": 19, "title": "Bake Sale Justice", "difficulty": "Headwind", "letter_count": 5, "word_count": 3, "sentence": "The bake-sale {1} buzzed before the brownies had earned any {2}, forcing the PTA treasurer to {3} a refund to one very disappointed second grader.", "answer_order": ["TIMER", "MERIT", "REMIT"], "rack": ["E", "I", "M", "R", "T"]}, {"id": "wod-020", "number": 20, "title": "Mascot Focus Group", "difficulty": "Headwind", "letter_count": 8, "word_count": 2, "sentence": "The data center's new mascot was supposed to feel {1} and inspiring, but the focus group found it weirdly {2}, flinching every time someone mentioned the electric bill.", "answer_order": ["CREATIVE", "REACTIVE"], "rack": ["A", "C", "E", "E", "I", "R", "T", "V"]}, {"id": "wod-021", "number": 21, "title": "Pool Rules", "difficulty": "Trailhead", "letter_count": 4, "word_count": 3, "sentence": "The neighborhood {1} closed early when a stray {2} ball bounced off the diving board and the lifeguard's whistle got stuck on {3}.", "answer_order": ["POOL", "POLO", "LOOP"], "rack": ["L", "O", "O", "P"]}, {"id": "wod-022", "number": 22, "title": "The Last Climb", "difficulty": "Trailhead", "letter_count": 5, "word_count": 3, "sentence": "The cyclist started to {1} harder up the hill, only to {2} for mercy near the top, where even his sunburn {3} at the sight of the next climb.", "answer_order": ["PEDAL", "PLEAD", "PALED"], "rack": ["A", "D", "E", "L", "P"]}, {"id": "wod-023", "number": 23, "title": "County Fair", "difficulty": "Greenway", "letter_count": 5, "word_count": 3, "sentence": "The 4-H kid agreed to {1} the clippers, started to {2} the very patient sheep, and froze the instant he {3} the county fair judge clear his throat.", "answer_order": ["SHARE", "SHEAR", "HEARS"], "rack": ["A", "E", "H", "R", "S"]}, {"id": "wod-024", "number": 24, "title": "Vestibule Standoff", "difficulty": "Greenway", "letter_count": 6, "word_count": 2, "sentence": "Animal control arrived to {1} the goose from the Wegmans vestibule, but couldn't {2} a single volunteer brave enough to hold the door.", "answer_order": ["RESCUE", "SECURE"], "rack": ["C", "E", "E", "R", "S", "U"]}, {"id": "wod-025", "number": 25, "title": "Sunday Stand", "difficulty": "Greenway", "letter_count": 6, "word_count": 3, "sentence": "The market tomato with the faint green {1} turned out to be the {2} of the whole basket, personally blessed by the {3} who runs the Sunday stand.", "answer_order": ["STRIPE", "RIPEST", "PRIEST"], "rack": ["E", "I", "P", "R", "S", "T"]}, {"id": "wod-026", "number": 26, "title": "New Dads' Workshop", "difficulty": "Headwind", "letter_count": 8, "word_count": 3, "sentence": "The new-dads' workshop covered {1} controls on the tablet, a {2} yoga video nobody could finish, and a {3} pep talk that made three grown men cry.", "answer_order": ["PARENTAL", "PRENATAL", "PATERNAL"], "rack": ["A", "A", "E", "L", "N", "P", "R", "T"]}, {"id": "wod-027", "number": 27, "title": "Whose Wetland", "difficulty": "Detour", "letter_count": 12, "word_count": 2, "sentence": "What began as a polite HOA {1} about water {2} ended, predictably, with a 45-minute argument over whose lawn was technically a wetland.", "answer_order": ["CONVERSATION", "CONSERVATION"], "rack": ["A", "C", "E", "I", "N", "N", "O", "O", "R", "S", "T", "V"]}, {"id": "wod-028", "number": 28, "title": "Camp Noises", "difficulty": "Trailhead", "letter_count": 5, "word_count": 2, "sentence": "The campout was going fine until, deep in the {1}, the scout leader swore he heard a {2} rustling that turned out to be one very committed raccoon.", "answer_order": ["NIGHT", "THING"], "rack": ["G", "H", "I", "N", "T"]}, {"id": "wod-029", "number": 29, "title": "Snapping Turtle", "difficulty": "Trailhead", "letter_count": 6, "word_count": 3, "sentence": "The kids tried to {1} toward the creek, until the camp {2} {3} them — for the third time — about the snapping turtle with a personal vendetta.", "answer_order": ["WANDER", "WARDEN", "WARNED"], "rack": ["A", "D", "E", "N", "R", "W"]}, {"id": "wod-030", "number": 30, "title": "Ticket Prices", "difficulty": "Greenway", "letter_count": 5, "word_count": 3, "sentence": "The toddler could only {1} at the carnival prize wall, dissolving into {2} when she learned the ticket {3} had quietly doubled since last summer.", "answer_order": ["STARE", "TEARS", "RATES"], "rack": ["A", "E", "R", "S", "T"]}];
+const WOD_LABELS=[[10,"Perfect Ride"],[8,"Fast Lane"],[6,"On Trail"],[3,"Scenic Route"],[1,"Barely Rolling"],[0,"Detour"]];
+function wodLabel(s){for(const pair of WOD_LABELS){if(s>=pair[0])return pair[1];}return"Detour";}
+let wodIdx=0, wodReveals=0, wodWrong=0, wodRevealCount=0, wodSolved=false;
+function wodCur(){return WOD[wodIdx];}
+function setWodMsg(c,t){const m=document.getElementById('wodMsg');m.className='msg '+c;m.textContent=t;}
+function wodRender(){
+  const p=wodCur();
+  wodReveals=0;wodWrong=0;wodRevealCount=0;wodSolved=false;
+  document.getElementById('wodNum').textContent='#'+String(p.number).padStart(3,'0');
+  document.getElementById('wodDiff').textContent=p.difficulty;
+  document.getElementById('wodTitle').textContent=p.title;
+  document.getElementById('wodRackInfo').textContent='· '+p.word_count+' words · '+p.letter_count+' letters';
+  let html=p.sentence.replace(/\{(\d+)\}/g,function(m,n){return '<input class="wod-blank" data-i="'+n+'" maxlength="'+p.letter_count+'" autocomplete="off" spellcheck="false" aria-label="Blank '+n+'">';});
+  document.getElementById('wodSentence').innerHTML=html;
+  const sorted=[...p.rack].sort();
+  document.getElementById('wodRack').innerHTML=sorted.map(function(c){return '<span class="rk">?</span>';}).join('');
+  document.getElementById('wodShare').classList.remove('show');
+  document.getElementById('wodScore').textContent='10';
+  setWodMsg('hint','Type a word in each blank. Stuck? Reveal a letter or two.');
+}
+function wodScoreNow(){return Math.max(0,10-wodReveals-wodWrong);}
+function wodReveal(){
+  if(wodSolved)return;
+  const sorted=[...wodCur().rack].sort();
+  if(wodRevealCount>=sorted.length){setWodMsg('hint','Whole rack is already showing.');return;}
+  const cells=document.querySelectorAll('#wodRack .rk');
+  cells[wodRevealCount].textContent=sorted[wodRevealCount];
+  cells[wodRevealCount].classList.add('on');
+  wodRevealCount++;wodReveals++;
+  document.getElementById('wodScore').textContent=wodScoreNow();
+  setWodMsg('hint','Revealed '+wodRevealCount+' of '+sorted.length+' letters.');
+}
+function wodCheck(){
+  const p=wodCur();
+  if(wodSolved)return;
+  const inputs=[...document.querySelectorAll('#wod .wod-blank')];
+  if(inputs.some(function(i){return !i.value.trim();})){setWodMsg('hint','Fill every blank first.');return;}
+  let allok=true;
+  inputs.forEach(function(inp){
+    const i=parseInt(inp.dataset.i,10)-1;
+    const ok=inp.value.trim().toUpperCase()===p.answer_order[i].toUpperCase();
+    inp.classList.toggle('good',ok);inp.classList.toggle('bad',!ok);
+    if(!ok)allok=false;
+  });
+  if(allok){
+    wodSolved=true;inputs.forEach(function(i){i.disabled=true;});
+    const sc=Math.max(1,10-wodReveals-wodWrong);
+    document.getElementById('wodScore').textContent=sc;
+    setWodMsg('win','Solved! '+sc+'/10 · '+wodLabel(sc));
+    wodRecord(true);wodShareGrid(sc);
+  }else{
+    wodWrong++;document.getElementById('wodScore').textContent=wodScoreNow();
+    const n=inputs.filter(function(i){return i.classList.contains('bad');}).length;
+    setWodMsg('lose','Not yet — '+n+' to fix. (&minus;1)');
+  }
+}
+function wodGiveUp(){
+  const p=wodCur();if(wodSolved)return;
+  wodSolved=true;
+  document.querySelectorAll('#wod .wod-blank').forEach(function(inp){
+    const i=parseInt(inp.dataset.i,10)-1;inp.value=p.answer_order[i];inp.disabled=true;
+    inp.classList.remove('bad');inp.classList.add('good');
+  });
+  document.getElementById('wodScore').textContent='0';
+  setWodMsg('lose','Answers shown · 0 · Detour');
+  wodRecord(false);
+}
+function wodShareGrid(sc){
+  const p=wodCur();
+  const txt='Ashburn Pulse · W&OD #'+String(p.number).padStart(3,'0')+'\n'+sc+'/10 · '+wodLabel(sc)+'\n\uD83D\uDD25 Streak '+(wodGet().cur||0)+'\nashburnpulse.com';
+  document.getElementById('wodShareText').textContent=txt;
+  document.getElementById('wodShare').classList.add('show');
+}
+function wodCopy(){var t=document.getElementById('wodShareText').textContent;if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){var b=event.target,o=b.textContent;b.textContent='Copied \u2713';setTimeout(function(){b.textContent=o;},1400);});}}
+function wodNext(){wodIdx=(wodIdx+1)%WOD.length;wodRender();}
+function wodGet(){return Store.get('wod2')||{played:0,wins:0,cur:0,max:0};}
+function wodRecord(win){var s=wodGet();s.played++;if(win){s.wins++;s.cur++;s.max=Math.max(s.max,s.cur);}else{s.cur=0;}Store.set('wod2',s);wodStatLine(s);}
+function wodStatLine(s){document.getElementById('wodLabel').textContent='Streak '+s.cur+' · best '+s.max+' · played '+s.played;}
+function wodInit(){wodRender();wodStatLine(wodGet());}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&document.getElementById('page-play').classList.contains('on')&&document.activeElement&&document.activeElement.classList&&document.activeElement.classList.contains('wod-blank'))wodCheck();
+});
+
+/* ============ The Interchange game ============ */
+const IC_EDITIONS=[{"number": 1, "label": "The Interchange #001", "puzzles": [{"difficulty": "easy", "answer": "B", "across": {"word": "HABIT", "clue": "Something you do automatically — hard to break."}, "down": {"word": "CABIN", "clue": "A small wooden home in the woods."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "N", "across": {"word": "CANON", "clue": "A body of accepted works, rules, or a fandom's official storyline."}, "down": {"word": "VENUE", "clue": "Where an event is held."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "R", "across": {"word": "JOURNEY", "clue": "A long trip — or your whole life, told as one."}, "down": {"word": "HORSE", "clue": "A knight moves like one; a carousel is full of them."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 2, "label": "The Interchange #002", "puzzles": [{"difficulty": "easy", "answer": "T", "across": {"word": "WATER", "clue": "You're mostly made of it."}, "down": {"word": "HOTEL", "clue": "Where you check in for the night."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "N", "across": {"word": "HONEY", "clue": "Bees make it, and it never spoils."}, "down": {"word": "PANEL", "clue": "A row of experts on a stage — or a section of a wall."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "R", "across": {"word": "LIBRARY", "clue": "A quiet place that lends but never sells."}, "down": {"word": "NERVE", "clue": "Audacity — or what a dentist tries not to hit."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 3, "label": "The Interchange #003", "puzzles": [{"difficulty": "easy", "answer": "N", "across": {"word": "MONEY", "clue": "It can't buy happiness, supposedly."}, "down": {"word": "DANCE", "clue": "What you do when the wedding band starts."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "E", "across": {"word": "EVENT", "clue": "Something that happens — a concert or a game."}, "down": {"word": "CHEAP", "clue": "Low in price, or a little stingy."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "T", "across": {"word": "MYSTERY", "clue": "A whodunit — or anything left unexplained."}, "down": {"word": "ACTOR", "clue": "They pretend for a living."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 4, "label": "The Interchange #004", "puzzles": [{"difficulty": "easy", "answer": "O", "across": {"word": "STORE", "clue": "Where you go to shop."}, "down": {"word": "SCORE", "clue": "Twenty, to Lincoln — or the tally at the buzzer."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "R", "across": {"word": "PURSE", "clue": "You carry your essentials in it."}, "down": {"word": "MARCH", "clue": "Spring's gateway month — or what soldiers do."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "P", "across": {"word": "DOLPHIN", "clue": "A clever, smiling marine mammal."}, "down": {"word": "PAPER", "clue": "It loses to scissors but covers rock."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 5, "label": "The Interchange #005", "puzzles": [{"difficulty": "easy", "answer": "B", "across": {"word": "TABLE", "clue": "You eat dinner at it."}, "down": {"word": "NOBLE", "clue": "High-born — or simply honorable."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "E", "across": {"word": "OCEAN", "clue": "The vast body of saltwater."}, "down": {"word": "CREAM", "clue": "What you pour in coffee, or whip for dessert."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "T", "across": {"word": "CAPTAIN", "clue": "The one in charge of the ship or the team."}, "down": {"word": "ENTER", "clue": "The big key you press to confirm."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 6, "label": "The Interchange #006", "puzzles": [{"difficulty": "easy", "answer": "S", "across": {"word": "MUSIC", "clue": "Sound arranged to please the ear."}, "down": {"word": "BASIC", "clue": "Plain and fundamental — or a beginner's level."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "G", "across": {"word": "EAGLE", "clue": "A soaring bird — and two-under-par in golf."}, "down": {"word": "MAGIC", "clue": "Tricks and illusions — or Orlando's NBA team."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "V", "across": {"word": "GRAVITY", "clue": "What keeps your feet on the ground."}, "down": {"word": "RIVER", "clue": "It flows to the sea."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 7, "label": "The Interchange #007", "puzzles": [{"difficulty": "easy", "answer": "U", "across": {"word": "HOUSE", "clue": "Where you live."}, "down": {"word": "MOUSE", "clue": "A small rodent — or what you click with."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "D", "across": {"word": "ORDER", "clue": "What the judge demands in a noisy court."}, "down": {"word": "MODEL", "clue": "Someone on a runway — or a scaled-down version."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "C", "across": {"word": "KITCHEN", "clue": "The room where the meals are made."}, "down": {"word": "LOCAL", "clue": "From right around here."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 8, "label": "The Interchange #008", "puzzles": [{"difficulty": "easy", "answer": "R", "across": {"word": "PARTY", "clue": "A celebration with cake."}, "down": {"word": "DIRTY", "clue": "Covered in mud."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "A", "across": {"word": "PIANO", "clue": "Eighty-eight keys, black and white."}, "down": {"word": "CHAIR", "clue": "You pull one up to sit."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "M", "across": {"word": "DIAMOND", "clue": "A baseball infield — or a girl's best friend."}, "down": {"word": "HUMOR", "clue": "What a good comedian has plenty of."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 9, "label": "The Interchange #009", "puzzles": [{"difficulty": "easy", "answer": "T", "across": {"word": "TOTAL", "clue": "The sum at the bottom of the receipt."}, "down": {"word": "PETAL", "clue": "One piece of a flower."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "E", "across": {"word": "OPERA", "clue": "Sung drama, often in Italian."}, "down": {"word": "ARENA", "clue": "A big venue for concerts and games."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "N", "across": {"word": "THUNDER", "clue": "The boom that follows the lightning."}, "down": {"word": "MINOR", "clue": "Under eighteen — or a sad-sounding musical key."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 10, "label": "The Interchange #010", "puzzles": [{"difficulty": "easy", "answer": "U", "across": {"word": "SOUND", "clue": "What your ears pick up."}, "down": {"word": "ROUND", "clue": "Shaped like a ball — or one of twelve in a boxing match."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "R", "across": {"word": "SERVE", "clue": "What you do to start a tennis point."}, "down": {"word": "VERSE", "clue": "A stanza of a poem or song."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "B", "across": {"word": "PROBLEM", "clue": "A math question — or just trouble."}, "down": {"word": "ORBIT", "clue": "The path a moon takes around a planet."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 11, "label": "The Interchange #011", "puzzles": [{"difficulty": "easy", "answer": "B", "across": {"word": "CABLE", "clue": "It carries your TV signal."}, "down": {"word": "ROBIN", "clue": "A red-breasted bird — or Batman's sidekick."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "M", "across": {"word": "ARMOR", "clue": "A knight's metal suit."}, "down": {"word": "TIMER", "clue": "It counts down to zero."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "T", "across": {"word": "HISTORY", "clue": "The school subject about the past."}, "down": {"word": "AFTER", "clue": "The opposite of before."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 12, "label": "The Interchange #012", "puzzles": [{"difficulty": "easy", "answer": "O", "across": {"word": "STORM", "clue": "Thunder, lightning, and rain together."}, "down": {"word": "SPORT", "clue": "Soccer, tennis, or basketball."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "R", "across": {"word": "NURSE", "clue": "They care for you in the hospital."}, "down": {"word": "CORAL", "clue": "A reef is built of it."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "G", "across": {"word": "PENGUIN", "clue": "A bird in a tuxedo that cannot fly."}, "down": {"word": "ANGER", "clue": "The feeling behind a slammed door."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 13, "label": "The Interchange #013", "puzzles": [{"difficulty": "easy", "answer": "U", "across": {"word": "TRUST", "clue": "What you place in a good friend."}, "down": {"word": "TRUCK", "clue": "A pickup or an eighteen-wheeler."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "N", "across": {"word": "DONOR", "clue": "Someone who gives blood or money."}, "down": {"word": "MANOR", "clue": "A grand country house."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "T", "across": {"word": "FACTORY", "clue": "Where things are made by the thousand."}, "down": {"word": "LATER", "clue": "\"See you ___.\""}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 14, "label": "The Interchange #014", "puzzles": [{"difficulty": "easy", "answer": "B", "across": {"word": "AMBER", "clue": "The yellow traffic light — or fossilized tree resin."}, "down": {"word": "ZEBRA", "clue": "A horse in stripes."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "E", "across": {"word": "GREAT", "clue": "Excellent — or very large."}, "down": {"word": "STEAM", "clue": "Hot vapor rising off a kettle."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "T", "across": {"word": "PICTURE", "clue": "Said to be worth a thousand words."}, "down": {"word": "OFTEN", "clue": "Frequently."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 15, "label": "The Interchange #015", "puzzles": [{"difficulty": "easy", "answer": "S", "across": {"word": "LASER", "clue": "A focused beam of light."}, "down": {"word": "VISOR", "clue": "The brim that shades your eyes."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "V", "across": {"word": "COVER", "clue": "The front of a book."}, "down": {"word": "NOVEL", "clue": "A long work of fiction."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "M", "across": {"word": "HARMONY", "clue": "When voices blend pleasingly."}, "down": {"word": "DEMON", "clue": "An evil spirit."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 16, "label": "The Interchange #016", "puzzles": [{"difficulty": "easy", "answer": "A", "across": {"word": "SNAKE", "clue": "A slithering, legless reptile."}, "down": {"word": "PLACE", "clue": "A spot or a location."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "N", "across": {"word": "CANOE", "clue": "A slim boat moved by a paddle."}, "down": {"word": "LUNAR", "clue": "Of the moon."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "D", "across": {"word": "STADIUM", "clue": "Where sixty thousand fans cheer."}, "down": {"word": "ELDER", "clue": "A respected older member of a community."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 17, "label": "The Interchange #017", "puzzles": [{"difficulty": "easy", "answer": "O", "across": {"word": "GHOST", "clue": "A spooky Halloween figure."}, "down": {"word": "FROST", "clue": "The thin white coat on a cold morning's grass."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "M", "across": {"word": "GAMER", "clue": "Someone who plays a lot of video games."}, "down": {"word": "HOMER", "clue": "A four-bagger in baseball."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "C", "across": {"word": "TEACHER", "clue": "They stand at the front of the class."}, "down": {"word": "RACER", "clue": "A driver chasing the checkered flag."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 18, "label": "The Interchange #018", "puzzles": [{"difficulty": "easy", "answer": "R", "across": {"word": "FORTY", "clue": "The number right after thirty-nine."}, "down": {"word": "MERCY", "clue": "Compassion shown to someone at your mercy."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "B", "across": {"word": "DEBIT", "clue": "The card that pulls straight from your account."}, "down": {"word": "RUBLE", "clue": "Russia's currency."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "T", "across": {"word": "WEATHER", "clue": "Sunny, rainy, or snowy — the forecaster's beat."}, "down": {"word": "UNTIL", "clue": "\"Wait here ___ I get back.\""}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 19, "label": "The Interchange #019", "puzzles": [{"difficulty": "easy", "answer": "U", "across": {"word": "COUNT", "clue": "One, two, three... what you do with sheep."}, "down": {"word": "MOUNT", "clue": "To climb onto a horse — or a tall peak."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "N", "across": {"word": "BONUS", "clue": "Extra pay at year's end."}, "down": {"word": "LINEN", "clue": "The fabric of fine sheets."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "L", "across": {"word": "GALLERY", "clue": "Where paintings hang for viewing."}, "down": {"word": "SOLAR", "clue": "Powered by the sun."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 20, "label": "The Interchange #020", "puzzles": [{"difficulty": "easy", "answer": "O", "across": {"word": "SHORT", "clue": "Not tall."}, "down": {"word": "FLOOR", "clue": "What you walk on indoors."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "R", "across": {"word": "CURVE", "clue": "A bend in the road."}, "down": {"word": "TORCH", "clue": "A flame you carry — or a flashlight, to a Brit."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "P", "across": {"word": "COMPANY", "clue": "A business — or guests who drop by."}, "down": {"word": "VAPOR", "clue": "The wisp rising off a hot cup."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 21, "label": "The Interchange #021", "puzzles": [{"difficulty": "easy", "answer": "B", "across": {"word": "GABLE", "clue": "The triangular top of a house wall."}, "down": {"word": "COBRA", "clue": "A hooded, venomous snake."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "M", "across": {"word": "HUMAN", "clue": "You are one."}, "down": {"word": "TAMER", "clue": "The one who calms the lion."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "T", "across": {"word": "JUSTICE", "clue": "What the scales and the blindfold stand for."}, "down": {"word": "METAL", "clue": "Gold, iron — or a loud genre of music."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 22, "label": "The Interchange #022", "puzzles": [{"difficulty": "easy", "answer": "S", "across": {"word": "MASON", "clue": "A worker who builds with brick and stone."}, "down": {"word": "BISON", "clue": "A shaggy American buffalo."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "E", "across": {"word": "DREAM", "clue": "The story your sleeping mind tells."}, "down": {"word": "CLEAR", "clue": "Easy to see through, like clean glass."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "R", "across": {"word": "AVERAGE", "clue": "Add them up, divide by how many — or just so-so."}, "down": {"word": "MORAL", "clue": "The lesson at the end of the fable."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 23, "label": "The Interchange #023", "puzzles": [{"difficulty": "easy", "answer": "U", "across": {"word": "BRUSH", "clue": "You use it on your teeth or your hair."}, "down": {"word": "CRUSH", "clue": "To squash flat — or a secret romantic liking."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "N", "across": {"word": "CANDY", "clue": "A sweet treat handed out on Halloween."}, "down": {"word": "MANGO", "clue": "A tropical orange-fleshed fruit."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "I", "across": {"word": "HORIZON", "clue": "Where the sky appears to meet the sea."}, "down": {"word": "NOISE", "clue": "Unwanted, jarring sound."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 24, "label": "The Interchange #024", "puzzles": [{"difficulty": "easy", "answer": "O", "across": {"word": "SPOON", "clue": "You eat your soup with it."}, "down": {"word": "BLOOM", "clue": "What a flower does in spring."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "R", "across": {"word": "BIRCH", "clue": "A slender tree with white, papery bark."}, "down": {"word": "PORCH", "clue": "The covered step at a house's front door."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "G", "across": {"word": "PROGRAM", "clue": "An app — or the printed lineup for the night."}, "down": {"word": "EAGER", "clue": "Keen and impatient to begin."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 25, "label": "The Interchange #025", "puzzles": [{"difficulty": "easy", "answer": "T", "across": {"word": "VITAL", "clue": "Absolutely essential."}, "down": {"word": "MOTOR", "clue": "The engine that makes it run."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "O", "across": {"word": "ABOVE", "clue": "The opposite of below."}, "down": {"word": "AROSE", "clue": "Got up, in old-fashioned phrasing."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "D", "across": {"word": "PRODUCT", "clue": "What a company makes to sell — or the answer to a multiplication."}, "down": {"word": "RIDER", "clue": "Someone on a horse or a bike."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 26, "label": "The Interchange #026", "puzzles": [{"difficulty": "easy", "answer": "R", "across": {"word": "WORLD", "clue": "The whole planet."}, "down": {"word": "BURST", "clue": "To pop all at once."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "B", "across": {"word": "SABLE", "clue": "A dark, prized fur — or the heraldic word for black."}, "down": {"word": "LABEL", "clue": "The sticker that says what's inside."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "T", "across": {"word": "DENTIST", "clue": "They keep reminding you to floss."}, "down": {"word": "OTTER", "clue": "A playful river mammal that floats on its back."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 27, "label": "The Interchange #027", "puzzles": [{"difficulty": "easy", "answer": "U", "across": {"word": "CRUST", "clue": "The chewy edge of the pizza."}, "down": {"word": "FRUIT", "clue": "An apple, a banana, or a mango."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "N", "across": {"word": "DENIM", "clue": "The sturdy fabric your jeans are made of."}, "down": {"word": "GENIE", "clue": "Grants three wishes from a lamp."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "S", "across": {"word": "CRYSTAL", "clue": "A clear, faceted mineral — or fine cut glass."}, "down": {"word": "PASTA", "clue": "Spaghetti, penne, or macaroni."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 28, "label": "The Interchange #028", "puzzles": [{"difficulty": "easy", "answer": "T", "across": {"word": "TUTOR", "clue": "A private, one-on-one teacher."}, "down": {"word": "ROTOR", "clue": "The spinning blades atop a helicopter."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "O", "across": {"word": "GLOOM", "clue": "Darkness and low spirits."}, "down": {"word": "PROOF", "clue": "The evidence that settles the argument."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "I", "across": {"word": "CABINET", "clue": "A cupboard — or the president's top advisors."}, "down": {"word": "GUIDE", "clue": "Someone who shows tourists around."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 29, "label": "The Interchange #029", "puzzles": [{"difficulty": "easy", "answer": "R", "across": {"word": "CARGO", "clue": "The freight a ship or plane carries."}, "down": {"word": "APRON", "clue": "What a chef ties on before cooking."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "N", "across": {"word": "TENOR", "clue": "A high male singing voice."}, "down": {"word": "MINER", "clue": "They dig underground for coal or gold."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "S", "across": {"word": "WHISTLE", "clue": "The ref blows it to stop play."}, "down": {"word": "PESTO", "clue": "A green basil sauce for pasta."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}, {"number": 30, "label": "The Interchange #030", "puzzles": [{"difficulty": "easy", "answer": "U", "across": {"word": "STUMP", "clue": "What's left after a tree is felled — or to baffle someone."}, "down": {"word": "PLUMP", "clue": "Pleasantly round and full."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "medium", "answer": "O", "across": {"word": "SCOPE", "clue": "The range or extent of a project."}, "down": {"word": "SLOPE", "clue": "The angle of a ski hill."}, "across_pos": 3, "down_pos": 3, "first_clue": "across"}, {"difficulty": "hard", "answer": "N", "across": {"word": "RAINBOW", "clue": "Seven colors arcing after the rain."}, "down": {"word": "DINER", "clue": "A classic roadside spot for burgers and shakes."}, "across_pos": 4, "down_pos": 3, "first_clue": "across"}]}];
+let icEd=0, icIdx=0, icWrong=0, icSecond=false, icScore=0, icDone=false;
+function icCur(){return IC_EDITIONS[icEd].puzzles[icIdx];}
+function icDirLabel(d){return d==='across'?'Left-to-right':'Top-to-bottom';}
+function setIcMsg(c,t){const m=document.getElementById('icMsg');m.className='msg '+c;m.textContent=t;}
+function icRenderProg(){
+  const ps=IC_EDITIONS[icEd].puzzles;
+  document.getElementById('icProg').innerHTML=ps.map(function(p,i){
+    const done=i<icIdx||(i===icIdx&&icDone);
+    const cls=done?'done':(i===icIdx?'on':'');
+    return '<span class="ic-chip '+cls+'">'+p.difficulty+'</span>';
+  }).join('');
+}
+function icRenderBoard(reveal){
+  const p=icCur(), cols=p.across.word.length, rows=p.down.word.length, aRow=p.down_pos-1, sCol=p.across_pos-1;
+  const b=document.getElementById('icBoard');
+  var cw=(window.innerWidth<=480)?38:44;b.style.gridTemplateColumns='repeat('+cols+','+cw+'px)';
+  let h='';
+  for(let r=0;r<rows;r++){for(let c=0;c<cols;c++){
+    let letter=null; const center=(r===aRow&&c===sCol);
+    if(r===aRow)letter=p.across.word[c]; else if(c===sCol)letter=p.down.word[r];
+    if(letter===null){h+='<div class="ic-cell empty"></div>';continue;}
+    const show=reveal?letter:(center?'':'');
+    h+='<div class="ic-cell'+(center?' center':'')+(reveal?' filled':'')+'">'+show+'</div>';
+  }}
+  b.innerHTML=h;
+}
+function icLoadPuzzle(){
+  const p=icCur(); icWrong=0; icSecond=false; icDone=false;
+  document.getElementById('icEdLabel').textContent=IC_EDITIONS[icEd].label.replace('The Interchange ','');
+  document.getElementById('icDiff').textContent=p.difficulty.charAt(0).toUpperCase()+p.difficulty.slice(1);
+  const first=p.first_clue||'across', other=first==='across'?'down':'across';
+  document.getElementById('icClue1Dir').textContent=icDirLabel(first);
+  document.getElementById('icClue1').textContent=' '+p[first].clue;
+  document.getElementById('icClue2Dir').textContent=icDirLabel(other);
+  document.getElementById('icClue2').textContent=' '+p[other].clue;
+  document.getElementById('icClue2wrap').style.display='none';
+  document.getElementById('icRevealBtn').disabled=false;
+  const inp=document.getElementById('icInput');inp.value='';inp.disabled=false;
+  setIcMsg('hint','Name the single letter where the two words cross.');
+  icRenderProg();icRenderBoard(false);
+}
+function icReveal2(){
+  if(icDone||icSecond)return;
+  icSecond=true;
+  document.getElementById('icClue2wrap').style.display='block';
+  document.getElementById('icRevealBtn').disabled=true;
+  setIcMsg('hint','Second clue revealed (&minus;2).');
+}
+function icGuess(){
+  if(icDone)return;
+  const inp=document.getElementById('icInput');
+  const g=(inp.value||'').trim().toUpperCase().replace(/[^A-Z]/g,'');
+  if(!g)return;
+  const p=icCur(), last=icIdx>=IC_EDITIONS[icEd].puzzles.length-1;
+  if(g===p.answer){
+    const pts=Math.max(0,5-(icSecond?2:0)-icWrong);
+    icScore+=pts;icDone=true;inp.disabled=true;
+    document.getElementById('icScore').textContent=icScore;
+    icRenderBoard(true);icRenderProg();
+    setIcMsg('win','Yes — '+p.across.word+' / '+p.down.word+'. +'+pts+(last?" points · that's the edition!":' points.'));
+    if(!last)setTimeout(function(){icIdx++;icLoadPuzzle();},1700);
+    return;
+  }
+  icWrong++;inp.value='';
+  if(Math.max(0,5-(icSecond?2:0)-icWrong)<=0){
+    icDone=true;inp.disabled=true;icRenderBoard(true);icRenderProg();
+    setIcMsg('lose','Out of points — it was “'+p.answer+'” ('+p.across.word+' / '+p.down.word+').');
+    if(!last)setTimeout(function(){icIdx++;icLoadPuzzle();},1900);
+    return;
+  }
+  setIcMsg('lose','Not that letter (&minus;1). Try again' + (icSecond?'.':' — or reveal the second clue.'));
+}
+function icNextEdition(){icEd=(icEd+1)%IC_EDITIONS.length;icIdx=0;icScore=0;document.getElementById('icScore').textContent='0';icLoadPuzzle();}
+function icInit(){icEd=0;icIdx=0;icScore=0;document.getElementById('icScore').textContent='0';icLoadPuzzle();}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&document.getElementById('page-play').classList.contains('on')&&document.activeElement&&document.activeElement.id==='icInput')icGuess();
+});
+
+/* ============ guide data (sectioned) ============ */
+const GUIDE_SECTIONS=[{"id": "schools", "title": "Schools", "color": "#FF5A47", "intro": "Public-school assignments are by home address and shift as new schools open, so always confirm your exact schools with the LCPS locator. The clusters below show how each Ashburn high school connects to its feeder middle school and neighborhood elementaries.", "groups": [{"name": "Start here", "note": "every new family", "items": [{"name": "Find Your School (LCPS Locator)", "url": "https://www.lcps.org", "sub": "Address lookup", "desc": "Type your address to get your exact assigned elementary, middle, and high school — the one source that never goes stale."}]}, {"name": "Broad Run High School", "url": "https://en.wikipedia.org/wiki/Broad_Run_High_School", "note": "Ashburn Village & old Ashburn", "items": [{"name": "Farmwell Station Middle School", "url": "https://en.wikipedia.org/wiki/Farmwell_Station_Middle_School", "sub": "Feeder middle", "desc": "The middle school most Broad Run students attend."}, {"name": "Neighborhood elementaries", "url": "https://www.lcps.org", "sub": "Elementary", "desc": "Ashburn, Sanders Corner, Cedar Lane, and Dominion Trail."}]}, {"name": "Stone Bridge High School", "url": "https://en.wikipedia.org/wiki/Stone_Bridge_High_School", "note": "Ashburn Farm", "items": [{"name": "Trailside Middle School", "url": "https://www.lcps.org", "sub": "Feeder middle", "desc": "The Ashburn Farm-area middle school."}, {"name": "Neighborhood elementaries", "url": "https://www.lcps.org", "sub": "Elementary", "desc": "Mill Run, Newton-Lee, Steuart W. Weller, and Discovery."}]}, {"name": "Briar Woods High School", "url": "https://en.wikipedia.org/wiki/Briar_Woods_High_School", "note": "Broadlands & south Ashburn", "items": [{"name": "Eagle Ridge Middle School", "url": "https://www.lcps.org", "sub": "Feeder middle", "desc": "Serves Broadlands and nearby communities."}, {"name": "Neighborhood elementaries", "url": "https://www.lcps.org", "sub": "Elementary", "desc": "Hillside, Sycolin Creek, and Legacy."}]}, {"name": "Rock Ridge High School", "url": "https://en.wikipedia.org/wiki/Rock_Ridge_High_School", "note": "Moorefield & Stone Hill", "items": [{"name": "Stone Hill Middle School", "url": "https://www.lcps.org", "sub": "Feeder middle", "desc": "Serves the Metro-side growth corridor."}, {"name": "Neighborhood elementaries", "url": "https://www.lcps.org", "sub": "Elementary", "desc": "Rosa Lee Carter, Moorefield Station, and Cardinal Ridge."}]}, {"name": "Independence High School", "url": "https://en.wikipedia.org/wiki/Independence_High_School_(Ashburn,_Virginia)", "note": "Brambleton", "items": [{"name": "Brambleton Middle School", "url": "https://en.wikipedia.org/wiki/Brambleton_Middle_School", "sub": "Feeder middle", "desc": "The Brambleton-area middle school (with Stone Hill)."}, {"name": "Neighborhood elementaries", "url": "https://www.lcps.org", "sub": "Elementary", "desc": "Creighton's Corner, Madison's Trust, and Legacy."}]}, {"name": "Magnet, private & higher ed", "note": "beyond the clusters", "items": [{"name": "Academies of Loudoun", "url": "https://www.lcps.org", "sub": "Countywide magnet", "desc": "The county's application-based STEM and career magnet, drawing from every Ashburn school."}, {"name": "St. Theresa Catholic School", "url": "https://www.visitloudoun.org", "sub": "Private · PK–8", "desc": "Parochial school attached to the area's large Catholic parish."}, {"name": "The Loudoun Country Day School", "url": "https://www.visitloudoun.org", "sub": "Private · PK–8", "desc": "Long-running independent school just west in Leesburg."}, {"name": "George Washington University — Virginia Science & Technology Campus", "url": "https://www.gwu.edu", "sub": "Higher ed", "desc": "GW's research campus on the edge of Ashburn."}, {"name": "Northern Virginia Community College — Loudoun Campus", "url": "https://www.nvcc.edu", "sub": "Higher ed", "desc": "Transfer pathways, workforce training, and continuing education in nearby Sterling."}]}]}, {"id": "hoods", "title": "Neighborhoods & communities", "color": "#3D9BD9", "intro": "Ashburn is really a collection of master-planned communities, each with its own HOA, pools, and trails. (Ashburn's 2020 census population was 46,349, with a median home value around $630,000.) Home counts below are approximate. Each links to a fuller reference.", "items": [{"name": "Old Ashburn (Historic District)", "url": "https://www.visitloudoun.org", "sub": "Ashburn Road · 1800s", "desc": "The original railroad village — the historic core the whole town grew from."}, {"name": "Ashburn Village", "url": "https://en.wikipedia.org/wiki/Ashburn_Village", "sub": "Since 1987 · ≈5,000 homes · 1,500 acres", "desc": "The first master-planned community — lakes, five pools, and the Sports Pavilion fitness center."}, {"name": "Ashburn Farm", "url": "https://www.visitloudoun.org", "sub": "Since 1988 · ≈6,000 homes", "desc": "A family staple on the old Janney land, with trails everywhere and the Stone Bridge cluster."}, {"name": "Broadlands", "url": "https://en.wikipedia.org/wiki/Broadlands,_Virginia", "sub": "South Ashburn · ≈6,000+ homes", "desc": "A wildlife-certified community with the Southern Walk trail network and a nature center."}, {"name": "Brambleton", "url": "https://en.wikipedia.org/wiki/Brambleton,_Virginia", "sub": "Master-planned · still growing", "desc": "The juggernaut to the south — its own town center, library, and fiber to every home."}, {"name": "Belmont Country Club", "url": "https://en.wikipedia.org/wiki/Belmont,_Virginia", "sub": "Gated · golf", "desc": "Gated golf community wrapped around the historic Belmont Manor house."}, {"name": "Lansdowne", "url": "https://en.wikipedia.org/wiki/Lansdowne,_Virginia", "sub": "Potomac riverfront", "desc": "Resort, Inova hospital, and riverfront living just north — close enough to read as Ashburn."}, {"name": "One Loudoun", "url": "https://www.oneloudoun.com", "sub": "The de facto downtown", "desc": "Live-work-play center — dining, cinema, rooftop bars, offices, and the Sunday farmers market."}, {"name": "Moorefield Station / Loudoun Valley Estates", "url": "https://en.wikipedia.org/wiki/Moorefield_Station,_Virginia", "sub": "Metro side", "desc": "The transit-oriented growth clustered around the Ashburn Metro station."}, {"name": "Goose Creek Village", "url": "https://en.wikipedia.org/wiki/Goose_Creek_Village,_Virginia", "sub": "Belmont Ridge", "desc": "A walkable town-center community off Sycolin / Belmont Ridge Road."}]}, {"id": "parks", "title": "Parks, trails & the outdoors", "color": "#3FA776", "intro": "From the rail-trail at the spine of town to the county's flagship park, the outdoor options are deep — and mostly free.", "items": [{"name": "W&OD Trail", "url": "https://www.novaparks.com", "sub": "Spine of town · 45 miles", "desc": "The paved rail-trail on the old Washington & Old Dominion line — bike, run, or walk the heart of Ashburn."}, {"name": "Hal & Berni Hanson Regional Park", "url": "https://www.loudoun.gov", "sub": "Evergreen Mill · flagship", "desc": "The county's flagship park (opened 2021) — fields, trails, an overlook, and an amphitheater."}, {"name": "Beaverdam Reservoir", "url": "https://www.novaparks.com", "sub": "Off Reservoir Road", "desc": "Paddling, fishing, and trail miles around a large reservoir on the edge of town."}, {"name": "Bles Park", "url": "https://www.loudoun.gov", "sub": "Broadlands / Potomac", "desc": "124 acres of soccer fields, a playground, trails, and Broad Run river access."}, {"name": "Ashburn Park (\"Dinosaur Park\")", "url": "https://www.loudoun.gov", "sub": "Ashburn Village", "desc": "The local-favorite playground kids know for its dinosaur climber, plus ballfields and courts."}, {"name": "Claude Moore Park & Rec Center", "url": "https://www.loudoun.gov", "sub": "Sterling", "desc": "Indoor pool, trails, and a visitor center just east — a rainy-day and lap-swim standby."}, {"name": "Loudoun wine & ale country", "url": "https://www.visitloudoun.org", "sub": "Western Loudoun", "desc": "Dozens of wineries, breweries, and cideries 20–30 minutes west — the classic weekend escape."}]}, {"id": "go", "title": "Places to go", "color": "#cf8a14", "intro": "Where to eat, watch, browse, and spend a weekend afternoon — in Ashburn and the towns next door.", "items": [{"name": "One Loudoun", "url": "https://www.oneloudoun.com", "sub": "Downtown Ashburn", "desc": "Dining, the Alamo Drafthouse cinema, plaza events, and the EatLoco Sunday farmers market."}, {"name": "Brambleton Town Center", "url": "https://www.visitloudoun.org", "sub": "Brambleton", "desc": "Movies, dining, and the Brambleton library in a walkable town center."}, {"name": "Ashburn & Brambleton Libraries", "url": "https://library.loudoun.gov", "sub": "LCPL branches", "desc": "Story times, study space, meeting rooms, and events — the all-weather family standby."}, {"name": "Ashburn Ice House", "url": "https://www.visitloudoun.org", "sub": "Ashburn", "desc": "Public skating, learn-to-play and travel hockey, and the cold-birthday-party headquarters."}, {"name": "Old Ox Brewery", "url": "https://www.visitloudoun.org", "sub": "Ashburn", "desc": "A hometown brewery with a patio, rotating food trucks, and seasonal releases."}, {"name": "Lost Rhino Brewing Co.", "url": "https://www.visitloudoun.org", "sub": "Ashburn", "desc": "Longtime local brewery and taproom, known for its weekly run club."}, {"name": "Pinstack", "url": "https://www.visitloudoun.org", "sub": "Kincora", "desc": "Bowling and a big indoor entertainment complex for groups and rainy days."}, {"name": "Loudoun United FC (Segra Field)", "url": "https://www.loudoununitedfc.com", "sub": "Leesburg", "desc": "The local pro soccer club — affordable, family-friendly weekend matches."}, {"name": "Washington Commanders HQ", "url": "https://www.commanders.com", "sub": "Loudoun County Pkwy", "desc": "The NFL team's headquarters and practice facility; summer training-camp sessions open to fans."}, {"name": "Historic Downtown Leesburg", "url": "https://www.visitloudoun.org", "sub": "Leesburg", "desc": "Walkable shops and restaurants, plus the Premium Outlets nearby — the area's classic day-out."}]}, {"id": "youth", "title": "Youth sports & leagues", "color": "#0F3D4C", "intro": "The county rec department is the master clock — most programs register the season before (fall sign-ups over the summer, spring in winter, camps in late winter). Grouped by sport below, from first-timers to travel.", "groups": [{"name": "Where to start", "note": "the county calendar", "items": [{"name": "Loudoun County PRCS", "url": "https://www.loudoun.gov", "sub": "Countywide · PRCS Connect", "desc": "Seasonal rec leagues and camps across every sport. Watch the quarterly Activity Guide for sign-up windows."}, {"name": "i9 Sports (Ashburn area)", "url": "https://www.i9sports.com", "sub": "Intro · ages 3+ · no tryouts", "desc": "Multi-sport intro leagues — flag football, soccer, basketball, baseball, and more. The easiest on-ramp for first-timers."}]}, {"name": "Soccer", "note": "", "items": [{"name": "Loudoun Soccer", "url": "https://www.loudounsoccer.com", "sub": "Rec + travel · U4–U19", "desc": "One of Virginia's largest youth clubs. The youngest rec divisions fill first; financial-aid deadlines run about two weeks before close."}]}, {"name": "Basketball", "note": "", "items": [{"name": "Ashburn Youth Basketball League (AYBL)", "url": "https://www.loudoun.gov", "sub": "Rec + MS travel · K–8", "desc": "The neighborhood mainstay — a house league plus middle-school travel. Registration typically opens in August."}, {"name": "Dulles Youth Basketball / Ashburn Athletic Association", "url": "https://www.loudoun.gov", "sub": "Rec · youth", "desc": "Rec basketball with mandatory October evaluations for balanced team placement."}, {"name": "Loudoun Basketball Academy (LBA Attack)", "url": "https://www.visitloudoun.org", "sub": "Travel / elite", "desc": "Select travel program on national circuits, with spring tryouts."}]}, {"name": "Baseball & softball", "note": "", "items": [{"name": "Loudoun Aces Baseball Club", "url": "https://www.visitloudoun.org", "sub": "Travel · 8U+", "desc": "Travel baseball with summer/fall tryouts (held at Replay Baseball in Ashburn) and winter workouts."}, {"name": "Local Little Leagues", "url": "https://www.loudoun.gov", "sub": "Rec · ages 4–16", "desc": "Neighborhood rec baseball and softball; spring season registration opens in winter."}]}, {"name": "Football & cheer", "note": "", "items": [{"name": "Dulles South / Loudoun youth football", "url": "https://www.loudoun.gov", "sub": "Rec · youth", "desc": "Tackle, flag, and cheer programs; fall sign-ups open in spring."}]}, {"name": "Hockey & ice", "note": "", "items": [{"name": "Ashburn Ice House / Ashburn Xtreme", "url": "https://www.visitloudoun.org", "sub": "Learn-to-play + travel", "desc": "Skating lessons, house hockey, and travel teams at the local rink."}]}, {"name": "Swimming", "note": "", "items": [{"name": "NVSL neighborhood swim teams", "url": "https://www.visitloudoun.org", "sub": "Summer rec · ages 4–18", "desc": "A huge summer staple run through HOA and neighborhood pools; spring sign-ups, tied to your pool."}]}, {"name": "Everything else", "note": "classes year-round", "items": [{"name": "Gymnastics, dance, martial arts & climbing", "url": "https://www.loudoun.gov", "sub": "Classes · all ages", "desc": "Rolling session-based programs at studios and gyms across Ashburn."}, {"name": "Loudoun United FC & the Sports Center", "url": "https://www.loudoununitedfc.com", "sub": "Go watch / tournaments", "desc": "Cheap pro-soccer outings at Segra Field, plus youth tournaments at the Loudoun Sports Center."}]}]}, {"id": "adult", "title": "Adult & social sports", "color": "#FF5A47", "intro": "Plenty for grown-ups too — join solo or bring a team. Social leagues, pickup, young-professional groups, and the reliable weekly socials at local breweries.", "items": [{"name": "FXA Sports", "url": "https://www.fxasports.com", "sub": "Co-ed social leagues", "desc": "Northern Virginia's largest social-sports network — kickball, volleyball, softball, soccer and more, usually with a post-game bar."}, {"name": "DC Fray", "url": "https://www.dcfray.com", "sub": "Young-professional", "desc": "Kickball, cornhole, ultimate, and bar games. Very social; free agents welcome."}, {"name": "Volo Sports", "url": "https://www.volosports.com", "sub": "App-based", "desc": "Casual, app-driven social leagues and occasional free events."}, {"name": "Loudoun County PRCS — adult leagues", "url": "https://www.loudoun.gov", "sub": "Rec · affordable", "desc": "Basketball, soccer, flag football, softball, volleyball, kickball, and cricket, by season via PRCS Connect."}, {"name": "Pickleball (Dill Dinkers & rec courts)", "url": "https://www.loudoun.gov", "sub": "Fastest-growing", "desc": "Dedicated indoor courts plus public courts at the rec center and parks — the area's hottest adult sport."}, {"name": "Young Professionals of Loudoun & Fairfax", "url": "https://www.visitloudoun.org", "sub": "Meetup · monthly", "desc": "Independent social and networking group with a monthly happy hour and events."}, {"name": "Brewery run clubs, trivia & bingo", "url": "https://www.visitloudoun.org", "sub": "Weekly socials", "desc": "Group runs at Lost Rhino, trivia at Solace Brewing, and Brews & Bingo at Lark Brewing."}]}, {"id": "faith", "title": "Faith communities", "color": "#3FA776", "intro": "Ashburn's religious life is as diverse as its population. A representative cross-section is below — call ahead for current service times.", "items": [{"name": "St. Theresa Catholic Church", "url": "https://www.visitloudoun.org", "sub": "Old Ashburn", "desc": "The area's large Catholic parish (Diocese of Arlington), with an attached PK–8 school."}, {"name": "Our Lady of Hope Catholic Church", "url": "https://www.visitloudoun.org", "sub": "Potomac Falls", "desc": "Catholic parish serving the northern Ashburn / Sterling area."}, {"name": "Ashburn Presbyterian Church", "url": "https://www.visitloudoun.org", "sub": "Ashburn", "desc": "Established neighborhood Presbyterian congregation."}, {"name": "St. David's Episcopal Church & School", "url": "https://www.visitloudoun.org", "sub": "Ashburn", "desc": "Episcopal parish with an attached preschool / day school."}, {"name": "Crossroads United Methodist Church", "url": "https://www.visitloudoun.org", "sub": "Ashburn", "desc": "Active United Methodist congregation and community-service hub."}, {"name": "Beth Chaverim Reform Congregation", "url": "https://www.visitloudoun.org", "sub": "Beaumeade", "desc": "Loudoun's Reform Jewish congregation."}, {"name": "ADAMS Center", "url": "https://www.visitloudoun.org", "sub": "Ashburn / Sterling", "desc": "Major area mosque network with an Ashburn location and Jumu'ah prayers."}, {"name": "Hindu temples & Sikh gurdwaras", "url": "https://www.visitloudoun.org", "sub": "Loudoun", "desc": "Several congregations serve Ashburn families across the county, including nearby Sterling."}, {"name": "Cornerstone Chapel", "url": "https://www.visitloudoun.org", "sub": "Leesburg", "desc": "Large non-denominational church drawing many Ashburn attendees."}]}];
+function gItem(it){
+  var nm=it.url?('<a href="'+it.url+'" target="_blank" rel="noopener">'+it.name+' \u2197</a>'):it.name;
+  var sub=it.sub?('<div class="gsub">'+it.sub+'</div>'):'';
+  return '<li><div><div class="gname">'+nm+'</div>'+sub+'</div><div class="gdesc">'+it.desc+'</div></li>';
+}
+function buildGuide(){
+  var toc=document.getElementById('guideToc');
+  toc.innerHTML=GUIDE_SECTIONS.map(function(sec){
+    return '<a onclick="document.getElementById(\'g-'+sec.id+'\').scrollIntoView({behavior:\'smooth\',block:\'start\'})">'+sec.title+'</a>';
+  }).join('');
+  var body=document.getElementById('guideBody');
+  body.innerHTML=GUIDE_SECTIONS.map(function(sec){
+    var inner;
+    if(sec.groups){
+      inner=sec.groups.map(function(g){
+        var head=g.url?('<a href="'+g.url+'" target="_blank" rel="noopener">'+g.name+' \u2197</a>'):g.name;
+        var note=g.note?('<span class="ggnote">'+g.note+'</span>'):'';
+        return '<div class="ggroup"><div class="gghead"><span class="ggname">'+head+'</span>'+note+'</div><ul class="glist">'+g.items.map(gItem).join('')+'</ul></div>';
+      }).join('');
+    }else{
+      inner='<ul class="glist">'+sec.items.map(gItem).join('')+'</ul>';
+    }
+    return '<div class="gsec"><h3 id="g-'+sec.id+'"><span class="sw" style="background:'+sec.color+'"></span>'+sec.title+'</h3>'+
+      '<p class="intro">'+sec.intro+'</p>'+inner+'</div>';
+  }).join('');
+}
+
+/* ============ newsletter archive ============ */
+const ISSUES=[
+  {badge:'The Pulse',color:'#FF5A47',dt:'Jun 12',tag:'history',h:'The data-center power fight comes home',li:['Dominion\u2019s proposed rate hike','What it means for your bill','Where the supervisors stand']},
+  {badge:'The Pulse',color:'#FF5A47',dt:'Jun 13',tag:'weekend',h:'Markets, music, and a brewery release',li:['EatLoco returns to One Loudoun','Rocknoceros plays free Monday','Old Ox summer pour']},
+  {badge:'The Pulse',color:'#FF5A47',dt:'Jun 8',tag:'schools',h:'Summer camps still have openings',li:['LCPS registration is live','FCA PROVEN camp 6/22','Loudoun Soccer sessions']},
+  {badge:'The Pulse',color:'#FF5A47',dt:'Jun 5',tag:'sports',h:'Why everyone\u2019s playing pickleball now',li:['New courts at the rec center','The leagues filling up fast','Where to find open play']},
+  {badge:'The Pulse',color:'#FF5A47',dt:'May 30',tag:'food',h:'Five patios for a long weekend',li:['Best shade after 4pm','Kid-friendly picks','Where to park']},
+  {badge:'The Pulse',color:'#FF5A47',dt:'May 25',tag:'history',h:'The trail under your feet',li:['A short W&OD history','Then-and-now photos','Where the depot stood']}
+];
+let aFilter='all';
+function renderIssues(){
+  const list=ISSUES.filter(i=>aFilter==='all'||i.tag===aFilter);
+  document.getElementById('issueGrid').innerHTML=list.map(i=>
+    '<div class="issue" onclick="alert(\'Demo: opens the full issue (hosted on your email platform).\')">'+
+      '<div class="ih"><span class="badge" style="background:'+i.color+'">'+i.badge+'</span><span class="dt">'+i.dt+'</span></div>'+
+      '<div class="ib"><h4>'+i.h+'</h4><ul>'+i.li.map(x=>'<li>'+x+'</li>').join('')+'</ul>'+
+      '<span class="read">Read full issue →</span></div>'+
+    '</div>'
+  ).join('');
+}
+function setArch(btn,a){aFilter=a;document.querySelectorAll('.arch-filters .filt').forEach(b=>b.classList.toggle('on',b===btn));renderIssues();}
+
+/* ============ misc ============ */
+function fakeSub(btn){
+  const wrap=btn.parentElement;const inp=wrap.querySelector('input');
+  if(!inp.value.includes('@')){inp.focus();inp.style.outline='2px solid var(--coral)';return;}
+  inp.style.outline='';btn.textContent='Subscribed ✓';btn.style.background='var(--leaf)';btn.style.color='#fff';
+  setTimeout(()=>{btn.textContent='Subscribe';btn.style.background='';btn.style.color='';inp.value='';},1800);
+}
+
+/* ============ image fallback ============ */
+function _archSVG(){return '<svg viewBox="0 0 140 96" role="img" aria-label="Archival photo"><rect width="140" height="96" fill="#e7edf0"/><rect x="40" y="28" width="60" height="44" rx="4" fill="#fff" stroke="#16566b" stroke-width="2"/><circle cx="58" cy="46" r="6" fill="#FFB341"/><path d="M44 68 L66 50 L82 64 L92 56 L96 68Z" fill="#3D9BD9"/></svg>';}
+function photoFallback(img){img.onerror=null;img.outerHTML=_archSVG();}
+function photoFallback2(img){if(img.getAttribute('data-cdn')){var u=img.getAttribute('data-cdn');img.removeAttribute('data-cdn');img.src=u;return;}img.onerror=null;img.outerHTML=_archSVG();}
+
+function scrollToId(id){var e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+
+/* ============ init ============ */
+wodInit();
+icInit();
+buildGuide();
+renderIssues();
+</script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>W&amp;OD — Words &amp; Omitted Details</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --green-l:#a5d6a7; --green-bg:#e8f5e9;
+    --amber:#f9a825; --grey:#cfd8dc; --ink:#1f2a24; --muted:#5f6f67;
+    --paper:#fbfdfb; --line:#d7e3da; --bad:#c62828;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:linear-gradient(180deg,#f3f9f4,#eef5ef);min-height:100vh}
+  .wrap{max-width:760px;margin:0 auto;padding:20px 16px 64px}
+  header.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .brand{font-weight:800;font-size:26px;letter-spacing:.5px;color:var(--green-d)}
+  .brand span{color:var(--amber)}
+  .tag{color:var(--muted);font-size:13px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 18px;margin-top:14px;
+        box-shadow:0 1px 0 rgba(0,0,0,.02)}
+  .pz-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .pz-num{font-weight:800;font-size:18px;color:var(--green-d)}
+  .pz-meta{font-size:13px;color:var(--muted)}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;
+        background:var(--green-bg);color:var(--green-d);border:1px solid var(--green-l)}
+  .pill.Headwind{background:#fff3e0;color:#e65100;border-color:#ffcc80}
+  .pill.Detour{background:#fbe9e7;color:#bf360c;border-color:#ffab91}
+  .pill.Trailhead{background:#e3f2fd;color:#1565c0;border-color:#90caf9}
+  .sentence{font-size:19px;line-height:1.85;margin:16px 2px 6px}
+  .blank{display:inline-block;min-width:96px;border:none;border-bottom:2.5px solid var(--green);
+         background:#f1f8f2;font:inherit;font-weight:700;text-transform:uppercase;text-align:center;
+         color:var(--green-d);padding:2px 6px;margin:0 2px;border-radius:6px 6px 0 0;letter-spacing:1px}
+  .blank:focus{outline:none;background:#e3f2e4;border-bottom-color:var(--green-d)}
+  .blank.ok{background:var(--green);color:#fff;border-bottom-color:var(--green-d)}
+  .blank.bad{background:#ffebee;color:var(--bad);border-bottom-color:var(--bad)}
+  .blank.reveal{background:#eceff1;color:var(--muted);border-bottom-color:var(--muted)}
+  .rack{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0 4px}
+  .rack .lbl{font-size:13px;color:var(--muted);margin-right:4px}
+  .tile{width:34px;height:42px;border:1.5px solid var(--line);border-radius:8px;background:#fff;
+        display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:var(--grey)}
+  .tile.shown{background:var(--green-bg);border-color:var(--green-l);color:var(--green-d)}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  button{font:inherit;font-weight:700;border-radius:10px;border:1px solid var(--line);background:#fff;
+         color:var(--ink);padding:9px 14px;cursor:pointer;transition:transform .05s ease}
+  button:active{transform:translateY(1px)}
+  button.primary{background:var(--green);color:#fff;border-color:var(--green-d)}
+  button.ghost{background:#fff}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .scorebar{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-top:14px;font-size:14px;color:var(--muted)}
+  .scorebar b{color:var(--ink)}
+  .msg{margin-top:12px;font-size:15px;min-height:22px;font-weight:600}
+  .msg.good{color:var(--green-d)} .msg.bad{color:var(--bad)} .msg.info{color:var(--muted)}
+  .result{margin-top:14px;padding:14px;border-radius:12px;background:var(--green-bg);border:1px solid var(--green-l);display:none}
+  .result.show{display:block}
+  .result .big{font-size:22px;font-weight:800;color:var(--green-d)}
+  .squares{font-size:22px;letter-spacing:2px;margin:6px 0}
+  pre.share{background:#0f1a12;color:#dcefe0;border-radius:10px;padding:12px;font-size:13px;white-space:pre-wrap;margin:8px 0}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+  .stat{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+  .stat .n{font-size:22px;font-weight:800;color:var(--green-d)}
+  .stat .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+  details.archive{margin-top:16px}
+  details.archive summary{cursor:pointer;font-weight:700;color:var(--green-d);padding:6px 0}
+  .arch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:8px}
+  .arch{border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:#fff;cursor:pointer;font-size:13px}
+  .arch:hover{border-color:var(--green-l);background:var(--green-bg)}
+  .arch .t{font-weight:700} .arch .m{color:var(--muted);font-size:11px;margin-top:2px}
+  .arch .done{color:var(--green)}
+  .how{font-size:13px;color:var(--muted);line-height:1.6;margin-top:10px}
+  .foot{margin-top:24px;font-size:12px;color:var(--muted);text-align:center}
+  /* embed mode: drop all chrome so the bare game sits inside an iframe */
+  body.embed{background:#fff}
+  body.embed .top, body.embed .stats, body.embed .archive,
+  body.embed .foot, body.embed #btnNext{display:none}
+  body.embed .wrap{padding:10px 12px 16px;max-width:none}
+  body.embed .card{margin-top:0;border:none;box-shadow:none;padding:8px 4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">W<span>&amp;</span>OD</div>
+    <div class="tag">Words &amp; Omitted Details · the W&amp;OD Trail daily anagram game</div>
+  </header>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="card" id="card">
+    <div class="pz-head">
+      <div><span class="pz-num" id="pzNum"></span> <span class="pz-meta" id="pzTitle"></span></div>
+      <div><span class="pill" id="pzPill"></span> <span class="pz-meta" id="pzMeta"></span> · <span class="pz-meta" id="timer">0:00</span></div>
+    </div>
+
+    <div class="sentence" id="sentence"></div>
+
+    <div class="rack"><span class="lbl">Shared rack:</span><span id="rack"></span></div>
+
+    <div class="controls">
+      <button class="primary" id="btnCheck">Check answers</button>
+      <button class="ghost" id="btnReveal">Reveal a letter (&minus;1)</button>
+      <button class="ghost" id="btnGiveUp">Give up</button>
+      <button class="ghost" id="btnNext">Next puzzle &rarr;</button>
+    </div>
+
+    <div class="scorebar">
+      <span>Score: <b id="score">10</b>/10</span>
+      <span>Revealed: <b id="revealed">0</b></span>
+      <span>Misses: <b id="misses">0</b></span>
+    </div>
+
+    <div class="msg info" id="msg">Read the sentence, fill every blank — each word uses the same letters.</div>
+
+    <div class="result" id="result">
+      <div class="big" id="resBig"></div>
+      <div class="squares" id="resSquares"></div>
+      <div class="how" id="resLine"></div>
+      <pre class="share" id="shareText"></pre>
+      <button class="ghost" id="btnCopy">Copy share text</button>
+    </div>
+
+    <p class="how"><b>How to play.</b> Fill in the blanks. Every missing word is an anagram of the others — the exact same letters, reordered. Reveal letters from the shared rack one at a time. You start at 10 points and lose 1 per revealed letter and 1 per wrong check. Fewer hints, better score. Time is only a tiebreaker.</p>
+  </div>
+
+  <details class="archive" id="archiveWrap">
+    <summary>Archive — all puzzles</summary>
+    <div class="arch-grid" id="archive"></div>
+  </details>
+
+  <div class="foot">A self-contained prototype of the W&amp;OD engine. Puzzles come from <code>data/puzzles.json</code>.</div>
+</div>
+
+<script>
+const DB = {"game": "W&OD — Words & Omitted Details", "version": 1, "rule": "One sentence, several blanks; every missing word is an anagram of the others (same exact letters). Reveal fewer letters from the shared rack to score better.", "max_points_per_puzzle": 10, "difficulty_tiers": ["Trailhead", "Greenway", "Headwind", "Detour"], "result_labels": {"10": "Perfect Ride", "8-9": "Fast Lane", "6-7": "On Trail", "3-5": "Scenic Route", "1-2": "Barely Rolling", "0": "Detour"}, "puzzles": [{"id": "wod-001", "number": 1, "title": "Trailhead Warmup", "difficulty": "Trailhead", "type": 4, "anagram_key": "OPST", "letter_count": 4, "word_count": 4, "words": ["STOP", "POST", "SPOT", "POTS"], "sentence": "The chef couldn't {1} stirring the three {2} bubbling on the stove long enough to grab a parking {3} at One Loudoun or read the neighborhood {4} about the new taco place by the trail.", "answer_order": ["STOP", "POTS", "SPOT", "POST"], "alternate_anagrams": ["OPTS", "TOPS"], "ambiguity_risk": "medium", "rack": ["O", "P", "S", "T"], "factors": {"commonness": 5, "clueability": 5, "distinctness": 4, "fairness": 5, "humor": 4, "cleanliness": 5}, "quality_score": 28, "max_points": 10, "published_date": null, "notes": "OPST also yields OPTS and TOPS; the sentence is built so neither fits a blank."}, {"id": "wod-002", "number": 2, "title": "HOA Cartography", "difficulty": "Greenway", "type": 3, "anagram_key": "ACERT", "letter_count": 5, "word_count": 3, "words": ["REACT", "CRATE", "TRACE"], "sentence": "At the HOA meeting, Dana tried to {1} calmly, but someone brought a {2} of traffic cones and drew a chalk {3} showing exactly where the new turn lane should go.", "answer_order": ["REACT", "CRATE", "TRACE"], "alternate_anagrams": ["CARET", "CATER"], "ambiguity_risk": "medium", "rack": ["A", "C", "E", "R", "T"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "Avoid any phrasing where CATER could fit a blank."}, {"id": "wod-003", "number": 3, "title": "Quiet Please", "difficulty": "Trailhead", "type": 2, "anagram_key": "EILNST", "letter_count": 6, "word_count": 2, "words": ["LISTEN", "SILENT"], "sentence": "The librarian asked the field trip to {1}, which briefly made the entire bus go {2} — a miracle still under review by county officials.", "answer_order": ["LISTEN", "SILENT"], "alternate_anagrams": ["ENLIST", "INLETS", "TINSEL"], "ambiguity_risk": "medium", "rack": ["E", "I", "L", "N", "S", "T"], "factors": {"commonness": 5, "clueability": 5, "distinctness": 4, "fairness": 5, "humor": 4, "cleanliness": 5}, "quality_score": 28, "max_points": 10, "published_date": null, "notes": "Rich rack (ENLIST/TINSEL/INLETS); clues pin LISTEN and SILENT exactly."}, {"id": "wod-004", "number": 4, "title": "Cone of Authority", "difficulty": "Greenway", "type": 3, "anagram_key": "AELRT", "letter_count": 5, "word_count": 3, "words": ["ALERT", "ALTER", "LATER"], "sentence": "The crossing guard stayed {1} all morning, then had to {2} her entire route when a goose claimed the intersection, promising to file the paperwork {3}.", "answer_order": ["ALERT", "ALTER", "LATER"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "E", "L", "R", "T"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "Clean set; no common alternates."}, {"id": "wod-005", "number": 5, "title": "Four-Blank Friday", "difficulty": "Headwind", "type": 4, "anagram_key": "EILMS", "letter_count": 5, "word_count": 4, "words": ["MILES", "SMILE", "LIMES", "SLIME"], "sentence": "After three {1} on the trail the kids still managed a {2}, right up until the smoothie truck ran out of {3} and someone found mysterious green {4} on the picnic table.", "answer_order": ["MILES", "SMILE", "LIMES", "SLIME"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["E", "I", "L", "M", "S"], "factors": {"commonness": 4, "clueability": 4, "distinctness": 5, "fairness": 4, "humor": 5, "cleanliness": 5}, "quality_score": 27, "max_points": 10, "published_date": null, "notes": "Premium four-word set; no common alternates."}, {"id": "wod-006", "number": 6, "title": "Civic Gardening", "difficulty": "Greenway", "type": 2, "anagram_key": "ADEGNR", "letter_count": 6, "word_count": 2, "words": ["GARDEN", "DANGER"], "sentence": "The new community {1} by the W&OD Trail looked perfectly peaceful until the posted sign warned of mild {2} from aggressively confident geese.", "answer_order": ["GARDEN", "DANGER"], "alternate_anagrams": ["GANDER", "RANGED"], "ambiguity_risk": "medium", "rack": ["A", "D", "E", "G", "N", "R"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "Local Detour Saturday. GANDER/RANGED can't fit either blank."}, {"id": "wod-007", "number": 7, "title": "Out West", "difficulty": "Trailhead", "type": 3, "anagram_key": "ESTW", "letter_count": 4, "word_count": 3, "words": ["STEW", "WETS", "WEST"], "sentence": "Grandpa let his famous {1} simmer all afternoon while the sprinkler {2} the whole patio, and the sunset to the {3} did the rest.", "answer_order": ["STEW", "WETS", "WEST"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["E", "S", "T", "W"], "factors": {"commonness": 5, "clueability": 5, "distinctness": 4, "fairness": 5, "humor": 4, "cleanliness": 5}, "quality_score": 28, "max_points": 10, "published_date": null, "notes": "Easy Sunday family puzzle; clean set."}, {"id": "wod-008", "number": 8, "title": "Block Party", "difficulty": "Trailhead", "type": 3, "anagram_key": "ACDER", "letter_count": 5, "word_count": 3, "words": ["CEDAR", "CARED", "RACED"], "sentence": "Nobody {1} much about the old {2} fence until a squirrel {3} across it during the block party and made off with a whole hot dog.", "answer_order": ["CARED", "CEDAR", "RACED"], "alternate_anagrams": ["ARCED"], "ambiguity_risk": "medium", "rack": ["A", "C", "D", "E", "R"], "factors": {"commonness": 5, "clueability": 5, "distinctness": 4, "fairness": 5, "humor": 4, "cleanliness": 5}, "quality_score": 28, "max_points": 10, "published_date": null, "notes": "ARCED is the only same-key word and is not used; it doesn't fit any blank."}, {"id": "wod-009", "number": 9, "title": "Lawn Games", "difficulty": "Greenway", "type": 3, "anagram_key": "ACERS", "letter_count": 5, "word_count": 3, "words": ["SCARE", "RACES", "ACRES"], "sentence": "It took one good {1} from the inflatable skeleton to end the backyard {2} running across all two {3} of the Hendersons' lawn.", "answer_order": ["SCARE", "RACES", "ACRES"], "alternate_anagrams": ["CARES"], "ambiguity_risk": "medium", "rack": ["A", "C", "E", "R", "S"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "CARES is the alternate; it can't fit a blank as written."}, {"id": "wod-010", "number": 10, "title": "Toll Road Buffering", "difficulty": "Greenway", "type": 2, "anagram_key": "AEMRST", "letter_count": 6, "word_count": 2, "words": ["STREAM", "MASTER"], "sentence": "The kids tried to {1} the cartoon from the back seat, but only Grandma had truly {2} the art of finding a signal on the toll road.", "answer_order": ["STREAM", "MASTER"], "alternate_anagrams": ["TAMERS"], "ambiguity_risk": "medium", "rack": ["A", "E", "M", "R", "S", "T"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "Wednesday elegance puzzle. TAMERS is the alternate; doesn't fit."}, {"id": "wod-011", "number": 11, "title": "Cleats On", "difficulty": "Greenway", "type": 3, "anagram_key": "AEHRT", "letter_count": 5, "word_count": 3, "words": ["EARTH", "HEART", "HATER"], "sentence": "The youth coach told the team to play with {1}, keep their cleats planted in the {2}, and tune out every {3} up in the bleachers.", "answer_order": ["HEART", "EARTH", "HATER"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "E", "H", "R", "T"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "Clean set; HATER reads as modern-casual, which fits the voice."}, {"id": "wod-012", "number": 12, "title": "Before Seven A.M.", "difficulty": "Headwind", "type": 4, "anagram_key": "ADEIPRS", "letter_count": 7, "word_count": 4, "words": ["DIAPERS", "PRAISED", "ASPIRED", "DESPAIR"], "sentence": "The new parents {1} to a calm morning, {2} the baby's good mood, stocked up on the soft {3} — and then quietly {4} when all three plans collapsed before 7 a.m.", "answer_order": ["ASPIRED", "PRAISED", "DIAPERS", "DESPAIR"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "D", "E", "I", "P", "R", "S"], "factors": {"commonness": 4, "clueability": 4, "distinctness": 5, "fairness": 4, "humor": 5, "cleanliness": 5}, "quality_score": 27, "max_points": 10, "published_date": null, "notes": "Premium four-word, 7-letter set; no common alternates. Excellent Friday challenge."}, {"id": "wod-013", "number": 13, "title": "Parade Formation", "difficulty": "Greenway", "type": 3, "anagram_key": "AEIMNR", "letter_count": 6, "word_count": 3, "words": ["MARINE", "REMAIN", "AIRMEN"], "sentence": "At the Loudoun veterans' parade, the old {1} asked the two visiting {3} to {2} in formation while the marching band sorted out which way was forward.", "answer_order": ["MARINE", "REMAIN", "AIRMEN"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "E", "I", "M", "N", "R"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "Local Saturday. Clean six-letter trio; no common alternates."}, {"id": "wod-014", "number": 14, "title": "Market Sour", "difficulty": "Trailhead", "type": 2, "anagram_key": "ELMNO", "letter_count": 5, "word_count": 2, "words": ["LEMON", "MELON"], "sentence": "One sour {1} in the bin nearly ruined the farmers-market display, but the giant {2} beside it was somehow sweeter than candy.", "answer_order": ["LEMON", "MELON"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["E", "L", "M", "N", "O"], "factors": {"commonness": 5, "clueability": 5, "distinctness": 4, "fairness": 5, "humor": 4, "cleanliness": 5}, "quality_score": 28, "max_points": 10, "published_date": null, "notes": "Easy Sunday family pair; no alternates."}, {"id": "wod-015", "number": 15, "title": "Pride of the Bakery", "difficulty": "Trailhead", "type": 3, "anagram_key": "ABDER", "letter_count": 5, "word_count": 3, "words": ["BREAD", "BEARD", "BARED"], "sentence": "The baker's prized sourdough {1} earned more compliments than his very impressive {2}, at least until the bakery dog {3} its teeth at the mailman.", "answer_order": ["BREAD", "BEARD", "BARED"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "B", "D", "E", "R"], "factors": {"commonness": 5, "clueability": 5, "distinctness": 4, "fairness": 5, "humor": 4, "cleanliness": 5}, "quality_score": 28, "max_points": 10, "published_date": null, "notes": "Clean set; no common alternates in the rack."}, {"id": "wod-016", "number": 16, "title": "School Play", "difficulty": "Greenway", "type": 3, "anagram_key": "AEGLN", "letter_count": 5, "word_count": 3, "words": ["ANGEL", "ANGLE", "GLEAN"], "sentence": "The school-play director called the lead an absolute {1}, nudged the spotlight to a more flattering {2}, and tried to {3} one more rehearsal from the exhausted third graders.", "answer_order": ["ANGEL", "ANGLE", "GLEAN"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "E", "G", "L", "N"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "Clean set; GLEAN gives the puzzle its one-thought Greenway lift."}, {"id": "wod-017", "number": 17, "title": "Eye Exam", "difficulty": "Greenway", "type": 2, "anagram_key": "ADEILT", "letter_count": 6, "word_count": 2, "words": ["DETAIL", "DILATE"], "sentence": "The eye doctor had to {2} the patient's pupils before she could point out every tiny {1} on the very bottom line of the chart.", "answer_order": ["DETAIL", "DILATE"], "alternate_anagrams": ["TAILED"], "ambiguity_risk": "medium", "rack": ["A", "D", "E", "I", "L", "T"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "Wednesday elegance pair. TAILED is the alternate; cannot fit."}, {"id": "wod-018", "number": 18, "title": "Gate Delay", "difficulty": "Greenway", "type": 3, "anagram_key": "AELNP", "letter_count": 5, "word_count": 3, "words": ["PLANE", "PANEL", "PENAL"], "sentence": "Stuck at the gate, the {1} full of travelers somehow turned a delay into a heated {2} discussion about {3} reform, narrated by a toddler making jet noises.", "answer_order": ["PLANE", "PANEL", "PENAL"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "E", "L", "N", "P"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "Clean set; 'panel discussion' and 'penal reform' lock the two trickier words."}, {"id": "wod-019", "number": 19, "title": "Bake Sale Justice", "difficulty": "Headwind", "type": 3, "anagram_key": "EIMRT", "letter_count": 5, "word_count": 3, "words": ["TIMER", "MERIT", "REMIT"], "sentence": "The bake-sale {1} buzzed before the brownies had earned any {2}, forcing the PTA treasurer to {3} a refund to one very disappointed second grader.", "answer_order": ["TIMER", "MERIT", "REMIT"], "alternate_anagrams": ["MITER", "MITRE"], "ambiguity_risk": "medium", "rack": ["E", "I", "M", "R", "T"], "factors": {"commonness": 4, "clueability": 4, "distinctness": 5, "fairness": 4, "humor": 5, "cleanliness": 5}, "quality_score": 27, "max_points": 10, "published_date": null, "notes": "MITER/MITRE share the key but are not used and can't fit; REMIT keeps it Headwind."}, {"id": "wod-020", "number": 20, "title": "Mascot Focus Group", "difficulty": "Headwind", "type": 2, "anagram_key": "ACEEIRTV", "letter_count": 8, "word_count": 2, "words": ["CREATIVE", "REACTIVE"], "sentence": "The data center's new mascot was supposed to feel {1} and inspiring, but the focus group found it weirdly {2}, flinching every time someone mentioned the electric bill.", "answer_order": ["CREATIVE", "REACTIVE"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "C", "E", "E", "I", "R", "T", "V"], "factors": {"commonness": 4, "clueability": 4, "distinctness": 5, "fairness": 4, "humor": 5, "cleanliness": 5}, "quality_score": 27, "max_points": 10, "published_date": null, "notes": "Local Saturday. Elegant eight-letter pair; no alternates."}, {"id": "wod-021", "number": 21, "title": "Pool Rules", "difficulty": "Trailhead", "type": 3, "anagram_key": "LOOP", "letter_count": 4, "word_count": 3, "words": ["POOL", "POLO", "LOOP"], "sentence": "The neighborhood {1} closed early when a stray {2} ball bounced off the diving board and the lifeguard's whistle got stuck on {3}.", "answer_order": ["POOL", "POLO", "LOOP"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["L", "O", "O", "P"], "factors": {"commonness": 5, "clueability": 5, "distinctness": 4, "fairness": 5, "humor": 4, "cleanliness": 5}, "quality_score": 28, "max_points": 10, "published_date": null, "notes": "Easy Sunday family trio; no alternates."}, {"id": "wod-022", "number": 22, "title": "The Last Climb", "difficulty": "Trailhead", "type": 3, "anagram_key": "ADELP", "letter_count": 5, "word_count": 3, "words": ["PEDAL", "PLEAD", "PALED"], "sentence": "The cyclist started to {1} harder up the hill, only to {2} for mercy near the top, where even his sunburn {3} at the sight of the next climb.", "answer_order": ["PEDAL", "PLEAD", "PALED"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "D", "E", "L", "P"], "factors": {"commonness": 5, "clueability": 5, "distinctness": 4, "fairness": 5, "humor": 4, "cleanliness": 5}, "quality_score": 28, "max_points": 10, "published_date": null, "notes": "Clean set; no common alternates."}, {"id": "wod-023", "number": 23, "title": "County Fair", "difficulty": "Greenway", "type": 3, "anagram_key": "AEHRS", "letter_count": 5, "word_count": 3, "words": ["SHARE", "SHEAR", "HEARS"], "sentence": "The 4-H kid agreed to {1} the clippers, started to {2} the very patient sheep, and froze the instant he {3} the county fair judge clear his throat.", "answer_order": ["SHARE", "SHEAR", "HEARS"], "alternate_anagrams": ["HARES"], "ambiguity_risk": "medium", "rack": ["A", "E", "H", "R", "S"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "HARES is the alternate; it cannot fit any blank as written."}, {"id": "wod-024", "number": 24, "title": "Vestibule Standoff", "difficulty": "Greenway", "type": 2, "anagram_key": "CEERSU", "letter_count": 6, "word_count": 2, "words": ["RESCUE", "SECURE"], "sentence": "Animal control arrived to {1} the goose from the Wegmans vestibule, but couldn't {2} a single volunteer brave enough to hold the door.", "answer_order": ["RESCUE", "SECURE"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["C", "E", "E", "R", "S", "U"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "Wednesday elegance pair; no common alternates."}, {"id": "wod-025", "number": 25, "title": "Sunday Stand", "difficulty": "Greenway", "type": 3, "anagram_key": "EIPRST", "letter_count": 6, "word_count": 3, "words": ["STRIPE", "RIPEST", "PRIEST"], "sentence": "The market tomato with the faint green {1} turned out to be the {2} of the whole basket, personally blessed by the {3} who runs the Sunday stand.", "answer_order": ["STRIPE", "RIPEST", "PRIEST"], "alternate_anagrams": ["SPRITE"], "ambiguity_risk": "medium", "rack": ["E", "I", "P", "R", "S", "T"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "SPRITE shares the key; the 'green stripe on a tomato' framing keeps SPRITE from fitting."}, {"id": "wod-026", "number": 26, "title": "New Dads' Workshop", "difficulty": "Headwind", "type": 3, "anagram_key": "AAELNPRT", "letter_count": 8, "word_count": 3, "words": ["PARENTAL", "PRENATAL", "PATERNAL"], "sentence": "The new-dads' workshop covered {1} controls on the tablet, a {2} yoga video nobody could finish, and a {3} pep talk that made three grown men cry.", "answer_order": ["PARENTAL", "PRENATAL", "PATERNAL"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "A", "E", "L", "N", "P", "R", "T"], "factors": {"commonness": 4, "clueability": 4, "distinctness": 5, "fairness": 4, "humor": 5, "cleanliness": 5}, "quality_score": 27, "max_points": 10, "published_date": null, "notes": "Elegant eight-letter trio; no alternates. A Headwind Friday in place of a four-word."}, {"id": "wod-027", "number": 27, "title": "Whose Wetland", "difficulty": "Detour", "type": 2, "anagram_key": "ACEINNOORSTV", "letter_count": 12, "word_count": 2, "words": ["CONVERSATION", "CONSERVATION"], "sentence": "What began as a polite HOA {1} about water {2} ended, predictably, with a 45-minute argument over whose lawn was technically a wetland.", "answer_order": ["CONVERSATION", "CONSERVATION"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "C", "E", "I", "N", "N", "O", "O", "R", "S", "T", "V"], "factors": {"commonness": 4, "clueability": 3, "distinctness": 5, "fairness": 4, "humor": 5, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "The flagship Detour pair; twelve letters, one letter apart. Use sparingly."}, {"id": "wod-028", "number": 28, "title": "Camp Noises", "difficulty": "Trailhead", "type": 2, "anagram_key": "GHINT", "letter_count": 5, "word_count": 2, "words": ["NIGHT", "THING"], "sentence": "The campout was going fine until, deep in the {1}, the scout leader swore he heard a {2} rustling that turned out to be one very committed raccoon.", "answer_order": ["NIGHT", "THING"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["G", "H", "I", "N", "T"], "factors": {"commonness": 5, "clueability": 5, "distinctness": 4, "fairness": 5, "humor": 4, "cleanliness": 5}, "quality_score": 28, "max_points": 10, "published_date": null, "notes": "Easy Sunday family pair; no alternates."}, {"id": "wod-029", "number": 29, "title": "Snapping Turtle", "difficulty": "Trailhead", "type": 3, "anagram_key": "ADENRW", "letter_count": 6, "word_count": 3, "words": ["WANDER", "WARNED", "WARDEN"], "sentence": "The kids tried to {1} toward the creek, until the camp {2} {3} them — for the third time — about the snapping turtle with a personal vendetta.", "answer_order": ["WANDER", "WARDEN", "WARNED"], "alternate_anagrams": [], "ambiguity_risk": "low", "rack": ["A", "D", "E", "N", "R", "W"], "factors": {"commonness": 5, "clueability": 5, "distinctness": 4, "fairness": 5, "humor": 4, "cleanliness": 5}, "quality_score": 28, "max_points": 10, "published_date": null, "notes": "Clean six-letter trio; no common alternates."}, {"id": "wod-030", "number": 30, "title": "Ticket Prices", "difficulty": "Greenway", "type": 3, "anagram_key": "AERST", "letter_count": 5, "word_count": 3, "words": ["STARE", "TEARS", "RATES"], "sentence": "The toddler could only {1} at the carnival prize wall, dissolving into {2} when she learned the ticket {3} had quietly doubled since last summer.", "answer_order": ["STARE", "TEARS", "RATES"], "alternate_anagrams": ["ASTER", "TARES", "TASER"], "ambiguity_risk": "medium", "rack": ["A", "E", "R", "S", "T"], "factors": {"commonness": 5, "clueability": 4, "distinctness": 4, "fairness": 4, "humor": 4, "cleanliness": 5}, "quality_score": 26, "max_points": 10, "published_date": null, "notes": "Rich rack (ASTER/TASER/TARES); the clues fix STARE, TEARS, and RATES."}]};
+const PUZZLES = DB.puzzles;
+const LABELS = [[10,"Perfect Ride"],[8,"Fast Lane"],[6,"On Trail"],[3,"Scenic Route"],[1,"Barely Rolling"],[0,"Detour"]];
+function labelFor(s){ for(const [lo,n] of LABELS){ if(s>=lo) return n;} return "Detour"; }
+
+// ---- persistent stats ----
+const SKEY = "wod_stats_v1";
+function loadStats(){ try{return JSON.parse(localStorage.getItem(SKEY))||{};}catch(e){return {};} }
+function saveStats(s){ try{localStorage.setItem(SKEY, JSON.stringify(s));}catch(e){} }
+let stats = Object.assign({streak:0, best:0, miles:0, perfect:0, last10:[], done:{}}, loadStats());
+
+function renderStats(){
+  const last10 = stats.last10.slice(-10);
+  const avg = last10.length ? (last10.reduce((a,b)=>a+b,0)/last10.length).toFixed(1) : "—";
+  document.getElementById("stats").innerHTML = [
+    ["Current streak", stats.streak],
+    ["Last 10 avg", avg],
+    ["Trail Miles", stats.miles],
+    ["Perfect Rides", stats.perfect],
+  ].map(([k,n])=>`<div class="stat"><div class="n">${n}</div><div class="k">${k}</div></div>`).join("");
+}
+
+// ---- game state ----
+let idx = 0, P = null, revealed = 0, misses = 0, score = 10, locked = [], over = false;
+let t0 = null, tInt = null, elapsed = 0;
+
+function fmt(sec){ const m=Math.floor(sec/60), s=sec%60; return m+":"+String(s).padStart(2,"0"); }
+function startTimer(){ t0=Date.now(); tInt=setInterval(()=>{ elapsed=Math.floor((Date.now()-t0)/1000); document.getElementById("timer").textContent=fmt(elapsed); },1000); }
+function stopTimer(){ if(tInt) clearInterval(tInt); tInt=null; }
+
+function load(i){
+  idx = (i+PUZZLES.length)%PUZZLES.length;
+  P = PUZZLES[idx];
+  revealed=0; misses=0; score=10; over=false; elapsed=0; locked = P.answer_order.map(()=>false);
+  stopTimer(); document.getElementById("timer").textContent="0:00";
+  document.getElementById("pzNum").textContent = "W&OD #"+String(P.number).padStart(3,"0");
+  document.getElementById("pzTitle").textContent = "— "+P.title;
+  const pill=document.getElementById("pzPill"); pill.textContent=P.difficulty; pill.className="pill "+P.difficulty;
+  document.getElementById("pzMeta").textContent = P.word_count+" words · "+P.letter_count+" letters";
+  // sentence with inputs
+  let html="", n=0;
+  const parts = P.sentence.split(/(\{\d+\})/);
+  for(const seg of parts){
+    const m = seg.match(/^\{(\d+)\}$/);
+    if(m){ const k=parseInt(m[1]); const w=P.answer_order[k-1];
+      html += `<input class="blank" data-k="${k}" maxlength="${w.length}" size="${Math.max(w.length,5)}" autocomplete="off" spellcheck="false">`;
+    } else html += seg.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+  }
+  document.getElementById("sentence").innerHTML = html;
+  // rack (hidden)
+  renderRack();
+  document.getElementById("score").textContent=10;
+  document.getElementById("revealed").textContent=0;
+  document.getElementById("misses").textContent=0;
+  setMsg("info","Read the sentence, fill every blank — each word uses the same letters.");
+  document.getElementById("result").classList.remove("show");
+  ["btnCheck","btnReveal","btnGiveUp"].forEach(id=>document.getElementById(id).disabled=false);
+  const ins=document.querySelectorAll(".blank");
+  ins.forEach(inp=>inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); check(); }}));
+  if(ins[0]) ins[0].focus();
+  renderArchive();
+  startTimer();
+}
+
+function renderRack(){
+  const rack=P.rack; let h="";
+  for(let i=0;i<rack.length;i++){
+    const shown = i<revealed;
+    h += `<div class="tile ${shown?'shown':''}">${shown?rack[i]:'_'}</div>`;
+  }
+  document.getElementById("rack").innerHTML=h;
+}
+
+function setMsg(kind,text){ const m=document.getElementById("msg"); m.className="msg "+kind; m.textContent=text; }
+
+function reveal(){
+  if(over) return;
+  if(revealed>=P.rack.length){ setMsg("info","The whole rack is already revealed."); return; }
+  revealed++; score=Math.max(0,score-1);
+  document.getElementById("revealed").textContent=revealed;
+  document.getElementById("score").textContent=Math.max(score, over?0:1);
+  renderRack();
+  setMsg("info","Revealed "+P.rack[revealed-1]+". Each reveal costs 1 point.");
+  if(revealed>=P.rack.length) document.getElementById("btnReveal").disabled=true;
+}
+
+function check(){
+  if(over) return;
+  const ins=[...document.querySelectorAll(".blank")];
+  let anyWrong=false, anyEmpty=false;
+  ins.forEach(inp=>{
+    const k=parseInt(inp.dataset.k); const correct=P.answer_order[k-1];
+    if(locked[k-1]) return;
+    const v=inp.value.trim().toUpperCase();
+    if(!v){ anyEmpty=true; return; }
+    if(v===correct){ locked[k-1]=true; inp.value=correct; inp.classList.add("ok"); inp.readOnly=true; }
+    else { anyWrong=true; inp.classList.add("bad"); setTimeout(()=>inp.classList.remove("bad"),700); }
+  });
+  if(locked.every(Boolean)){ return finish(true); }
+  if(anyWrong){ misses++; score=Math.max(0,score-1); document.getElementById("misses").textContent=misses;
+    document.getElementById("score").textContent=Math.max(score,1);
+    setMsg("bad","Not quite — that's one miss (&minus;1). Correct words lock in green."); }
+  else if(anyEmpty){ setMsg("info","Fill the remaining blanks, then check again."); }
+}
+
+function giveUp(){
+  if(over) return;
+  document.querySelectorAll(".blank").forEach(inp=>{ const k=parseInt(inp.dataset.k);
+    inp.value=P.answer_order[k-1]; inp.classList.remove("ok","bad"); inp.classList.add("reveal"); inp.readOnly=true; });
+  finish(false);
+}
+
+function finish(solved){
+  over=true; stopTimer();
+  ["btnCheck","btnReveal","btnGiveUp"].forEach(id=>document.getElementById(id).disabled=true);
+  let final = solved ? Math.max(1, 10-revealed-misses) : 0;
+  score=final; document.getElementById("score").textContent=final;
+  // stats
+  const firstTime = !stats.done[P.id];
+  stats.done[P.id]=true;
+  if(solved){
+    stats.streak += 1; stats.best=Math.max(stats.best,stats.streak);
+    stats.miles += 1;
+    const perfect = (revealed===0 && misses===0);
+    if(perfect){ stats.miles += 1; stats.perfect += 1; }
+    if(stats.streak>0 && stats.streak%5===0){ stats.miles += 2; }
+    stats.last10.push(final);
+  } else { stats.streak = 0; }
+  saveStats(stats); renderStats();
+  // result panel
+  const sq = (solved? "🟩":"⬜").repeat(P.word_count);
+  document.getElementById("resBig").textContent = final+"/10 · "+labelFor(final);
+  document.getElementById("resSquares").textContent = sq;
+  document.getElementById("resLine").innerHTML = solved
+    ? `Solved in ${revealed} letter${revealed===1?"":"s"} · ${misses} miss${misses===1?"":"es"} · ${fmt(elapsed)} · streak ${stats.streak}`
+    : `Gave up · answers revealed · streak reset`;
+  const share = `W&OD #${String(P.number).padStart(3,"0")}\n${sq}\n${final}/10 · ${labelFor(final)}\n`+
+    (solved? `${revealed} letter${revealed===1?"":"s"} · ${misses} miss${misses===1?"":"es"} · ${fmt(elapsed)}\nStreak: ${stats.streak}`
+           : `Answers revealed`);
+  document.getElementById("shareText").textContent = share;
+  document.getElementById("result").classList.add("show");
+  setMsg(solved?"good":"bad", solved? "Nice ride." : "That one got away — try the next.");
+  renderArchive();
+}
+
+function renderArchive(){
+  const el=document.getElementById("archive");
+  el.innerHTML = PUZZLES.map((p,i)=>{
+    const done = stats.done[p.id];
+    return `<div class="arch" data-i="${i}"><div class="t">#${String(p.number).padStart(3,"0")} ${p.title} ${done?'<span class="done">✓</span>':''}</div>`+
+           `<div class="m">${p.word_count}w · ${p.letter_count}L · ${p.difficulty}</div></div>`;
+  }).join("");
+  el.querySelectorAll(".arch").forEach(a=>a.addEventListener("click",()=>{ load(parseInt(a.dataset.i)); window.scrollTo({top:0,behavior:"smooth"}); }));
+}
+
+document.getElementById("btnCheck").addEventListener("click",check);
+document.getElementById("btnReveal").addEventListener("click",reveal);
+document.getElementById("btnGiveUp").addEventListener("click",giveUp);
+document.getElementById("btnNext").addEventListener("click",()=>load(idx+1));
+document.getElementById("btnCopy").addEventListener("click",()=>{
+  navigator.clipboard.writeText(document.getElementById("shareText").textContent).then(()=>{
+    document.getElementById("btnCopy").textContent="Copied!"; setTimeout(()=>document.getElementById("btnCopy").textContent="Copy share text",1400);
+  }).catch(()=>{});
+});
+
+// ---- deep-linking + embed mode (?id=wod-0001 | ?n=2 | ?id=latest | ?embed=1) ----
+function findStart(){
+  const q = new URLSearchParams(location.search);
+  if(q.has("embed") && q.get("embed")!=="0") document.body.classList.add("embed");
+  const want = (q.get("id") || q.get("n") || "").toLowerCase().trim();
+  if(!want) return 0;
+  if(want==="latest") return PUZZLES.length-1;
+  let i = PUZZLES.findIndex(p => (p.id||"").toLowerCase() === want);
+  if(i>=0) return i;
+  const m = want.match(/(\d+)\s*$/);
+  if(m){ const num = parseInt(m[1],10); const j = PUZZLES.findIndex(p => p.number===num); if(j>=0) return j; }
+  return 0;
+}
+
+renderStats();
+load(findStart());
+</script>
+</body>
+</html>
