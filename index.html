@@ -518,6 +518,39 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
 
 /* history timeline: text-only (images removed) */
 .tl{display:block}
+
+/* ============ contact / submission modal ============ */
+.ap-modal{position:fixed;inset:0;z-index:1000;display:none}
+.ap-modal.open{display:block}
+.ap-modal-backdrop{position:absolute;inset:0;background:rgba(15,61,76,.45);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.ap-modal-card{position:relative;max-width:520px;margin:6vh auto 0;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px 26px 24px;box-shadow:0 24px 60px rgba(15,61,76,.28);max-height:88vh;overflow:auto;animation:apPop .18s ease}
+@keyframes apPop{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+.ap-modal-x{position:absolute;top:14px;right:16px;border:0;background:none;font-size:26px;line-height:1;color:var(--mute);cursor:pointer;padding:4px}
+.ap-modal-x:hover{color:var(--ink)}
+.ap-modal-card h3{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.02em;margin:6px 0 8px}
+.ap-modal-sub{font-size:14.5px;color:var(--mute);line-height:1.55;margin-bottom:18px}
+.ap-field{margin-bottom:14px}
+.ap-field label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.ap-field .req{color:var(--coral)}
+.ap-field input,.ap-field textarea{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--paper);box-sizing:border-box}
+.ap-field textarea{resize:vertical;min-height:84px}
+.ap-field input:focus,.ap-field textarea:focus{border-color:var(--teal);outline:none}
+.ap-field input::placeholder,.ap-field textarea::placeholder{color:#9aa6ad}
+.ap-modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}
+.ap-modal-actions .cta{cursor:pointer}
+.ap-modal-note{font-size:12px;color:var(--mute);margin-top:14px;line-height:1.5}
+@media(max-width:560px){.ap-modal-card{margin:0;border-radius:0;min-height:100vh;max-height:100vh}.ap-modal-actions{flex-direction:column-reverse}.ap-modal-actions .cta{width:100%;justify-content:center}}
+
+/* ============ about page ============ */
+.about-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:34px}
+.about-h{font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:-.01em;margin-bottom:8px;color:var(--teal)}
+.about-cols p{font-size:14.5px;color:var(--mute);line-height:1.6}
+.about-contact{margin-top:36px;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:26px}
+.about-contact p{font-size:15px;color:var(--mute);margin-top:4px}
+.about-contact a{color:var(--teal);font-weight:600}
+.about-btns{display:flex;gap:11px;flex-wrap:wrap;margin-top:16px}
+.about-btns .cta{cursor:pointer}
+@media(max-width:760px){.about-cols{grid-template-columns:1fr;gap:22px}}
 </style>
 </head>
 <body>
@@ -536,7 +569,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
       </span>
       <span>
         <span class="name">Ashburn <b>Pulse</b></span>
-        <span class="sub">Loudoun · ZIP 20147</span>
+        <span class="sub">Live life, together.</span>
       </span>
     </a>
     <nav class="menu" id="menu">
@@ -561,8 +594,8 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
     <div class="grid">
       <div>
         <div class="eyebrow c">Ashburn Pulse · a weekly local read</div>
-        <h1>Your four minutes<br>on <em>Ashburn.</em></h1>
-        <p class="tag">One sharp local read, every Thursday — what's worth your time, where to go, and the people making it happen. Free.</p>
+        <h1>Find your next reason<br>to get out — <em>together.</em></h1>
+        <p class="tag">Every Thursday, a four-minute read on great things to do in Ashburn — where to go and how to make the most of the weekend. Free.</p>
         <form class="ml-form hero-signup" action="" method="post" target="ml-sink" onsubmit="return mlSubmit(this)">
           <input type="email" name="fields[email]" placeholder="you@email.com" aria-label="Email address" required>
           <input type="hidden" name="ml-submit" value="1">
@@ -572,22 +605,22 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
         <div class="hero-sublabel">A new issue every Thursday. No spam · unsubscribe anytime.</div>
         <div class="cta-row" style="margin-top:18px">
           <button class="cta ghost" onclick="scrollToId('archive')">See past issues ↓</button>
-          <button class="cta ghost" onclick="go('play')">Play today's game</button>
         </div>
       </div>
       <div class="hero-card">
         <div class="hc-top">
-          <div class="eyebrow">Today's puzzle</div>
-          <div class="pill"><span class="sw" style="background:var(--coral)"></span>W&amp;OD</div>
+          <div class="eyebrow">What's in the Pulse</div>
+          <div class="pill"><span class="sw" style="background:var(--leaf)"></span>Every Thu</div>
         </div>
         <div class="hc-body">
-          <div class="hc-tile">
-            <span class="qm">?</span>
-            <span class="lbl">Words &amp; Omitted Details</span>
+          <div style="display:flex;flex-direction:column;gap:13px">
+            <div style="display:flex;align-items:center;gap:11px;font-size:14.5px;color:var(--ink)"><span style="width:8px;height:8px;border-radius:50%;background:var(--sky);flex:none"></span>Where to go this weekend</div>
+            <div style="display:flex;align-items:center;gap:11px;font-size:14.5px;color:var(--ink)"><span style="width:8px;height:8px;border-radius:50%;background:var(--coral);flex:none"></span>Local notes worth knowing</div>
+            <div style="display:flex;align-items:center;gap:11px;font-size:14.5px;color:var(--ink)"><span style="width:8px;height:8px;border-radius:50%;background:var(--leaf);flex:none"></span>A place or person to support</div>
+            <div style="display:flex;align-items:center;gap:11px;font-size:14.5px;color:var(--ink)"><span style="width:8px;height:8px;border-radius:50%;background:var(--sun);flex:none"></span>Today's puzzle 🔥</div>
           </div>
           <div class="hc-row">
-            <span class="s">🔥 Build a streak</span>
-            <button class="cta primary" style="padding:9px 16px;font-size:14px" onclick="go('play')">Play →</button>
+            <span class="s">A 4-minute read</span>
           </div>
         </div>
       </div>
@@ -598,8 +631,8 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
   <div class="wrap" style="padding:42px 22px 10px">
     <div class="mission">
       <div class="eyebrow c">Why we're here</div>
-      <h2 class="sec">Get out. Together.</h2>
-      <p class="mission-lede">We believe people are made for connection — and that the best moments happen when they're shared with other people. But life is busy. So every week we gather what's worth your time, to make it a little easier to get out, enjoy where you live, and do it together.</p>
+      <h2 class="sec">People are made for connection.</h2>
+      <p class="mission-lede">The best moments happen when they're shared with other people — but life is busy. So every week we curate things to do out and about in Ashburn, to make it a little easier to get out and enjoy where you live.</p>
     </div>
   </div>
 
@@ -612,21 +645,27 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
     </div>
   </div>
 
-  <!-- what's inside -->
-  <div class="wrap section-pad" style="padding-bottom:18px">
-    <div class="nl-hero">
+  <!-- games teaser -->
+  <div class="wrap" style="padding:8px 22px 0">
+    <div class="guide-help" style="margin-top:0">
       <div>
-        <div class="eyebrow">What's inside</div>
-        <h2 class="sec" style="font-size:26px">One read, every Thursday</h2>
-        <p class="lede">Free, four minutes, no fluff. Here's what lands in your inbox each week.</p>
-        <div style="margin-top:16px;font-size:13.5px;color:var(--mute)">Got a tip or an event? <a onclick="alert('Demo: opens the tip form.')" style="color:var(--teal);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px">Send it here →</a></div>
+        <h4>A quick daily puzzle, built to share</h4>
+        <p>Two local word games — W&amp;OD and The Interchange. Build a streak, compare scores, no account needed.</p>
       </div>
+      <button class="cta primary" onclick="go('play')">Play today's game →</button>
+    </div>
+  </div>
+
+  <!-- more than an inbox -->
+  <div class="wrap" style="padding:14px 22px 0">
+    <div class="guide-help" style="margin-top:0">
       <div>
-        <div class="ed-stack">
-          <div class="edrow2"><span class="bar" style="background:var(--coral)"></span><div><h4>The one story that matters<span class="when">the lead</span></h4><p>The week's most important local story, told straight — no fluff, no filler.</p></div></div>
-          <div class="edrow2"><span class="bar" style="background:var(--sky)"></span><div><h4>Where to go<span class="when">the plan</span></h4><p>The weekend worth screenshotting — events, openings, and family-friendly picks.</p></div></div>
-          <div class="edrow2"><span class="bar" style="background:var(--leaf)"></span><div><h4>The local notes<span class="when">the rest</span></h4><p>Schools, sports, roads, and the small things that make living here easier.</p></div></div>
-        </div>
+        <h4>More than an inbox</h4>
+        <p>Useful local references, Ashburn history, schools, parks, churches, and places to go — all in one place.</p>
+      </div>
+      <div class="cta-row" style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="cta ghost" onclick="go('guide')">Browse Local Links →</button>
+        <button class="cta ghost" onclick="go('history')">Explore Ashburn History →</button>
       </div>
     </div>
   </div>
@@ -698,7 +737,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
         <h4>Ashburn changes fast. Found something off?</h4>
         <p>If a listing is missing, outdated, or wrong — or you run a school, church, league, or business that belongs here — send it over. Reader submissions keep the guide honest.</p>
       </div>
-      <button class="cta primary" onclick="alert('Demo: this opens the Submit a Listing form (a simple Google Form at launch).')">Submit a listing →</button>
+      <button class="cta primary" onclick="openForm('listing')">Submit a listing →</button>
     </div>
   </div>
 </section>
@@ -709,8 +748,8 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
     <div class="hist-hero" style="grid-template-columns:1fr">
       <div>
         <div class="eyebrow y">The story of a place</div>
-        <h2 class="sec">How a burning tree<br>became Data Center Alley</h2>
-        <p class="lede">Ashburn's story begins before it was called Ashburn — as Farmwell, a quiet Loudoun farm town on a rail line. Two hundred years later, a town named for a creek (or maybe a lightning strike) carries a major share of the world's internet traffic. Here's the whole arc.</p>
+        <h2 class="sec">How a burning tree<br>became the Ashburn we know today</h2>
+        <p class="lede">Ashburn's story begins before it was called Ashburn — as Farmwell, a quiet Loudoun farm town on a rail line. Two hundred years later, a town named for a creek (or maybe a lightning strike) carries a major share of the world's internet traffic — alongside a thriving set of neighborhoods, schools, parks, and things to do. Here's the whole arc.</p>
       </div>
     </div>
   </div>
@@ -784,6 +823,40 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
   </div>
 </section>
 
+<!-- ====================================================== ABOUT ====================================================== -->
+<section class="page" id="page-about">
+  <div class="wrap section-pad" style="padding-bottom:36px">
+    <div class="eyebrow c">About</div>
+    <h2 class="sec">A simple way to know<br>what to do in Ashburn</h2>
+    <p class="lede">The Ashburn Pulse is a free, independent newsletter and local guide for ZIP 20147 and the neighborhoods around it — Ashburn, Brambleton, Broadlands, Lansdowne, Sterling, and Leesburg. One scannable place to catch what's happening, find the local link you actually need, learn how the area got here, and play a quick daily word game.</p>
+
+    <div class="about-cols">
+      <div>
+        <h3 class="about-h">What you'll find</h3>
+        <p>A weekly newsletter with the week ahead, a searchable directory of 140+ vetted local links — schools, parks, permits, churches, leagues, urgent care — a brief history of Ashburn, and a couple of daily word games to have fun with.</p>
+      </div>
+      <div>
+        <h3 class="about-h">Why it exists</h3>
+        <p>We're all busy, and there's a lot going on around Ashburn. The Pulse gathers helpful local links to help you stay connected, plus a short list of things to do so you can quickly figure out your weekend. Just a simple, quick read on what to do.</p>
+      </div>
+      <div>
+        <h3 class="about-h">Your feedback is welcome</h3>
+        <p>Reader tips, listings, and corrections help keep us on top of things. If something is missing or wrong, please tell us.</p>
+      </div>
+    </div>
+
+    <div class="about-contact">
+      <h3 class="about-h">Get in touch</h3>
+      <p>Email us anytime at <a href="mailto:info@theashburnpulse.com">info@theashburnpulse.com</a> — or use a form:</p>
+      <div class="about-btns">
+        <button class="cta primary" onclick="openForm('tip')">Submit a tip →</button>
+        <button class="cta ghost" onclick="openForm('listing')">Submit a listing →</button>
+        <button class="cta ghost" onclick="openForm('correction')">Send a correction →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <!-- ============ FOOTER ============ -->
@@ -808,16 +881,15 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
         <ul>
           <li><a onclick="go('home')">Subscribe</a></li>
           <li><a onclick="go('home')">Archive</a></li>
-          <li><a onclick="alert('Demo: tip form')">Submit a tip</a></li>
+          <li><a onclick="openForm('tip')">Submit a tip</a></li>
         </ul>
       </div>
       <div>
         <h5>Community</h5>
         <ul>
-          <li><a onclick="go('guide')">Submit a listing</a></li>
-          <li><a onclick="alert('Demo: correction form')">Send a correction</a></li>
-          <li><a onclick="alert('Demo: about page')">About</a></li>
-          <li><a href="#" onclick="return false">Instagram</a></li>
+          <li><a onclick="openForm('listing')">Submit a listing</a></li>
+          <li><a onclick="openForm('correction')">Send a correction</a></li>
+          <li><a onclick="go('about')">About</a></li>
         </ul>
       </div>
     </div>
@@ -829,6 +901,25 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
   <div class="sunrise"><i></i><i></i><i></i><i></i></div>
 </footer>
 
+<!-- ============ CONTACT / SUBMISSION MODAL ============ -->
+<div class="ap-modal" id="apModal" aria-hidden="true">
+  <div class="ap-modal-backdrop" onclick="closeForm()"></div>
+  <div class="ap-modal-card" role="dialog" aria-modal="true" aria-labelledby="apModalTitle">
+    <button class="ap-modal-x" type="button" onclick="closeForm()" aria-label="Close">&times;</button>
+    <div class="eyebrow c" id="apModalKicker">The Ashburn Pulse</div>
+    <h3 id="apModalTitle">Get in touch</h3>
+    <p class="ap-modal-sub" id="apModalSub"></p>
+    <form id="apForm" onsubmit="return submitForm(event)">
+      <div id="apFields"></div>
+      <div class="ap-modal-actions">
+        <button type="button" class="cta ghost" onclick="closeForm()">Cancel</button>
+        <button type="submit" class="cta primary" id="apSubmitBtn">Open email →</button>
+      </div>
+      <p class="ap-modal-note">This opens your email app with everything filled in, addressed to <b>info@theashburnpulse.com</b> — just hit send. No email app? Write us directly at <a href="mailto:info@theashburnpulse.com" style="color:var(--teal)">info@theashburnpulse.com</a>.</p>
+    </form>
+  </div>
+</div>
+
 <script>
 /* ============ page routing ============ */
 function go(p){
@@ -838,6 +929,97 @@ function go(p){
   document.getElementById('menu').classList.remove('open');
   window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
 }
+
+/* ============ contact / submission forms (compose email to info@) ============ */
+const AP_EMAIL='info@theashburnpulse.com';
+const AP_FORMS={
+  tip:{
+    kicker:'Reader tip',
+    title:'Submit a tip',
+    sub:"Saw something happening in Ashburn? Tell us — a new business, road work, an event, a closure, anything worth a look.",
+    subject:'Tip for the Ashburn Pulse',
+    fields:[
+      {name:'Your tip',type:'textarea',required:true,placeholder:"What's happening, and where?"},
+      {name:'Area',type:'text',required:false,placeholder:'Ashburn, Brambleton, Broadlands…'},
+      {name:'Link (if you have one)',type:'text',required:false,placeholder:'https://…'},
+      {name:'Your name',type:'text',required:false,placeholder:'Optional'},
+      {name:'Your email',type:'email',required:false,placeholder:'So we can follow up (optional)'}
+    ]
+  },
+  listing:{
+    kicker:'Local Links',
+    title:'Submit a listing',
+    sub:"Run a school, church, league, shop, or service in Ashburn — or know one that belongs in the guide? Send the details and we'll add it.",
+    subject:'Local Links — submit a listing',
+    fields:[
+      {name:'Name of the place or organization',type:'text',required:true,placeholder:'e.g. Ashburn Volunteer Fire & Rescue'},
+      {name:'Website or link',type:'text',required:false,placeholder:'https://…'},
+      {name:'Category',type:'text',required:false,placeholder:'School, park, church, league, restaurant…'},
+      {name:'Area',type:'text',required:false,placeholder:'Ashburn, Brambleton, Broadlands…'},
+      {name:'Anything else we should know',type:'textarea',required:false,placeholder:'Hours, what makes it useful, etc.'},
+      {name:'Your name',type:'text',required:false,placeholder:'Optional'},
+      {name:'Your email',type:'email',required:false,placeholder:'Optional'}
+    ]
+  },
+  correction:{
+    kicker:'Correction',
+    title:'Send a correction',
+    sub:"Spotted something wrong or out of date? Tell us what to fix — accuracy matters and we'll update it fast.",
+    subject:'Correction — the Ashburn Pulse',
+    fields:[
+      {name:'Where is it',type:'text',required:true,placeholder:'Which page, section, or listing?'},
+      {name:"What's wrong",type:'textarea',required:true,placeholder:'Describe the error'},
+      {name:'The correct information',type:'textarea',required:false,placeholder:'If you know it'},
+      {name:'Your name',type:'text',required:false,placeholder:'Optional'},
+      {name:'Your email',type:'email',required:false,placeholder:'So we can thank you / follow up (optional)'}
+    ]
+  }
+};
+function apEsc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function openForm(type){
+  const cfg=AP_FORMS[type]; if(!cfg)return;
+  document.getElementById('apModalKicker').textContent=cfg.kicker;
+  document.getElementById('apModalTitle').textContent=cfg.title;
+  document.getElementById('apModalSub').textContent=cfg.sub;
+  const wrap=document.getElementById('apFields');
+  wrap.innerHTML=cfg.fields.map(function(f,i){
+    const id='apf_'+i;
+    const req=f.required?' required':'';
+    const star=f.required?' <span class="req">*</span>':'';
+    const ph=apEsc(f.placeholder||'');
+    const ctrl=f.type==='textarea'
+      ? '<textarea id="'+id+'" rows="4" placeholder="'+ph+'"'+req+'></textarea>'
+      : '<input id="'+id+'" type="'+(f.type||'text')+'" placeholder="'+ph+'"'+req+'>';
+    return '<div class="ap-field"><label for="'+id+'">'+apEsc(f.name)+star+'</label>'+ctrl+'</div>';
+  }).join('');
+  const form=document.getElementById('apForm');
+  form.dataset.type=type;
+  const m=document.getElementById('apModal');
+  m.classList.add('open'); m.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  setTimeout(function(){const first=wrap.querySelector('input,textarea'); if(first)first.focus();},40);
+}
+function closeForm(){
+  const m=document.getElementById('apModal');
+  m.classList.remove('open'); m.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+function submitForm(e){
+  e.preventDefault();
+  const type=document.getElementById('apForm').dataset.type;
+  const cfg=AP_FORMS[type]; if(!cfg)return false;
+  const lines=[];
+  cfg.fields.forEach(function(f,i){
+    const el=document.getElementById('apf_'+i);
+    const v=el&&el.value?el.value.trim():'';
+    if(v) lines.push(f.name+':\n'+v);
+  });
+  const body=lines.join('\n\n')+'\n\n— Sent from theashburnpulse.com';
+  window.location.href='mailto:'+AP_EMAIL+'?subject='+encodeURIComponent(cfg.subject)+'&body='+encodeURIComponent(body);
+  closeForm();
+  return false;
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeForm();});
 
 /* ============ tiny resilient store (localStorage w/ in-memory fallback) ============ */
 const Store=(()=>{
