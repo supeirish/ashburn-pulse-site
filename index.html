@@ -1284,9 +1284,7 @@ function filterGuide(){
 }
 
 /* ============ newsletter archive ============ */
-const ISSUES=[
-  {badge:'The Pulse',color:'#FF5A47',dt:'Jun 13',tag:'weekend',h:'Live music on the farm, Orville Peck under the stars, and pro sports galore',li:['Vanish Farmwoods: free live music all weekend','Loudoun United hosts Rhode Island FC tonight','One Loudoun Carnival\u2019s last week \u2014 free admission'],url:'issues/2026-06-13.html'}
-];
+const ISSUES=[{"badge": "The Pulse", "color": "#FF5A47", "dt": "Jun 18", "tag": "weekend", "h": "Father's Day, handled: ribs & rosé in the mountains (+ the carnival's last call)", "li": ["Father's Day Ribs & Rosé at Bluemont Vineyard", "Polo under the lights at Morven Park", "One Loudoun Carnival's final weekend — free admission"], "url": "issues/2026-06-18.html"}, {"badge": "The Pulse", "color": "#FF5A47", "dt": "Jun 13", "tag": "weekend", "h": "Live music on the farm, Orville Peck under the stars, and pro sports galore", "li": ["Vanish Farmwoods: free live music all weekend", "Loudoun United hosts Rhode Island FC tonight", "One Loudoun Carnival’s last week — free admission"], "url": "issues/2026-06-13.html"}];
 let aFilter='all';
 function renderIssues(){
   const list=ISSUES.filter(i=>aFilter==='all'||i.tag===aFilter);
