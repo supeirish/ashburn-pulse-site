@@ -49,6 +49,10 @@
     // clean return URL: strip any #hash / ?query so Supabase's token fragment
     // is the ONLY hash (a stray #signin etc. breaks token parsing -> signed out)
     _returnURL: function () { return location.origin + location.pathname; },
+    // path prefix to the games folder: "" when already inside /games/, else "games/".
+    // lets the account chip + menu link correctly whether mounted on a game page
+    // or on the main site (homepage) which lives one level up.
+    _base: function () { return /\/games\//.test(location.pathname) ? "" : "games/"; },
     signInEmail: function (email) {
       return this._sb.auth.signInWithOtp({ email: email, options: { emailRedirectTo: this._returnURL() } });
     },
@@ -222,7 +226,7 @@
       var host = this._barHost; if (!host) return;
       host.innerHTML = "";
       var lb = document.createElement("a");
-      lb.className = "pulse-btn"; lb.href = "leaderboard.html"; lb.innerHTML = "🏆 Leaderboard";
+      lb.className = "pulse-btn"; lb.href = this._base() + "leaderboard.html"; lb.innerHTML = "🏆 Leaderboard";
       host.appendChild(lb);
       if (!this.user) {
         host.appendChild(this._btn("Sign in to save", "solid", this.openSignIn.bind(this)));
@@ -248,7 +252,7 @@
       }
       m.innerHTML =
         '<div class="hd">Signed in as <b>' + (this.user.handle || "you") + "</b><br>🔥 streak " + (this.user.current_streak || 0) + "</div>" +
-        '<a href="leaderboard.html#me">📜 My history & stats</a>' +
+        '<a href="' + this._base() + 'leaderboard.html#me">📜 My history & stats</a>' +
         '<button id="pulse-edit">✏️ Edit profile</button>' +
         '<button id="pulse-out">↩︎ Sign out</button>';
       var r = e.currentTarget.getBoundingClientRect();

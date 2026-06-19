@@ -723,7 +723,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
 
     <div class="play-toolbar">
       <a class="play-btn primary" href="games/leaderboard.html">🏆 Leaderboard</a>
-      <a class="play-btn" href="games/leaderboard.html#signin">🎟️ Sign in to save</a>
+      <a class="play-btn" id="ap-signin" href="games/leaderboard.html#signin">🎟️ Sign in to save</a>
     </div>
 
     <div class="play-cards">
@@ -1411,6 +1411,43 @@ renderIssues();
   }
   window.addEventListener('load',function(){ fit(); setInterval(fit,800); });
   document.querySelectorAll('iframe[src^="games/"]').forEach(function(f){ f.addEventListener('load',function(){ setTimeout(fit,60); }); });
+})();
+</script>
+
+<!-- ============ Accounts: make the WHOLE site auth-aware ============
+     Loads the same Supabase client the games use, so a player who signs in
+     stays signed in everywhere on the site, the homepage reflects it, and a
+     sign-in that returns to the homepage actually completes (no more
+     "still signed out"). Degrades to a plain link if accounts aren't set up. -->
+<script>window.__apAuthRedirect = /[#&](access_token|error)=/.test(location.hash) || /[?&]code=/.test(location.search);</script>
+<script src="games/pulse-config.js"></script>
+<script src="games/pulse.js"></script>
+<script>
+(function(){
+  var btn = document.getElementById('ap-signin');
+  if (!btn || !window.Pulse || !Pulse.enabled) return;   // not configured -> leave the plain link
+  function render(){
+    if (Pulse.user){
+      btn.innerHTML = '✅ Signed in · ' + (Pulse.user.handle || 'you');
+      btn.setAttribute('href','games/leaderboard.html');
+      btn.classList.add('primary');
+    } else {
+      btn.innerHTML = '🎟️ Sign in to save';
+      btn.setAttribute('href','games/leaderboard.html#signin');
+      btn.classList.remove('primary');
+    }
+  }
+  // Sign in right here on the homepage instead of bouncing to the leaderboard.
+  btn.addEventListener('click', function(e){
+    if (!Pulse.user){ e.preventDefault(); Pulse.openSignIn(); }
+  });
+  Pulse.whenReady().then(function(){
+    render();
+    // If we just came back from a Google/magic-link sign-in, drop the player
+    // straight onto the Play section so they can start a game.
+    if (window.__apAuthRedirect && Pulse.user && typeof go === 'function') go('play');
+  });
+  Pulse.onChange(render);
 })();
 </script>
 </body>
