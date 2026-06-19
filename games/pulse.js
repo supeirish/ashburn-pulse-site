@@ -46,11 +46,14 @@
     },
 
     /* ---- auth actions ---- */
+    // clean return URL: strip any #hash / ?query so Supabase's token fragment
+    // is the ONLY hash (a stray #signin etc. breaks token parsing -> signed out)
+    _returnURL: function () { return location.origin + location.pathname; },
     signInEmail: function (email) {
-      return this._sb.auth.signInWithOtp({ email: email, options: { emailRedirectTo: location.href } });
+      return this._sb.auth.signInWithOtp({ email: email, options: { emailRedirectTo: this._returnURL() } });
     },
     signInGoogle: function () {
-      return this._sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.href } });
+      return this._sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: this._returnURL() } });
     },
     signOut: function () { return this._sb.auth.signOut(); },
 
@@ -149,7 +152,14 @@
       var self = this;
       if (!this.enabled) { this._resolveReady(); return; }
       import(CDN).then(function (mod) {
-        self._sb = mod.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
+        self._sb = mod.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY, {
+          auth: {
+            persistSession: true,        // keep the session in localStorage
+            autoRefreshToken: true,      // silently refresh so people stay signed in indefinitely
+            detectSessionInUrl: true,    // process the magic-link / OAuth token on return
+            flowType: "implicit"         // token in the URL hash — works even across devices/mail apps
+          }
+        });
         return self._sb.auth.getSession();
       }).then(function (res) {
         return self._onSession(res && res.data ? res.data.session : null);
