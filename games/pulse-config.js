@@ -17,6 +17,6 @@ window.PULSE_CONFIG = {
   // Project: ashburn-pulse-games (Supabase, supeirish's Org) — set up 2026-06-18
   SUPABASE_URL:      "https://nhmekflguvoksczonczw.supabase.co",
   SUPABASE_ANON_KEY: "sb_publishable_4_3ofewlgqTw8P3Cwtd0-w_aXHIl0_e",  // publishable (browser-safe) key
-  GOOGLE: false,          // set true once Google sign-in is enabled in Supabase
+  GOOGLE: true,           // Google sign-in enabled in Supabase 2026-06-19
   AREA_PROMPT: true       // ask new players for their Ashburn neighborhood (optional)
 };
