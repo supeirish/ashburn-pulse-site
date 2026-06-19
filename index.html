@@ -970,6 +970,11 @@ function go(p){
   window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
 }
 
+/* deep-links from the games/leaderboard pages: /#play, /#guide, /#history, /#about */
+function goFromHash(){ var h=(location.hash||'').replace(/^#/,''); if(h && document.getElementById('page-'+h)) go(h); }
+window.addEventListener('hashchange', goFromHash);
+goFromHash();
+
 /* ============ contact / submission forms (compose email to info@) ============ */
 const AP_EMAIL='info@theashburnpulse.com';
 const AP_FORMS={
