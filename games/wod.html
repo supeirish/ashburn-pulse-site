@@ -103,7 +103,7 @@
 <div class="wrap">
   <header class="top">
     <div>
-      <div class="brand">W<span>&amp;</span>OD</div>
+      <a href="../index.html" style="text-decoration:none" title="Ashburn Pulse home"><div class="brand">W<span>&amp;</span>OD</div></a>
       <div class="tag">Words &amp; Omitted Details &middot; the daily Ashburn anagram game</div>
     </div>
     <button class="help-link" id="btnHelp">&#9432; How it works</button>
@@ -155,7 +155,7 @@
   </div>
 
   <details class="archive" id="archiveWrap">
-    <summary>Archive - all puzzles</summary>
+    <summary>Past puzzles &middot; play any prior day</summary>
     <div class="arch-grid" id="archive"></div>
   </details>
 
@@ -353,10 +353,16 @@ function finish(solved){
 function renderArchive(){
   const el=document.getElementById("archive");
   if(!el) return;
-  el.innerHTML = PUZZLES.map((p,i)=>{
+  const todayIdx = Math.min(dailyIndex(), PUZZLES.length-1);   // only puzzles released so far
+  const items = [];
+  PUZZLES.forEach((p,i)=>{ if(i<=todayIdx) items.push({p,i}); });
+  items.reverse();                                             // newest first
+  el.innerHTML = items.map(({p,i})=>{
     const done = stats.done[p.id];
+    const ds = new Date(DAY1 + i*86400000)
+      .toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
     return `<div class="arch" data-i="${i}"><div class="t">#${String(p.number).padStart(3,"0")} ${p.title} ${done?'<span class="done">✓</span>':''}</div>`+
-           `<div class="m">${p.word_count}w · ${p.letter_count}L · ${p.difficulty}</div></div>`;
+           `<div class="m">${ds} · ${p.difficulty}</div></div>`;
   }).join("");
   el.querySelectorAll(".arch").forEach(a=>a.addEventListener("click",()=>{ load(parseInt(a.dataset.i)); window.scrollTo({top:0,behavior:"smooth"}); }));
 }

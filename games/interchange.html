@@ -101,7 +101,7 @@ body.embed .embed-help{display:flex;justify-content:flex-end;margin-bottom:2px}
 @media(max-width:520px){.kbd{grid-template-columns:repeat(7,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
 </style></head>
 <body><div class="wrap">
-<header class="top"><div><div class="brand">The Interchange</div>
+<header class="top"><div><a href="../index.html" style="text-decoration:none" title="Ashburn Pulse home"><div class="brand">The Interchange</div></a>
 <div class="tag">One clue &middot; two words &middot; pick the middle letter</div></div>
 <button class="help-link" id="btnHelp">&#9432; How it works</button></header>
 <div class="stats" id="stats"></div>
@@ -140,7 +140,7 @@ body.embed .embed-help{display:flex;justify-content:flex-end;margin-bottom:2px}
     <button class="btn startbtn" id="btnStart">Start &rarr;</button>
   </div>
 </div>
-<details class="archive" id="archiveWrap"><summary>Archive - all editions</summary>
+<details class="archive" id="archiveWrap"><summary>Past editions &middot; play any prior day</summary>
 <div class="arch-grid" id="archive"></div></details>
 <div class="foot">A self-contained player for The Interchange. Editions come from <code>data/editions.json</code>.</div>
 </div>
@@ -314,10 +314,16 @@ function editionSummary(){
   setMsg("good","That's the full edition. Come back tomorrow.");
 }
 function renderArchive(){
-  $("archive").innerHTML=EDS.map((e,i)=>{
+  const now=new Date();
+  const todayStr = now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+  const items=[];
+  EDS.forEach((e,i)=>{ if(!e.date || e.date<=todayStr) items.push({e,i}); });   // only editions released so far
+  items.reverse();                                                              // newest first
+  $("archive").innerHTML=items.map(({e,i})=>{
     const t=stats.done[e.number];
+    const ds = e.date ? new Date(e.date+"T00:00:00").toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : "";
     return `<div class="arch" data-i="${i}"><div class="t">#${String(e.number).padStart(3,"0")} ${t!=null?`<span style="color:var(--ok)">${t}/15</span>`:""}</div>`+
-      `<div class="m">${e.date||""}</div></div>`;
+      `<div class="m">${ds}</div></div>`;
   }).join("");
   $("archive").querySelectorAll(".arch").forEach(a=>a.addEventListener("click",()=>{loadEdition(parseInt(a.dataset.i),0);window.scrollTo({top:0,behavior:"smooth"});}));
 }

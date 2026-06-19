@@ -285,6 +285,7 @@ document.querySelectorAll('#tabSeg button').forEach(function(b){b.onclick=functi
     Pulse.onChange(function(){banner();draw();});
     banner(); draw();
     if(location.hash==='#me') setTimeout(openHistory,400);
+    else if(location.hash==='#signin') setTimeout(function(){ if(window.Pulse&&Pulse.enabled&&!Pulse.user&&Pulse.openSignIn) Pulse.openSignIn(); },400);
   }
   if(window.Pulse) Pulse.whenReady().then(start);
   else window.addEventListener('DOMContentLoaded',function(){ if(window.Pulse) Pulse.whenReady().then(start); else { banner(); draw(); } });

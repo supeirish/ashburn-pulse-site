@@ -698,16 +698,56 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
 <!-- ====================================================== PLAY ====================================================== -->
 <section class="page" id="page-play">
   <div class="wrap section-pad" style="padding-bottom:50px">
+    <style>
+      .play-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px}
+      .play-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--disp);font-weight:800;font-size:15px;letter-spacing:-.01em;text-decoration:none;padding:12px 18px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--teal);transition:.15s}
+      .play-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(15,61,76,.12)}
+      .play-btn.primary{background:var(--coral);color:#fff;border-color:var(--coral)}
+      .play-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:6px;max-width:760px}
+      .play-card{display:flex;flex-direction:column;text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:22px;background:#fff;color:var(--ink);transition:.18s}
+      .play-card:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(15,61,76,.16)}
+      .play-card .pc-bar{height:4px;border-radius:4px;margin-bottom:16px;width:46px}
+      .play-card.wod .pc-bar{background:#3FA776} .play-card.ic .pc-bar{background:#3D9BD9}
+      .play-card .pc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+      .play-card .pc-emoji{font-size:30px}
+      .play-card .pc-streak{font-family:var(--mono);font-size:12px;font-weight:700;color:#e2691b}
+      .play-card .pc-name{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.02em}
+      .play-card.wod .pc-name{color:#2e7d32} .play-card.ic .pc-name{color:#1565c0}
+      .play-card .pc-sub{color:var(--mute);font-size:14px;line-height:1.5;margin:8px 0 16px;flex:1}
+      .play-card .pc-cta{font-family:var(--disp);font-weight:800;font-size:15px}
+      .play-card.wod .pc-cta{color:#2e7d32} .play-card.ic .pc-cta{color:#1565c0}
+    </style>
     <div class="eyebrow c">The daily habit</div>
     <h2 class="sec">Play Ashburn Pulse</h2>
-    <p class="lede">Two daily local word games, built to share. Your scores live on this device — no account needed.</p>
+    <p class="lede">Two daily local word games, built to share. Play free on any device — or sign in to save your scores, keep a streak, and climb the neighborhood leaderboard.</p>
 
-    <!-- Games embedded from the master players in /games (single source of truth).
-         Update the master build (the-wod / the-interchange) and the site inherits. -->
-    <iframe src="games/wod.html?embed=1" title="W&amp;OD — today's puzzle" loading="lazy"
-            style="width:100%;max-width:720px;height:560px;border:1px solid #d9e1e7;border-radius:16px;background:#fff;display:block;margin:22px auto 0"></iframe>
-    <iframe src="games/interchange.html?embed=1" title="The Interchange — today's puzzle" loading="lazy"
-            style="width:100%;max-width:720px;height:700px;border:1px solid #d9e1e7;border-radius:16px;background:#fff;display:block;margin:22px auto 0"></iframe>
+    <div class="play-toolbar">
+      <a class="play-btn primary" href="games/leaderboard.html">🏆 Leaderboard</a>
+      <a class="play-btn" href="games/leaderboard.html#signin">🎟️ Sign in to save</a>
+    </div>
+
+    <div class="play-cards">
+      <a class="play-card wod" href="games/wod.html">
+        <div class="pc-bar"></div>
+        <div class="pc-top"><span class="pc-emoji">🌳</span><span class="pc-streak" data-streak="wod_stats_v1"></span></div>
+        <div class="pc-name">W&amp;OD</div>
+        <div class="pc-sub">Words &amp; Omitted Details — one sentence, several blanks, every missing word an anagram of the same letters. Fewer hints, better score.</div>
+        <div class="pc-cta">Play today's puzzle →</div>
+      </a>
+      <a class="play-card ic" href="games/interchange.html">
+        <div class="pc-bar"></div>
+        <div class="pc-top"><span class="pc-emoji">🚦</span><span class="pc-streak" data-streak="ic_stats_v1"></span></div>
+        <div class="pc-name">The Interchange</div>
+        <div class="pc-sub">One clue, two words that share a middle letter — name it. Three puzzles, easy to hard, every day.</div>
+        <div class="pc-cta">Play today's edition →</div>
+      </a>
+    </div>
+    <script>(function(){
+      function st(k){try{return (JSON.parse(localStorage.getItem(k))||{}).streak||0;}catch(e){return 0;}}
+      document.querySelectorAll('.pc-streak[data-streak]').forEach(function(el){
+        var n=st(el.getAttribute('data-streak')); if(n>0) el.textContent='🔥 '+n+' day streak';
+      });
+    })();</script>
   </div>
 </section>
 
