@@ -162,6 +162,9 @@
   <div class="foot">A self-contained prototype of the W&amp;OD engine. Puzzles come from <code>data/puzzles.json</code>.</div>
 </div>
 
+<script src="pulse-config.js"></script>
+<script src="pulse.js"></script>
+
 <div class="modal" id="helpModal">
   <div class="modal-box">
     <button class="x" id="btnHelpClose">&times;</button>
@@ -340,6 +343,11 @@ function finish(solved){
   document.getElementById("result").classList.add("show");
   setMsg(solved?"good":"bad", solved? "Nice ride. Come back tomorrow for the next one." : "That one got away - new puzzle tomorrow.");
   renderArchive();
+  if(window.Pulse) Pulse.recordPlay({
+    game:"wod", edition_id:Pulse.canonicalId("wod",P.number), edition_no:P.number,
+    title:P.title, score:final, max_score:10, hints:revealed, misses:misses,
+    ms:elapsed*1000, solved:solved, squares:sq
+  });
 }
 
 function renderArchive(){
