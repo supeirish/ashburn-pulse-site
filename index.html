@@ -6,20 +6,21 @@
 <title>Ashburn Pulse — your four minutes on Ashburn</title>
 <meta name="description" content="Your four minutes on Ashburn — one sharp local brief, the weekend plan, a daily local puzzle, and the only Ashburn (ZIP 20147) reference you'll bookmark. Free.">
 <meta name="theme-color" content="#0F3D4C">
+<link rel="canonical" href="https://theashburnpulse.com/">
 
 <!-- Social share preview (Facebook, iMessage, etc.) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ashburn Pulse">
 <meta property="og:title" content="Ashburn Pulse — your four minutes on Ashburn">
 <meta property="og:description" content="One sharp local brief, the weekend plan, a daily local puzzle, and the only Ashburn reference you'll bookmark. Free.">
-<meta property="og:url" content="https://ashburnpulse.com">
-<meta property="og:image" content="https://ashburnpulse.com/share-card.png">
+<meta property="og:url" content="https://theashburnpulse.com/">
+<meta property="og:image" content="https://theashburnpulse.com/share-card.png">
 
 <!-- Social share preview (X / Twitter) -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ashburn Pulse — your four minutes on Ashburn">
 <meta name="twitter:description" content="One sharp local brief, the weekend plan, a daily local puzzle, and the only Ashburn reference you'll bookmark. Free.">
-<meta name="twitter:image" content="https://ashburnpulse.com/share-card.png">
+<meta name="twitter:image" content="https://theashburnpulse.com/share-card.png">
 
 <!-- Favicon: the pulse mark, drawn inline so there's no extra file to host -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='1' y='1' width='38' height='38' rx='9' fill='%230F3D4C'/%3E%3Cpath d='M5 23 L13 23 L16 14 L21 30 L25 19 L28 23 L35 23' stroke='%23FFB341' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='35' cy='23' r='2.4' fill='%23FF5A47'/%3E%3C/svg%3E">
@@ -32,7 +33,7 @@
 :root{
   --ink:#181b20; --paper:#ffffff; --soft:#f7f8f6; --panel:#fbfcfb;
   --teal:#0F3D4C; --teal-700:#16566b; --teal-50:#eaf2f4;
-  --coral:#FF5A47; --sky:#3D9BD9; --leaf:#3FA776; --sun:#FFB341;
+  --coral:#FF5A47; --coral-ink:#D6361F; --sky:#3D9BD9; --leaf:#3FA776; --sun:#FFB341;
   --mute:#62707A; --line:#e7e6e2; --line-2:#eceae5;
   --disp:'Plus Jakarta Sans',sans-serif;
   --body:'Inter',sans-serif;
@@ -88,7 +89,7 @@ nav.menu{display:flex;gap:2px}
 
 /* ============ shared bits ============ */
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:600}
-.eyebrow.c{color:var(--coral)}.eyebrow.s{color:var(--sky)}.eyebrow.g{color:var(--leaf)}.eyebrow.y{color:#cf8a14}
+.eyebrow.c{color:var(--coral-ink)}.eyebrow.s{color:#2A77A8}.eyebrow.g{color:#2E7D55}.eyebrow.y{color:#9C660B}
 h2.sec{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.6vw,38px);letter-spacing:-.03em;line-height:1.05;margin:10px 0 0}
 .lede{font-size:18px;color:#3a4047;max-width:62ch;margin-top:14px}
 .factstrip{font-family:var(--mono);font-size:12px;color:var(--mute);letter-spacing:.02em;display:flex;flex-wrap:wrap;gap:6px 14px}
@@ -106,7 +107,7 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.6vw,38px);
 .hero p.tag{font-size:20px;color:#3a4047;margin-top:18px;max-width:46ch}
 .hero .cta-row{display:flex;gap:11px;margin-top:26px;flex-wrap:wrap}
 .cta{border:0;border-radius:11px;padding:13px 20px;font-weight:700;font-size:15.5px;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:9px;transition:.15s}
-.cta.primary{background:var(--coral);color:#fff}
+.cta.primary{background:var(--coral-ink);color:#fff}
 .cta.primary:hover{filter:brightness(.94)}
 .cta.ghost{background:#fff;color:var(--teal);border:1.5px solid var(--line)}
 .cta.ghost:hover{border-color:var(--teal);background:var(--teal-50)}
@@ -190,7 +191,7 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.6vw,38px);
 .slot.filled{border-color:var(--teal);background:#fff}
 .guess-input{display:flex;gap:9px;margin-top:6px}
 .guess-input input{flex:1;border:1.5px solid var(--line);border-radius:11px;padding:12px 14px;font-size:16px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase}
-.guess-input input:focus{border-color:var(--teal);outline:none}
+.guess-input input:focus{border-color:var(--teal);outline:2px solid var(--sky);outline-offset:2px}
 .gbtn{background:var(--teal);color:#fff;border:0;border-radius:11px;padding:0 20px;font-weight:700;font-size:15px}
 .gbtn.sec{background:#fff;color:var(--teal);border:1.5px solid var(--line)}
 .tries{display:flex;gap:7px;margin:16px 0 4px}
@@ -198,7 +199,7 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.6vw,38px);
 .try.miss{background:#ffe2dd}
 .try.hit{background:#cdeede}
 .msg{font-size:14px;margin-top:12px;min-height:22px;font-weight:600}
-.msg.win{color:var(--leaf)}.msg.lose{color:var(--coral)}.msg.hint{color:var(--mute);font-weight:500}
+.msg.win{color:#2E7D55}.msg.lose{color:var(--coral-ink)}.msg.hint{color:var(--mute);font-weight:500}
 .share-box{margin-top:14px;background:var(--teal);color:#fff;border-radius:12px;padding:16px;display:none}
 .share-box.show{display:block}
 .share-box pre{font-family:var(--mono);font-size:13px;line-height:1.7;white-space:pre-wrap;color:#eaf2f4}
@@ -232,9 +233,9 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.6vw,38px);
 /* ============ GUIDE ============ */
 .guide-search{display:flex;gap:10px;margin:24px 0 10px;flex-wrap:wrap}
 .guide-search input{flex:1;min-width:240px;border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;font-size:15px;font-family:inherit}
-.guide-search input:focus{border-color:var(--teal);outline:none}
+.guide-search input:focus{border-color:var(--teal);outline:2px solid var(--sky);outline-offset:2px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 26px}
-.filt{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 15px;font-size:13.5px;font-weight:600;color:var(--mute);transition:.15s}
+.filt{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;min-height:44px;display:inline-flex;align-items:center;font-size:13.5px;font-weight:600;color:var(--mute);transition:.15s}
 .filt:hover{border-color:var(--teal);color:var(--teal)}
 .filt.on{background:var(--teal);color:#fff;border-color:var(--teal)}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -247,8 +248,8 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.6vw,38px);
 .card p{font-size:13.5px;color:#4a5158;margin-top:9px;flex:1}
 .card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--line-2)}
 .card .ext{font-weight:700;font-size:13px;color:var(--teal);display:inline-flex;gap:5px;align-items:center}
-.card .ext:hover{color:var(--coral)}
-.card .ver{font-family:var(--mono);font-size:10px;color:#9aa0a6}
+.card .ext:hover{color:var(--coral-ink)}
+.card .ver{font-family:var(--mono);font-size:10px;color:#6e747c}
 .guide-help{margin-top:30px;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .guide-help h4{font-family:var(--disp);font-weight:700;font-size:18px}
 .guide-help p{font-size:14px;color:var(--mute);margin-top:4px;max-width:54ch}
@@ -330,7 +331,7 @@ footer li a:hover{color:#fff}
   nav.menu.open{transform:none}
   .tab{text-align:left;width:100%;padding:13px 16px;font-size:16px}
   .hamb{display:flex}
-  .navsub .btn-sub{display:none}
+  .navsub .btn-sub{display:inline-block;padding:8px 12px;font-size:13px}
   .hero .grid,.today-grid,.play-hero,.hist-hero,.nl-hero{grid-template-columns:1fr}
   .explore,.cards,.issues{grid-template-columns:1fr 1fr}
   .statband .wrap{grid-template-columns:1fr 1fr;gap:18px}
@@ -349,8 +350,10 @@ footer li a:hover{color:#fff}
 /* ============ hero signup (added) ============ */
 .hero-signup{display:flex;gap:10px;margin-top:18px;max-width:440px;flex-wrap:wrap}
 .hero-signup input{flex:1;min-width:200px;border:1.5px solid var(--line);border-radius:11px;padding:13px 15px;font-size:15px;font-family:inherit}
-.hero-signup input:focus{border-color:var(--teal);outline:none}
+.hero-signup input:focus{border-color:var(--teal);outline:2px solid var(--sky);outline-offset:2px}
 .hero-sublabel{font-family:var(--mono);font-size:11.5px;color:var(--mute);margin-top:9px;letter-spacing:.01em}
+.ml-confirm{display:none;margin-top:13px;font-size:14px;font-weight:600;color:#1f6b45;background:#e7f5ee;border:1px solid #bfe3cf;border-radius:10px;padding:11px 14px;max-width:480px}
+.signup .ml-confirm{color:#fff;background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28)}
 
 /* ============ mission (added) ============ */
 .mission{max-width:760px}
@@ -372,11 +375,11 @@ footer li a:hover{color:#fff}
 .ic-clue .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);display:block;margin-bottom:4px}
 .ic-input{display:flex;gap:9px;margin-top:14px}
 .ic-input input{width:64px;text-align:center;border:1.5px solid var(--line);border-radius:11px;padding:12px;font-size:22px;font-family:var(--disp);font-weight:800;text-transform:uppercase;color:var(--teal)}
-.ic-input input:focus{border-color:var(--teal);outline:none}
+.ic-input input:focus{border-color:var(--teal);outline:2px solid var(--sky);outline-offset:2px}
 
 /* ============ Guide — sectioned list (added) ============ */
 .guide-toc{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 8px}
-.guide-toc a{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.03em;border:1px solid var(--line);border-radius:999px;padding:8px 14px;color:var(--teal);cursor:pointer}
+.guide-toc a{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.03em;border:1px solid var(--line);border-radius:999px;padding:8px 14px;min-height:44px;display:inline-flex;align-items:center;color:var(--teal);cursor:pointer}
 .guide-toc a:hover{background:var(--teal-50);border-color:var(--teal)}
 .gsec{padding:30px 0 6px;border-top:1px solid var(--line);margin-top:4px}
 .gsec h3{font-family:var(--disp);font-weight:800;font-size:23px;letter-spacing:-.02em;color:var(--teal);display:flex;align-items:center;gap:10px;scroll-margin-top:80px}
@@ -403,7 +406,7 @@ footer li a:hover{color:#fff}
 @media(max-width:820px){.ggrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.ggrid{grid-template-columns:1fr}}
 .gcell{position:relative;display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--line-2);min-width:0}
-.gcell:focus{outline:none}
+.gcell:focus{outline:2px solid var(--sky);outline-offset:2px}
 .gcl{font-size:13px;font-weight:600;color:var(--teal);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
 a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-underline-offset:2px}
 .gmeta{display:flex;align-items:center;gap:3px;flex:none}
@@ -455,7 +458,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
 .wod-title{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--teal);margin-bottom:8px}
 .wod-sentence{font-size:18px;line-height:2.1;color:var(--ink)}
 .wod-blank{border:0;border-bottom:2px solid var(--coral);background:var(--teal-50);border-radius:5px 5px 0 0;font-family:var(--mono);font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.12em;text-align:center;padding:3px 6px;color:var(--teal);min-width:74px}
-.wod-blank:focus{outline:none;background:#fff;border-bottom-color:var(--teal)}
+.wod-blank:focus{outline:2px solid var(--sky);outline-offset:1px;background:#fff;border-bottom-color:var(--teal)}
 .wod-blank.good{background:#e7f5ee;border-bottom-color:var(--leaf);color:#1f7a51}
 .wod-blank.bad{background:#ffe9e6;border-bottom-color:var(--coral);color:#d23b2a}
 .wod-rackwrap{margin:18px 0 6px}
@@ -535,7 +538,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
 .ap-field .req{color:var(--coral)}
 .ap-field input,.ap-field textarea{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--paper);box-sizing:border-box}
 .ap-field textarea{resize:vertical;min-height:84px}
-.ap-field input:focus,.ap-field textarea:focus{border-color:var(--teal);outline:none}
+.ap-field input:focus,.ap-field textarea:focus{border-color:var(--teal);outline:2px solid var(--sky);outline-offset:2px}
 .ap-field input::placeholder,.ap-field textarea::placeholder{color:#9aa6ad}
 .ap-modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}
 .ap-modal-actions .cta{cursor:pointer}
@@ -596,14 +599,14 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
       <div>
         <div class="eyebrow c">Ashburn Pulse · a weekly local read</div>
         <h1>Find your next reason<br>to get out — <em>together.</em></h1>
-        <p class="tag">Every Thursday, a four-minute read on great things to do in Ashburn — where to go and how to make the most of the weekend. Free.</p>
+        <p class="tag">Every Wednesday, a four-minute read on great things to do in Ashburn — where to go and how to make the most of the weekend. Free.</p>
         <form class="ml-form hero-signup" action="" method="post" target="ml-sink" onsubmit="return mlSubmit(this)">
           <input type="email" name="fields[email]" placeholder="you@email.com" aria-label="Email address" required>
           <input type="hidden" name="ml-submit" value="1">
           <input type="hidden" name="anticsrf" value="true">
           <button class="cta primary" type="submit">Get the Pulse — free</button>
         </form>
-        <div class="hero-sublabel">A new issue every Thursday. No spam · unsubscribe anytime.</div>
+        <div class="hero-sublabel">A new issue every Wednesday. No spam · unsubscribe anytime.</div>
         <div class="cta-row" style="margin-top:18px">
           <button class="cta ghost" onclick="scrollToId('archive')">See past issues ↓</button>
         </div>
@@ -611,7 +614,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
       <div class="hero-card">
         <div class="hc-top">
           <div class="eyebrow">What's in the Pulse</div>
-          <div class="pill"><span class="sw" style="background:var(--leaf)"></span>Every Thu</div>
+          <div class="pill"><span class="sw" style="background:var(--leaf)"></span>Every Wed</div>
         </div>
         <div class="hc-body">
           <div style="display:flex;flex-direction:column;gap:13px">
@@ -640,9 +643,9 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
   <!-- stat band -->
   <div class="statband">
     <div class="wrap">
-      <div class="stat"><div class="n">Thu</div><div class="l">New issue, every week</div></div>
+      <div class="stat"><div class="n">Wed</div><div class="l">New issue, every week</div></div>
       <div class="stat"><div class="n">4<em>min</em></div><div class="l">Start to finish</div></div>
-      <div class="stat"><div class="n">~46<em>k</em></div><div class="l">Neighbors in Ashburn</div></div>
+      <div class="stat"><div class="n"><em>Free</em></div><div class="l">Every issue, always</div></div>
     </div>
   </div>
 
@@ -675,7 +678,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
   <div class="wrap" style="padding:14px 22px 52px">
     <div class="signup">
       <h2>Get the Pulse.</h2>
-      <p>One sharp local read, every Thursday — the week that matters in Ashburn. Free, four minutes, no fluff.</p>
+      <p>One sharp local read, every Wednesday — the week that matters in Ashburn. Free, four minutes, no fluff.</p>
       <form class="ml-form form" action="" method="post" target="ml-sink" onsubmit="return mlSubmit(this)">
         <input type="email" name="fields[email]" placeholder="you@ashburn.com" aria-label="Email address" required>
         <input type="hidden" name="ml-submit" value="1">
@@ -683,7 +686,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
         <button class="cta primary" type="submit">Subscribe</button>
       </form>
       <div class="edrow">
-        <span class="ed"><span class="sw" style="background:var(--coral)"></span>The Pulse — every Thursday, always free</span>
+        <span class="ed"><span class="sw" style="background:var(--coral)"></span>The Pulse — every Wednesday, always free</span>
       </div>
     </div>
   </div>
@@ -703,7 +706,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
       .play-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px}
       .play-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--disp);font-weight:800;font-size:15px;letter-spacing:-.01em;text-decoration:none;padding:12px 18px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--teal);transition:.15s}
       .play-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(15,61,76,.12)}
-      .play-btn.primary{background:var(--coral);color:#fff;border-color:var(--coral)}
+      .play-btn.primary{background:var(--coral-ink);color:#fff;border-color:var(--coral-ink)}
       .play-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:6px;max-width:760px}
       .play-card{display:flex;flex-direction:column;text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:22px;background:#fff;color:var(--ink);transition:.18s}
       .play-card:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(15,61,76,.16)}
@@ -963,16 +966,28 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
 
 <script>
 /* ============ page routing ============ */
-function go(p){
+function go(p, push){
+  var target=document.getElementById('page-'+p);
+  if(!target) return;
   document.querySelectorAll('.page').forEach(s=>s.classList.remove('on'));
-  document.getElementById('page-'+p).classList.add('on');
-  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.p===p));
+  target.classList.add('on');
+  document.querySelectorAll('.tab').forEach(function(t){
+    var on=t.dataset.p===p;
+    t.classList.toggle('on',on);
+    if(on){ t.setAttribute('aria-current','page'); } else { t.removeAttribute('aria-current'); }
+  });
   document.getElementById('menu').classList.remove('open');
+  /* keep a shareable URL + a working Back button, without re-triggering navigation */
+  if(push!==false){
+    var cur=(location.hash||'').replace(/^#/,'');
+    if(cur!==p){ history.pushState({p:p},'', '#'+p); }
+  }
   window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
 }
 
-/* deep-links from the games/leaderboard pages: /#play, /#guide, /#history, /#about */
-function goFromHash(){ var h=(location.hash||'').replace(/^#/,''); if(h && document.getElementById('page-'+h)) go(h); }
+/* deep-links + Back/Forward: /#play, /#guide, /#history, /#about */
+function goFromHash(){ var h=(location.hash||'').replace(/^#/,'')||'home'; if(document.getElementById('page-'+h)) go(h,false); }
+window.addEventListener('popstate', goFromHash);
 window.addEventListener('hashchange', goFromHash);
 goFromHash();
 
@@ -1377,16 +1392,29 @@ const MAILERLITE_ACTION = "https://assets.mailerlite.com/jsonp/2443994/forms/190
 function mlSubmit(form){
   const inp=form.querySelector('input[type=email]');
   const btn=form.querySelector('button[type=submit]')||form.querySelector('button');
-  if(!inp || !inp.value.includes('@')){ if(inp){inp.focus();inp.style.outline='2px solid var(--coral)';} return false; }
-  inp.style.outline='';
+  const value=((inp&&inp.value)||'').trim();
+  const valid=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  if(!valid){
+    if(inp){ inp.focus(); inp.style.outline='2px solid var(--coral-ink)'; inp.setAttribute('aria-invalid','true'); }
+    return false;
+  }
+  if(inp){ inp.style.outline=''; inp.removeAttribute('aria-invalid'); }
   const ready = MAILERLITE_ACTION && !MAILERLITE_ACTION.startsWith("PASTE_");
-  const confirm=()=>{
+  // persistent inline confirmation right below the form
+  const showNote=()=>{
+    let note=form.parentNode.querySelector('.ml-confirm');
+    if(!note){ note=document.createElement('div'); note.className='ml-confirm'; note.setAttribute('role','status'); form.insertAdjacentElement('afterend', note); }
+    note.textContent='🎉 You’re on the list — check your inbox to confirm your subscription.';
+    note.style.display='block';
+  };
+  // brief button flash for immediate feedback
+  const flash=()=>{
     const label=btn.textContent;
     btn.textContent='Subscribed ✓'; btn.style.background='var(--leaf)'; btn.style.color='#fff';
-    setTimeout(()=>{ btn.textContent=label; btn.style.background=''; btn.style.color=''; inp.value=''; },2400);
+    setTimeout(()=>{ btn.textContent=label; btn.style.background=''; btn.style.color=''; if(inp) inp.value=''; },2400);
   };
-  if(ready){ setTimeout(confirm,150); return true; }   // POST to MailerLite, then confirm
-  confirm(); return false;                              // not configured yet: confirm only
+  if(ready){ setTimeout(()=>{ flash(); showNote(); },150); return true; }  // POST to MailerLite, then confirm
+  flash(); showNote(); return false;                                       // not configured yet: confirm only
 }
 
 /* ============ image fallback ============ */

@@ -321,30 +321,40 @@ function finish(solved){
   ["btnCheck","btnReveal","btnGiveUp"].forEach(id=>document.getElementById(id).disabled=true);
   let final = solved ? Math.max(1, 10-revealed-misses) : 0;
   score=final; document.getElementById("score").textContent=final;
-  stats.done[P.id]=true;
-  if(solved){
-    stats.streak += 1; stats.best=Math.max(stats.best,stats.streak);
-    stats.miles += 1;
-    const perfect = (revealed===0 && misses===0);
-    if(perfect){ stats.miles += 1; stats.perfect += 1; }
-    if(stats.streak>0 && stats.streak%5===0){ stats.miles += 2; }
-    stats.last10.push(final);
-  } else { stats.streak = 0; }
-  saveStats(stats); renderStats();
+  // Only the FIRST completion of a puzzle counts. Reopening one you've already
+  // finished is a practice run: no streak, Perfect Ride, Trail Miles, or score change.
+  const replay = !!stats.done[P.id];
+  if(!replay){
+    stats.done[P.id]=true;
+    if(solved){
+      stats.streak += 1; stats.best=Math.max(stats.best,stats.streak);
+      stats.miles += 1;
+      const perfect = (revealed===0 && misses===0);
+      if(perfect){ stats.miles += 1; stats.perfect += 1; }
+      if(stats.streak>0 && stats.streak%5===0){ stats.miles += 2; }
+      stats.last10.push(final);
+    } else { stats.streak = 0; }
+    saveStats(stats); renderStats();
+  }
   const sq = (solved? "🟩":"⬜").repeat(P.word_count);
   document.getElementById("resBig").textContent = final+"/10 · "+labelFor(final);
   document.getElementById("resSquares").textContent = sq;
-  document.getElementById("resLine").innerHTML = solved
-    ? `Solved in ${revealed} letter${revealed===1?"":"s"} · ${misses} miss${misses===1?"":"es"} · ${fmt(elapsed)} · streak ${stats.streak}`
-    : `Gave up · answers revealed · streak reset`;
+  document.getElementById("resLine").innerHTML = replay
+    ? `Replay · practice only — your streak &amp; stats are unchanged`
+    : (solved
+      ? `Solved in ${revealed} letter${revealed===1?"":"s"} · ${misses} miss${misses===1?"":"es"} · ${fmt(elapsed)} · streak ${stats.streak}`
+      : `Gave up · answers revealed · streak reset`);
   const share = `W&OD #${String(P.number).padStart(3,"0")}\n${sq}\n${final}/10 · ${labelFor(final)}\n`+
     (solved? `${revealed} letter${revealed===1?"":"s"} · ${misses} miss${misses===1?"":"es"} · ${fmt(elapsed)}\nStreak: ${stats.streak}`
            : `Answers revealed`);
   document.getElementById("shareText").textContent = share;
   document.getElementById("result").classList.add("show");
-  setMsg(solved?"good":"bad", solved? "Nice ride. Come back tomorrow for the next one." : "That one got away - new puzzle tomorrow.");
+  setMsg(replay ? "info" : (solved?"good":"bad"),
+    replay ? "You've already played this one — this was just for practice, so your streak and stats didn't change."
+           : (solved? "Nice ride. Come back tomorrow for the next one." : "That one got away - new puzzle tomorrow."));
   renderArchive();
-  if(window.Pulse) Pulse.recordPlay({
+  // Don't re-submit a replay to the leaderboard (the server dedupes too, but skip the round-trip).
+  if(window.Pulse && !replay) Pulse.recordPlay({
     game:"wod", edition_id:Pulse.canonicalId("wod",P.number), edition_no:P.number,
     title:P.title, score:final, max_score:10, hints:revealed, misses:misses,
     ms:elapsed*1000, solved:solved, squares:sq

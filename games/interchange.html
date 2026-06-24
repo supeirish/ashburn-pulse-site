@@ -295,12 +295,17 @@ function editionSummary(){
   stopTimer();
   const total=edResults.reduce((a,b)=>a+b,0);
   const sq=edResults.map(s=>s===5?"🟩":(s>0?"🟨":"⬛")).join("");
-  if(!stats.done[E.number]){ stats.played+=1; }
-  stats.done[E.number]=total; stats.best=Math.max(stats.best,total);
-  if(total===15) stats.perfect+=1;
-  stats.streak = total>0 ? stats.streak+1 : 0;
-  saveStats(stats); renderStats(); renderArchive();
-  if(window.Pulse) Pulse.recordPlay({
+  // First completion only: replaying a finished edition is practice — no played/streak/perfect/score change.
+  const replay = stats.done[E.number] !== undefined;
+  if(!replay){
+    stats.played+=1;
+    stats.done[E.number]=total; stats.best=Math.max(stats.best,total);
+    if(total===15) stats.perfect+=1;
+    stats.streak = total>0 ? stats.streak+1 : 0;
+    saveStats(stats); renderStats(); renderArchive();
+  }
+  // Don't re-submit a replay to the leaderboard (the server dedupes too, but skip the round-trip).
+  if(window.Pulse && !replay) Pulse.recordPlay({
     game:"interchange", edition_id:Pulse.canonicalId("interchange",E.number), edition_no:E.number,
     title:E.label, score:total, max_score:15, hints:edResults.length, misses:0,
     ms:elapsed*1000, solved:total>0, squares:sq
@@ -309,10 +314,14 @@ function editionSummary(){
   $("result").classList.add("show");
   $("resBig").textContent=`${E.label} - ${total}/15`;
   $("resSquares").textContent=sq;
-  $("resLine").textContent = (total===15?"Perfect day.":"Nice work.")+" Time: "+fmt(elapsed);
+  $("resLine").textContent = replay
+    ? "Replay · practice only — your streak & stats are unchanged"
+    : (total===15?"Perfect day.":"Nice work.")+" Time: "+fmt(elapsed);
   $("shareText").textContent=`${E.label}\n${sq}\n${total}/15 in ${fmt(elapsed)}\nStreak: ${stats.streak}`;
   $("btnNext").style.display="none";
-  setMsg("good","That's the full edition. Come back tomorrow.");
+  setMsg("good", replay
+    ? "You've already played this edition — this run was just for practice, so your stats didn't change."
+    : "That's the full edition. Come back tomorrow.");
 }
 function renderArchive(){
   const now=new Date();
