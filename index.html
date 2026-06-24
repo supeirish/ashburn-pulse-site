@@ -578,6 +578,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
     </a>
     <nav class="menu" id="menu">
       <button class="tab on" data-p="home" onclick="go('home')">Newsletter</button>
+      <button class="tab" data-p="weekend" onclick="go('weekend')">This Weekend</button>
       <button class="tab" data-p="play" onclick="go('play')">Play <span class="dot"></span></button>
       <button class="tab" data-p="guide" onclick="go('guide')">Local Links</button>
       <button class="tab" data-p="history" onclick="go('history')">Ashburn History</button>
@@ -608,6 +609,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
         </form>
         <div class="hero-sublabel">A new issue every Wednesday. No spam · unsubscribe anytime.</div>
         <div class="cta-row" style="margin-top:18px">
+          <button class="cta ghost" onclick="go('weekend')">See this weekend →</button>
           <button class="cta ghost" onclick="scrollToId('archive')">See past issues ↓</button>
         </div>
       </div>
@@ -696,6 +698,86 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
     <div class="eyebrow g">The archive</div>
     <h2 class="sec" style="font-size:26px">Every issue, kept</h2>
     <div class="issues" id="issueGrid" style="margin-top:20px"></div>
+  </div>
+</section>
+
+<!-- ====================================================== THIS WEEKEND ====================================================== -->
+<section class="page" id="page-weekend">
+  <style>
+    .wk-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:16px 0 24px}
+    .wk-weekof{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--mute);text-transform:uppercase}
+    .wk-share{appearance:none;border:1.5px solid var(--line);background:#fff;color:var(--teal);font-weight:700;font-size:13.5px;padding:9px 15px;border-radius:10px;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;gap:6px}
+    .wk-share:hover{border-color:var(--teal);background:var(--teal-50)}
+    .wk-bar{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:6px 0 16px}
+    .wk-when2{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--mute);text-transform:uppercase}
+    .wk-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .wk-frame-wrap{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.02),0 18px 40px -30px rgba(15,61,76,.4)}
+    .wk-frame{width:100%;border:0;display:block;min-height:680px}
+    .wk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .wk-card{border:1px solid var(--line);border-radius:var(--r);padding:18px;background:#fff;display:flex;flex-direction:column;transition:.16s}
+    .wk-card:hover{border-color:var(--teal-700);box-shadow:0 14px 28px -24px rgba(15,61,76,.5)}
+    .wk-when{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--coral-ink)}
+    .wk-area{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.06em;color:var(--sky);border:1px solid #d3e3e7;border-radius:5px;padding:2px 6px}
+    .wk-title{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:-.02em;line-height:1.15;margin-top:9px}
+    .wk-where{font-size:13px;color:var(--mute);margin-top:4px}
+    .wk-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+    .wk-tag{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:5px}
+    .wk-tag.free{background:#e7f5ee;color:#1f7a51}.wk-tag.kids{background:#fff1dd;color:#9a6412}.wk-tag.new{background:#ffe9e6;color:#c0301f}.wk-tag.outdoors{background:#e9f3ec;color:#2e7d55}.wk-tag.music{background:#eceeff;color:#3f46b5}
+    .wk-blurb{font-size:13.5px;color:#4a5158;margin-top:10px;flex:1;line-height:1.55}
+    .wk-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line-2)}
+    .wk-link{font-weight:700;font-size:13px;color:var(--teal)}
+    .wk-link:hover{color:var(--coral-ink)}
+    .wk-src{font-family:var(--mono);font-size:10px;color:var(--mute)}
+    .wk-fallback{grid-column:1/-1;border:1px dashed var(--line);border-radius:14px;padding:30px;text-align:center;color:var(--mute);font-size:15px;background:var(--soft)}
+    .wk-cross{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+    .ed-forward{appearance:none;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:9px 13px;border-radius:9px;cursor:pointer;min-height:40px}
+    .ed-forward:hover{background:rgba(255,255,255,.22)}
+    .share-mini{appearance:none;border:1px solid var(--line);background:#fff;color:var(--teal);font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:8px 11px;border-radius:8px;cursor:pointer;min-height:40px;display:inline-flex;align-items:center;gap:4px}
+    .share-mini:hover{border-color:var(--teal);background:var(--teal-50)}
+    .issue-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:13px}
+    .issue-foot .read{margin-top:0}
+    .ml-share{appearance:none;background:transparent;border:0;color:#1f6b45;font-weight:700;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0;margin-left:6px}
+    .signup .ml-share{color:#fff}
+    #apToast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--teal);color:#fff;font-size:14px;font-weight:600;padding:12px 18px;border-radius:12px;box-shadow:0 12px 30px -10px rgba(15,61,76,.5);opacity:0;pointer-events:none;transition:.25s;z-index:200;max-width:90vw;text-align:center}
+    #apToast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    @media(max-width:920px){.wk-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.wk-grid{grid-template-columns:1fr}}
+  </style>
+  <div class="wrap section-pad" style="padding-bottom:30px">
+    <div class="wk-bar">
+      <div>
+        <div class="eyebrow s">This week in Ashburn</div>
+        <span class="wk-when2" id="wkWhen"></span>
+      </div>
+      <div class="wk-actions">
+        <button class="wk-share" onclick="shareWeekend()">↗ Share</button>
+        <button class="wk-share" onclick="openLatestIssue()">Open full page ↗</button>
+      </div>
+    </div>
+    <div class="wk-frame-wrap" id="wkFrameWrap">
+      <iframe id="wkFrame" class="wk-frame" title="This week's Ashburn Pulse issue"></iframe>
+    </div>
+    <div id="wkFallback" class="wk-fallback" style="display:none">This week’s issue lands Wednesday. Browse <a onclick="go('home')" style="color:var(--teal);text-decoration:underline;cursor:pointer">past issues</a> or get the Pulse in your inbox.</div>
+    <div class="wk-cross">
+      <button class="cta ghost" onclick="go('guide')">Plan more from Local Links →</button>
+      <button class="cta ghost" onclick="go('home')">See past issues →</button>
+    </div>
+  </div>
+  <div class="wrap" style="padding:6px 22px 60px" id="wkSignup">
+    <div class="signup">
+      <h2>Get the weekend plan.</h2>
+      <p>The full lineup lands in your inbox every Wednesday — free, four minutes, no fluff.</p>
+      <form class="ml-form form" action="" method="post" target="ml-sink" onsubmit="return mlSubmit(this)">
+        <input type="email" name="fields[email]" placeholder="you@email.com" aria-label="Email address" required>
+        <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
+        <button class="cta primary" type="submit">Subscribe</button>
+      </form>
+      <div class="edrow">
+        <span class="ed"><span class="sw" style="background:var(--coral)"></span>Always free · unsubscribe anytime</span>
+        <button class="ed-forward" onclick="forwardToNeighbor()">↗ Forward to a neighbor</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -915,6 +997,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
         <h5>The site</h5>
         <ul>
           <li><a onclick="go('home')">Newsletter</a></li>
+          <li><a onclick="go('weekend')">This Weekend</a></li>
           <li><a onclick="go('play')">Play</a></li>
           <li><a onclick="go('guide')">Local Links</a></li>
           <li><a onclick="go('history')">Ashburn History</a></li>
@@ -931,6 +1014,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
       <div>
         <h5>Community</h5>
         <ul>
+          <li><a onclick="forwardToNeighbor()">Forward to a neighbor</a></li>
           <li><a onclick="openForm('listing')">Submit a listing</a></li>
           <li><a onclick="openForm('correction')">Send a correction</a></li>
           <li><a onclick="go('about')">About</a></li>
@@ -1347,18 +1431,79 @@ function filterGuide(){
 /* ============ newsletter archive ============ */
 const ISSUES=[{"badge": "The Pulse", "color": "#FF5A47", "dt": "Jun 18", "tag": "weekend", "h": "Father's Day, handled: ribs & rosé in the mountains (+ the carnival's last call)", "li": ["Father's Day Ribs & Rosé at Bluemont Vineyard", "Polo under the lights at Morven Park", "One Loudoun Carnival's final weekend — free admission"], "url": "issues/2026-06-18.html"}, {"badge": "The Pulse", "color": "#FF5A47", "dt": "Jun 13", "tag": "weekend", "h": "Live music on the farm, Orville Peck under the stars, and pro sports galore", "li": ["Vanish Farmwoods: free live music all weekend", "Loudoun United hosts Rhode Island FC tonight", "One Loudoun Carnival’s last week — free admission"], "url": "issues/2026-06-13.html"}];
 let aFilter='all';
+let ARCH_LIST=[];
 function renderIssues(){
   const list=ISSUES.filter(i=>aFilter==='all'||i.tag===aFilter);
-  document.getElementById('issueGrid').innerHTML=list.map(i=>{
+  ARCH_LIST=list;
+  document.getElementById('issueGrid').innerHTML=list.map((i,idx)=>{
     const act=i.url?('window.open(\''+i.url+'\',\'_blank\',\'noopener\')'):'alert(\'This issue isn\\u2019t hosted yet.\')';
+    const share=i.url?'<button class="share-mini" onclick="event.stopPropagation();apShareIssue('+idx+')" aria-label="Share this issue">↗ Share</button>':'';
     return '<div class="issue" onclick="'+act+'">'+
       '<div class="ih"><span class="badge" style="background:'+i.color+'">'+i.badge+'</span><span class="dt">'+i.dt+'</span></div>'+
       '<div class="ib"><h4>'+i.h+'</h4><ul>'+i.li.map(x=>'<li>'+x+'</li>').join('')+'</ul>'+
-      '<span class="read">Read full issue →</span></div>'+
+      '<div class="issue-foot"><span class="read">Read full issue →</span>'+share+'</div></div>'+
     '</div>';
   }).join('');
 }
 function setArch(btn,a){aFilter=a;document.querySelectorAll('.arch-filters .filt').forEach(b=>b.classList.toggle('on',b===btn));renderIssues();}
+
+/* ============ share / referral ============ */
+function apToast(msg){
+  let t=document.getElementById('apToast');
+  if(!t){ t=document.createElement('div'); t.id='apToast'; t.setAttribute('role','status'); document.body.appendChild(t); }
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(window._apToastT); window._apToastT=setTimeout(function(){ t.classList.remove('show'); },2800);
+}
+function apShare(opts){
+  opts=opts||{};
+  const url=opts.url||(location.origin+'/');
+  const data={title:opts.title||'Ashburn Pulse', text:opts.text||'', url:url};
+  if(navigator.share){ navigator.share(data).catch(function(){}); return; }
+  const blob=(opts.text?opts.text+' — ':'')+url;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(blob).then(function(){ apToast('Link copied — paste it to a neighbor'); }).catch(function(){ apToast(url); });
+  } else { apToast(url); }
+}
+function apShareIssue(idx){
+  const i=ARCH_LIST[idx]; if(!i) return;
+  apShare({title:'Ashburn Pulse', text:i.h, url: location.origin+'/'+i.url});
+}
+let WK_LATEST=null;
+function shareWeekend(){
+  const u=(WK_LATEST&&WK_LATEST.url)?(location.origin+'/'+WK_LATEST.url):(location.origin+'/#weekend');
+  apShare({title:'Ashburn Pulse — this week in Ashburn', text:(WK_LATEST&&WK_LATEST.h)||'This week in Ashburn', url:u});
+}
+function openLatestIssue(){ if(WK_LATEST&&WK_LATEST.url) window.open(WK_LATEST.url,'_blank','noopener'); }
+function forwardToNeighbor(){
+  const subj='You should read Ashburn Pulse';
+  const body='Thought you’d like this — a free, four-minute weekly read on what’s happening around Ashburn:\n\nhttps://theashburnpulse.com\n';
+  location.href='mailto:?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+}
+
+/* ============ This Weekend page = the latest issue ============ */
+/* No separate content model: the Weekend tab embeds the newest edition from
+   ISSUES (data/issues.json, newest-first). Publishing a new issue advances it. */
+function renderWeekend(){
+  const frame=document.getElementById('wkFrame'); if(!frame) return;
+  const fb=document.getElementById('wkFallback');
+  const wrap=document.getElementById('wkFrameWrap');
+  const whenEl=document.getElementById('wkWhen');
+  const latest=(typeof ISSUES!=='undefined'&&ISSUES.length)?ISSUES[0]:null;
+  if(!latest||!latest.url){
+    if(fb) fb.style.display='block';
+    if(wrap) wrap.style.display='none';
+    return;
+  }
+  WK_LATEST=latest;
+  if(fb) fb.style.display='none';
+  if(wrap) wrap.style.display='';
+  if(whenEl) whenEl.textContent=latest.dt?('The latest issue · '+latest.dt):'The latest issue';
+  if(frame.getAttribute('data-src')!==latest.url){
+    frame.setAttribute('data-src',latest.url);
+    frame.onload=function(){ try{ var d=frame.contentDocument; if(d&&d.body){ var h=Math.max(d.body.scrollHeight,d.documentElement.scrollHeight); if(h>120) frame.style.height=(h+8)+'px'; } }catch(e){} };
+    frame.src=latest.url;
+  }
+}
 
 /* ============ newsletter signup (MailerLite) ============ */
 /* ── SETUP (one line) ──────────────────────────────────────────────────────
@@ -1404,7 +1549,7 @@ function mlSubmit(form){
   const showNote=()=>{
     let note=form.parentNode.querySelector('.ml-confirm');
     if(!note){ note=document.createElement('div'); note.className='ml-confirm'; note.setAttribute('role','status'); form.insertAdjacentElement('afterend', note); }
-    note.textContent='🎉 You’re on the list — check your inbox to confirm your subscription.';
+    note.innerHTML='🎉 You’re on the list — check your inbox to confirm. <button class="ml-share" onclick="forwardToNeighbor()">Tell a neighbor →</button>';
     note.style.display='block';
   };
   // brief button flash for immediate feedback
@@ -1429,17 +1574,18 @@ if(document.getElementById('wodSentence'))wodInit();
 if(document.getElementById('icBoard'))icInit();
 buildGuide();
 renderIssues();
+renderWeekend();
 </script>
 <script>
 /* Auto-size the embedded game iframes to their content (same-origin players). */
 (function(){
   function fit(){
-    document.querySelectorAll('iframe[src^="games/"]').forEach(function(f){
+    document.querySelectorAll('iframe[src^="games/"],#wkFrame').forEach(function(f){
       try{ var d=f.contentDocument; if(d&&d.body){ var h=Math.max(d.body.scrollHeight,d.documentElement.scrollHeight); if(h>60) f.style.height=(h+6)+'px'; } }catch(e){}
     });
   }
   window.addEventListener('load',function(){ fit(); setInterval(fit,800); });
-  document.querySelectorAll('iframe[src^="games/"]').forEach(function(f){ f.addEventListener('load',function(){ setTimeout(fit,60); }); });
+  document.querySelectorAll('iframe[src^="games/"],#wkFrame').forEach(function(f){ f.addEventListener('load',function(){ setTimeout(fit,60); }); });
 })();
 </script>
 
