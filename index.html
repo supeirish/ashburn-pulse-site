@@ -65,13 +65,14 @@ header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.93);ba
 .brand{display:flex;align-items:center;gap:11px;margin-right:auto}
 .mark{position:relative;width:38px;height:38px;flex:none}
 .mark svg{width:100%;height:100%;display:block}
-.brand .name{font-family:var(--disp);font-weight:800;font-size:20px;letter-spacing:-.02em;color:var(--teal);line-height:1}
+.brand .name{font-family:var(--disp);font-weight:800;font-size:20px;letter-spacing:-.02em;color:var(--teal);line-height:1;white-space:nowrap}
 .brand .name b{color:var(--coral);font-weight:800}
 .brand .sub{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-top:3px}
 nav.menu{display:flex;gap:2px}
 .tab{appearance:none;background:none;border:0;padding:9px 14px;border-radius:9px;font-weight:600;font-size:14.5px;color:var(--mute);letter-spacing:-.01em;transition:.15s}
 .tab:hover{color:var(--teal);background:var(--teal-50)}
 .tab.on{color:var(--teal);background:var(--teal-50)}
+.tab-sub{display:none}
 .tab .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--coral);margin-left:6px;vertical-align:middle;animation:pulse 2.4s ease-in-out infinite}
 .navsub{display:flex;align-items:center;gap:6px}
 .btn-sub{background:var(--teal);color:#fff;border:0;border-radius:10px;padding:9px 15px;font-weight:700;font-size:14px;letter-spacing:-.01em;transition:.15s}
@@ -335,7 +336,9 @@ footer li a:hover{color:#fff}
   nav.menu.open{transform:none}
   .tab{text-align:left;width:100%;padding:13px 16px;font-size:16px}
   .hamb{display:flex}
-  .navsub .btn-sub{display:inline-block;padding:8px 12px;font-size:13px}
+  .navsub .btn-sub{display:none}
+  .tab-sub{display:block;background:var(--teal);color:#fff}
+  .tab-sub:hover{background:var(--teal-700);color:#fff}
   .hero .grid,.today-grid,.play-hero,.hist-hero,.nl-hero{grid-template-columns:1fr}
   .explore,.cards,.issues{grid-template-columns:1fr 1fr}
   .statband .wrap{grid-template-columns:1fr 1fr;gap:18px}
@@ -586,6 +589,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
       <button class="tab" data-p="play" onclick="go('play')">Play <span class="dot"></span></button>
       <button class="tab" data-p="guide" onclick="go('guide')">Local Links</button>
       <button class="tab" data-p="history" onclick="go('history')">Ashburn History</button>
+      <button class="tab tab-sub" onclick="go('home')">Subscribe →</button>
     </nav>
     <div class="navsub">
       <button class="btn-sub" onclick="go('home')">Subscribe</button>

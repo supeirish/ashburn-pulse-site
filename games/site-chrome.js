@@ -35,12 +35,13 @@
       ".apc-nav{max-width:1080px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:8px;height:62px}",
       ".apc-brand{display:flex;align-items:center;gap:11px;margin-right:auto;text-decoration:none}",
       ".apc-mark{width:38px;height:38px;display:block;flex:0 0 auto}",
-      ".apc-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.02em;color:#0F3D4C;line-height:1;display:block}",
+      ".apc-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.02em;color:#0F3D4C;line-height:1;display:block;white-space:nowrap}",
       ".apc-name b{color:#FF5A47;font-weight:800}",
       ".apc-tag{display:block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#62707A;margin-top:3px}",
       ".apc-menu{display:flex;gap:2px}",
       ".apc-tab{appearance:none;background:none;border:0;font-family:inherit;cursor:pointer;font-weight:600;font-size:14.5px;color:#62707A;letter-spacing:-.01em;text-decoration:none;padding:9px 14px;border-radius:9px;transition:.15s;white-space:nowrap}",
       ".apc-tab:hover{color:#0F3D4C;background:#eaf2f4}",
+      ".apc-tab-sub{display:none}",
       ".apc-navsub{display:flex;align-items:center;gap:6px}",
       ".apc-sub-btn{background:#0F3D4C;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:9px 15px;border-radius:10px;white-space:nowrap}",
       ".apc-sub-btn:hover{background:#16566b}",
@@ -51,7 +52,8 @@
         ".apc-menu.open{transform:none}",
         ".apc-tab{text-align:left;width:100%;padding:13px 16px;font-size:16px}",
         ".apc-hamb{display:flex}",
-        ".apc-sub-btn{padding:8px 12px;font-size:13px}",
+        ".apc-sub-btn{display:none}",
+        ".apc-tab-sub{display:block;background:#0F3D4C;color:#fff}",
       "}",
       ".apc-footer{background:#0F3D4C;color:#cfe0e5;margin-top:44px}",
       ".apc-fwrap{max-width:1080px;margin:0 auto;padding:34px 22px 18px}",
@@ -87,6 +89,7 @@
           '<a class="apc-tab" href="/#play">Play</a>' +
           '<a class="apc-tab" href="/#guide">Local Links</a>' +
           '<a class="apc-tab" href="/#history">Ashburn History</a>' +
+          '<a class="apc-tab apc-tab-sub" href="/#home">Subscribe</a>' +
         '</nav>' +
         '<div class="apc-navsub">' +
           '<a class="apc-sub-btn" href="/#home">Subscribe</a>' +
