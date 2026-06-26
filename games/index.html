@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulse Games — daily puzzles for Ashburn | Ashburn Pulse</title>
+<meta name="description" content="Free daily puzzles made for Ashburn — W&OD, the daily anagram game, and The Interchange. Play in two minutes and climb the neighborhood leaderboard.">
+<link rel="canonical" href="https://theashburnpulse.com/games/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pulse Games — daily puzzles for Ashburn">
+<meta property="og:description" content="Free daily puzzles made for Ashburn. Play in two minutes, climb the neighborhood leaderboard.">
+<meta property="og:url" content="https://theashburnpulse.com/games/">
+<style>
+  :root{
+    --teal:#0F3D4C; --coral:#FF5A47; --sun:#FFB341; --leaf:#3FA776; --sky:#3D9BD9;
+    --ink:#14272f; --mute:#62707A; --line:#e7e6e2; --paper:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);background:linear-gradient(180deg,#f3f9f4,#eef5ef);min-height:100vh;
+       font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:880px;margin:0 auto;padding:40px 22px 30px}
+  .eyebrow{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.16em;
+           text-transform:uppercase;color:var(--coral);font-weight:600}
+  h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;letter-spacing:-.02em;
+     font-size:clamp(30px,5vw,42px);color:var(--teal);margin:10px 0 8px;line-height:1.05}
+  .lede{font-size:17px;line-height:1.6;color:var(--mute);max-width:54ch;margin:0 0 6px}
+  .meta{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.04em;
+        color:var(--mute);margin-top:14px}
+  .meta b{color:var(--leaf)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+  @media(max-width:680px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px;
+        box-shadow:0 1px 0 rgba(0,0,0,.02);display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;inset:0 auto 0 0;width:5px}
+  .card.wod::before{background:var(--leaf)}
+  .card.inter::before{background:var(--sky)}
+  .badge{align-self:flex-start;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;
+         letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:12px}
+  .card.wod .badge{background:#e9f6ef;color:#1f7a51;border:1px solid #bfe6d2}
+  .card.inter .badge{background:#e8f2fb;color:#1f6aa8;border:1px solid #c3def3}
+  .card h2{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:23px;color:var(--teal);
+           margin:0 0 4px;letter-spacing:-.01em}
+  .card .sub{font-size:13.5px;color:var(--mute);margin:0 0 12px}
+  .card p{font-size:14.5px;line-height:1.6;color:var(--ink);margin:0 0 18px}
+  .play{margin-top:auto;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+        background:var(--teal);color:#fff;text-decoration:none;font-weight:700;font-size:15px;
+        padding:11px 18px;border-radius:11px;transition:.15s}
+  .play:hover{background:#16566b}
+  .card.wod .play:hover{background:#1f7a51}
+  .card.inter .play:hover{background:#1f6aa8}
+  .strip{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-top:26px;padding-top:18px;
+         border-top:1px solid var(--line);font-size:14px;color:var(--mute)}
+  .strip a{color:var(--teal);font-weight:700;text-decoration:none}
+  .strip a:hover{color:var(--coral)}
+  .slogan{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;color:var(--coral);margin-left:auto}
+</style>
+</head>
+<body>
+<script src="site-chrome.js"></script>
+
+<main class="wrap">
+  <div class="eyebrow">Pulse Games</div>
+  <h1>Two-minute puzzles, made for Ashburn</h1>
+  <p class="lede">Free daily brain breaks with a local twist — play in a couple of minutes, then see where you land on the neighborhood leaderboard.</p>
+  <p class="meta">New puzzles daily · <b>free to play</b> · neighborhood leaderboard</p>
+
+  <div class="grid">
+    <section class="card wod">
+      <span class="badge">Daily anagram</span>
+      <h2>W&amp;OD</h2>
+      <p class="sub">Words &amp; Omitted Details · the daily Ashburn anagram game</p>
+      <p>One funny sentence, several blanks — and every missing word is an anagram of the others. Same letters, reordered. Solve it, build a streak, climb the tiers.</p>
+      <a class="play" href="wod.html">Play W&amp;OD <span aria-hidden="true">→</span></a>
+    </section>
+
+    <section class="card inter">
+      <span class="badge">Daily puzzle</span>
+      <h2>The Interchange</h2>
+      <p class="sub">One clue · two words · pick the middle letter</p>
+      <p>Two words cross at their exact middle letter. You get one clue and the blank cross — guess just the shared middle letter before the clock runs out.</p>
+      <a class="play" href="interchange.html">Play The Interchange <span aria-hidden="true">→</span></a>
+    </section>
+  </div>
+
+  <div class="strip">
+    <a href="leaderboard.html">View the leaderboard →</a>
+    <a href="/#home">Subscribe to the newsletter →</a>
+    <span class="slogan">Live life, together.</span>
+  </div>
+</main>
+
+</body>
+</html>
