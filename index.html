@@ -1605,6 +1605,62 @@ renderWeekend();
 </script>
 
 <!-- ============ Accounts: make the WHOLE site auth-aware ============
-     Loads the same Supabase client the games use, so a player who signs in
-     stays signed in everywhere on the site, the homepage reflects it, and a
-     sign-in that returns to the homepag
+     Loads the same Supabase client the games use (games/pulse.js), so a
+     player who signs in on a game page — or via the button in the Play
+     section — is recognised here too, and the homepage reflects it. A magic
+     link / Google sign-in that returns to the homepage is processed here as
+     well. Degrades to a plain link if accounts aren't configured. -->
+<script>
+(function () {
+  // The homepage header is <header class="site">, not the games' <header class="top">,
+  // so pulse.js won't auto-mount its own bar here. Set this flag anyway, defensively.
+  if (document.body) document.body.setAttribute('data-pulse-manual', '');
+
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      if (document.querySelector('script[src="' + src + '"]')) return resolve();
+      var s = document.createElement('script');
+      s.src = src; s.onload = resolve; s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  // Reflect the current sign-in state on the Play section's toolbar button.
+  function renderSignin(P) {
+    var btn = document.getElementById('ap-signin');
+    if (!btn) return;
+    if (P && P.user) {
+      var u = P.user;
+      btn.innerHTML = (u.avatar_emoji || '🟢') + ' ' + (u.handle || 'My scores');
+      btn.setAttribute('href', 'games/leaderboard.html#me');
+      btn.setAttribute('title', 'Signed in — view your scores & streak');
+      btn.onclick = null;
+    } else {
+      btn.innerHTML = '🎟️ Sign in to save';
+      btn.removeAttribute('title');
+      if (P && P.enabled && typeof P.openSignIn === 'function') {
+        // accounts available: open the sign-in sheet in place
+        btn.setAttribute('href', '#play');
+        btn.onclick = function (e) { e.preventDefault(); P.openSignIn(); };
+      } else {
+        // not configured: fall back to the leaderboard sign-in link
+        btn.setAttribute('href', 'games/leaderboard.html#signin');
+        btn.onclick = null;
+      }
+    }
+  }
+
+  loadScript('games/pulse-config.js')
+    .then(function () { return loadScript('games/pulse.js'); })
+    .then(function () {
+      var P = window.Pulse;
+      if (!P) return;
+      P.onChange(function () { renderSignin(P); });            // updates on sign in / sign out
+      P.whenReady().then(function () { renderSignin(P); });    // once the session has been checked
+      renderSignin(P);                                         // first paint while it loads
+    })
+    .catch(function () { /* accounts unavailable: leave the static link untouched */ });
+})();
+</script>
+</body>
+</html>
