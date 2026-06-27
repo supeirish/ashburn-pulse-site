@@ -72,13 +72,22 @@
   .arch .done{color:var(--green)}
   .how{font-size:13px;color:var(--muted);line-height:1.6;margin-top:10px}
   .foot{margin-top:24px;font-size:12px;color:var(--muted);text-align:center}
-  /* Start gate: blanks out the puzzle until the player presses Start */
-  #startGate{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:24px;border-radius:14px;background:rgba(251,253,251,.80);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);z-index:6}
+  /* Start panel: compact and fully on-screen at load, so the primary action
+     (Start) is reachable with no scrolling. Hides the puzzle body until Start. */
+  #startGate{display:none;flex-direction:column;align-items:center;text-align:center;padding:4px 6px 6px}
+  .card.locked{padding-bottom:20px}
+  .card.locked > :not(#startGate){display:none}
   .card.locked #startGate{display:flex}
-  #startGate h3{margin:0 0 6px;color:var(--green-d);font-size:20px}
-  #startGate p{margin:0 0 16px;color:var(--muted);font-size:14px;max-width:340px}
-  #startGate .startbtn{background:var(--green);color:#fff;border-color:var(--green-d);font-size:18px;padding:12px 30px;border-radius:12px}
+  #startGate .sg-meta{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+  #startGate h3{margin:0 0 6px;color:var(--green-d);font-size:21px}
+  #startGate p{margin:0 0 12px;color:var(--muted);font-size:14px;max-width:380px;line-height:1.5}
+  #startGate .sg-steps{counter-reset:sg;text-align:left;margin:0 0 16px;padding:0;list-style:none;max-width:380px;width:100%}
+  #startGate .sg-steps li{position:relative;padding:6px 4px 6px 32px;font-size:13.5px;color:var(--ink);line-height:1.45}
+  #startGate .sg-steps li:before{counter-increment:sg;content:counter(sg);position:absolute;left:0;top:5px;
+    width:22px;height:22px;border-radius:50%;background:var(--green-bg);color:var(--green-d);
+    font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  #startGate .startbtn{background:var(--green);color:#fff;border-color:var(--green-d);font-size:18px;padding:13px 36px;border-radius:12px;width:100%;max-width:300px}
+  #startGate .sg-rules{background:none;border:0;color:var(--green-d);text-decoration:underline;font-size:13px;font-weight:700;margin-top:10px;cursor:pointer;padding:6px;font-family:inherit}
   /* How-it-works modal */
   .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(15,26,18,.55);z-index:50;padding:18px}
   .modal.show{display:flex}
@@ -108,8 +117,6 @@
     </div>
     <button class="help-link" id="btnHelp">&#9432; Game Info: Rules &amp; Scoring</button>
   </header>
-
-  <div class="stats" id="stats"></div>
 
   <div class="embed-help"><button class="help-link" id="btnHelp2">&#9432; Game Info: Rules &amp; Scoring</button></div>
 
@@ -148,11 +155,20 @@
     <p class="how"><b>New to W&amp;OD?</b> Tap &ldquo;How it works&rdquo; up top for the full rules, scoring, and skill tiers.</p>
 
     <div id="startGate">
+      <div class="sg-meta" id="sgMeta"></div>
       <h3>Today's W&amp;OD</h3>
-      <p>One sentence, several blanks &mdash; every missing word is an anagram of the others. The clock starts when you press Start.</p>
+      <p>One sentence, several blanks &mdash; every missing word is an anagram of the others (the same letters, reordered).</p>
+      <ol class="sg-steps">
+        <li>Read the sentence and fill in every blank.</li>
+        <li>Stuck? Reveal letters from the shared rack (&minus;1 each).</li>
+        <li>Fewer hints means a higher score &mdash; solve clean for a Perfect Ride.</li>
+      </ol>
       <button class="startbtn" id="btnStart">Start &rarr;</button>
+      <button class="sg-rules" id="btnRules">How scoring works</button>
     </div>
   </div>
+
+  <div class="stats" id="stats"></div>
 
   <details class="archive" id="archiveWrap">
     <summary>Past puzzles &middot; play any prior day</summary>
@@ -232,6 +248,7 @@ function load(i){
   stopTimer(); document.getElementById("timer").textContent="0:00";
   document.getElementById("pzNum").textContent = "W&OD #"+String(P.number).padStart(3,"0");
   document.getElementById("pzTitle").textContent = "- "+P.title;
+  document.getElementById("sgMeta").textContent = "W&OD #"+String(P.number).padStart(3,"0")+" · "+P.difficulty;
   const pill=document.getElementById("pzPill"); pill.textContent=P.difficulty; pill.className="pill "+P.difficulty;
   document.getElementById("pzMeta").textContent = P.word_count+" words · "+P.letter_count+" letters";
   // sentence with inputs
@@ -386,6 +403,7 @@ document.getElementById("btnCheck").addEventListener("click",check);
 document.getElementById("btnReveal").addEventListener("click",reveal);
 document.getElementById("btnGiveUp").addEventListener("click",giveUp);
 document.getElementById("btnStart").addEventListener("click",startGame);
+document.getElementById("btnRules").addEventListener("click",openHelp);
 document.getElementById("btnHelp").addEventListener("click",openHelp);
 document.getElementById("btnHelp2").addEventListener("click",openHelp);
 document.getElementById("btnHelpClose").addEventListener("click",closeHelp);

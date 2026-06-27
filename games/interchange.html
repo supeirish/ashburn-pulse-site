@@ -49,11 +49,19 @@ color:var(--blue);background:var(--blue-bg);border-radius:6px;padding:2px 7px;ma
 .key{font:inherit;font-weight:700;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);
 padding:9px 0;cursor:pointer;font-size:15px}
 .key:hover{background:var(--blue-bg)}
+.key.sel{background:var(--blue);color:#fff;border-color:var(--blue-d)}
 .key.bad{background:#ffebee;color:var(--bad);border-color:#ef9a9a;opacity:.55}
 .key.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
 .key:disabled{cursor:not-allowed}
+.gc.center.staged{background:var(--blue);color:#fff;border-color:var(--blue-d);font-size:20px}
 .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 button.btn{font:inherit;font-weight:700;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:9px 13px;cursor:pointer}
+button.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue-d)}
+button.btn.hint{background:#fff8e1;border-color:#ffcc80;color:#a05a00}
+button.btn.hint:hover{background:#fff3cd}
+button.btn.hint:disabled{background:#fff;color:var(--ink)}
+.controls.hint-row{margin-top:12px}
+.controls.actions{margin-top:8px}
 button.btn:active{transform:translateY(1px)}
 button.btn:disabled{opacity:.45;cursor:not-allowed}
 .scorebar{display:flex;gap:16px;flex-wrap:wrap;margin-top:13px;font-size:14px;color:var(--muted)}
@@ -73,13 +81,21 @@ details.archive summary{cursor:pointer;font-weight:700;color:var(--blue-d);paddi
 .arch:hover{border-color:var(--blue-l);background:var(--blue-bg)}
 .arch .t{font-weight:700}.arch .m{color:var(--muted);font-size:11px;margin-top:2px}
 .foot{margin-top:22px;font-size:12px;color:var(--muted);text-align:center}
-/* Start gate */
-#startGate{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
-text-align:center;padding:24px;border-radius:14px;background:rgba(251,253,255,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);z-index:6}
+/* Start panel: compact and fully on-screen at load so Start needs no scrolling */
+#startGate{display:none;flex-direction:column;align-items:center;text-align:center;padding:4px 6px 6px}
+.card.locked{padding-bottom:20px}
+.card.locked > :not(#startGate){display:none}
 .card.locked #startGate{display:flex}
-#startGate h3{margin:0 0 6px;color:var(--blue-d);font-size:20px}
-#startGate p{margin:0 0 16px;color:var(--muted);font-size:14px;max-width:340px}
-#startGate .startbtn{background:var(--blue);color:#fff;border-color:var(--blue-d);font-size:18px;padding:12px 30px;border-radius:12px}
+#startGate .sg-meta{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+#startGate h3{margin:0 0 6px;color:var(--blue-d);font-size:21px}
+#startGate p{margin:0 0 12px;color:var(--muted);font-size:14px;max-width:380px;line-height:1.5}
+#startGate .sg-steps{counter-reset:sg;text-align:left;margin:0 0 16px;padding:0;list-style:none;max-width:380px;width:100%}
+#startGate .sg-steps li{position:relative;padding:6px 4px 6px 32px;font-size:13.5px;color:var(--ink);line-height:1.45}
+#startGate .sg-steps li:before{counter-increment:sg;content:counter(sg);position:absolute;left:0;top:5px;
+width:22px;height:22px;border-radius:50%;background:var(--blue-bg);color:var(--blue-d);
+font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+#startGate .startbtn{background:var(--blue);color:#fff;border-color:var(--blue-d);font-size:18px;padding:13px 36px;border-radius:12px;width:100%;max-width:300px}
+#startGate .sg-rules{background:none;border:0;color:var(--blue-d);text-decoration:underline;font-size:13px;font-weight:700;margin-top:10px;cursor:pointer;padding:6px;font-family:inherit}
 /* modal */
 .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(13,27,42,.55);z-index:50;padding:18px}
 .modal.show{display:flex}
@@ -104,7 +120,6 @@ body.embed .embed-help{display:flex;justify-content:flex-end;margin-bottom:2px}
 <header class="top"><div><a href="../index.html" style="text-decoration:none" title="Ashburn Pulse home"><div class="brand">The Interchange</div></a>
 <div class="tag">One clue &middot; two words &middot; pick the middle letter</div></div>
 <button class="help-link" id="btnHelp">&#9432; Game Info: Rules &amp; Scoring</button></header>
-<div class="stats" id="stats"></div>
 <div class="embed-help"><button class="help-link" id="btnHelp2">&#9432; Game Info: Rules &amp; Scoring</button></div>
 <div class="card locked" id="card">
   <div class="pz-head">
@@ -114,12 +129,15 @@ body.embed .embed-help{display:flex;justify-content:flex-end;margin-bottom:2px}
   <div class="edscore" id="edScore"></div>
   <div class="grid" id="grid"></div>
   <div id="clues"></div>
-  <div class="kbd" id="kbd"></div>
-  <div class="controls">
-    <button class="btn" id="btnSecond">Reveal 2nd clue (&minus;2)</button>
+  <div class="controls hint-row">
+    <button class="btn hint" id="btnSecond">&#128161; Reveal 2nd clue (&minus;2)</button>
+  </div>
+  <div class="controls actions">
+    <button class="btn primary" id="btnSubmit" disabled>Submit guess</button>
     <button class="btn" id="btnGiveUp">Give up</button>
     <button class="btn" id="btnNext" style="display:none">Next &rarr;</button>
   </div>
+  <div class="kbd" id="kbd"></div>
   <div class="scorebar">
     <span>This puzzle: <b id="pts">5</b>/5</span>
     <span>Wrong: <b id="wrong">0</b></span>
@@ -135,11 +153,19 @@ body.embed .embed-help{display:flex;justify-content:flex-end;margin-bottom:2px}
   </div>
   <p class="how"><b>New here?</b> Tap &ldquo;How it works&rdquo; up top for the full rules, scoring, and skill tiers.</p>
   <div id="startGate">
+    <div class="sg-meta" id="sgMeta"></div>
     <h3>Today's Interchange</h3>
-    <p>Three puzzles, two crossing words each &mdash; guess the shared middle letter. The clock starts when you press Start.</p>
+    <p>Two words cross at one shared middle letter. You name just that letter &mdash; not the whole words.</p>
+    <ol class="sg-steps">
+      <li>Read the clue and picture both crossing words.</li>
+      <li>Tap the letter you think they share, then press Submit.</li>
+      <li>Three puzzles &mdash; Easy, Medium, Hard &mdash; for up to 15 points.</li>
+    </ol>
     <button class="btn startbtn" id="btnStart">Start &rarr;</button>
+    <button class="sg-rules" id="btnRules">How scoring works</button>
   </div>
 </div>
+<div class="stats" id="stats"></div>
 <details class="archive" id="archiveWrap"><summary>Past editions &middot; play any prior day</summary>
 <div class="arch-grid" id="archive"></div></details>
 <div class="foot">A self-contained player for The Interchange. Editions come from <code>data/editions.json</code>.</div>
@@ -192,7 +218,7 @@ function renderStats(){
 }
 
 // ---- state ----
-let E=null, pi=0, P=null, pts=5, wrong=0, secondUsed=false, over=false, revealed=false, edResults=[], started=false;
+let E=null, pi=0, P=null, pts=5, wrong=0, secondUsed=false, over=false, revealed=false, edResults=[], started=false, selected=null;
 let t0=null, tInt=null, elapsed=0;
 function fmt(s){const m=Math.floor(s/60);return m+":"+String(s%60).padStart(2,"0");}
 function startTimer(){t0=Date.now();tInt=setInterval(function(){elapsed=Math.floor((Date.now()-t0)/1000);$("icTimer").textContent=fmt(elapsed);},1000);}
@@ -211,14 +237,16 @@ function startGame(){
   setMsg("info","Name the single letter where the two words cross.");
 }
 function loadPuzzle(){
-  P=E.puzzles[pi]; pts=5; wrong=0; secondUsed=false; over=false; revealed=false;
+  P=E.puzzles[pi]; pts=5; wrong=0; secondUsed=false; over=false; revealed=false; selected=null;
   $("pzNum").textContent=E.label;
+  $("sgMeta").textContent=E.label+" · 3 puzzles";
   const pill=$("pzPill"); pill.textContent=P.difficulty; pill.className="pill "+P.difficulty;
   $("dots").innerHTML=E.puzzles.map((p,i)=>`<span class="dot ${p.difficulty} ${i===pi?'cur':''}"></span>`).join("");
   const total=edResults.reduce((a,b)=>a+b,0);
   $("edScore").innerHTML=`Edition running total: <b>${total}</b>/15`;
   $("pts").textContent=5; $("wrong").textContent=0; $("usedSecond").textContent="no";
   $("btnSecond").disabled=false; $("btnGiveUp").disabled=false; $("btnNext").style.display="none";
+  $("btnSubmit").disabled=true;
   $("result").classList.remove("show");
   renderGrid(); renderClues(false); renderKbd();
   setMsg("info", started?"Name the single letter where the two words cross.":"Press Start when you're ready.");
@@ -232,7 +260,8 @@ function renderGrid(){
       if(!onA&&!onD){ h+='<span class="gc ic-empty"></span>'; continue; }
       const letter = onA? A[c] : D[r];
       if(revealed) h+=`<span class="gc ${center?'center':''} filled">${letter}</span>`;
-      else h+=`<span class="gc ${center?'center':''}">${center?'◆':''}</span>`;
+      else if(center) h+=`<span class="gc center" id="centerCell">◆</span>`;
+      else h+=`<span class="gc"></span>`;
     } h+='</div>'; }
   $("grid").innerHTML=h;
 }
@@ -247,9 +276,31 @@ function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
 function renderKbd(){
   const L="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   $("kbd").innerHTML=L.map(c=>`<button class="key" data-c="${c}">${c}</button>`).join("");
-  $("kbd").querySelectorAll(".key").forEach(b=>b.addEventListener("click",()=>guess(b.dataset.c)));
+  $("kbd").querySelectorAll(".key").forEach(b=>b.addEventListener("click",()=>selectLetter(b.dataset.c)));
 }
 function setMsg(k,t){const m=$("msg");m.className="msg "+k;m.textContent=t;}
+
+// Stage a letter (no scoring yet) so a guess can't be submitted by accident.
+function selectLetter(ch){
+  if(over||!started) return; ch=ch.toUpperCase();
+  if(!/^[A-Z]$/.test(ch)) return;
+  const key=[...$("kbd").querySelectorAll(".key")].find(b=>b.dataset.c===ch);
+  if(key && key.disabled) return;            // already tried & wrong
+  selected=ch;
+  $("kbd").querySelectorAll(".key").forEach(b=>b.classList.toggle("sel", b.dataset.c===ch && !b.disabled));
+  const cc=$("centerCell"); if(cc){ cc.textContent=ch; cc.classList.add("staged"); }
+  $("btnSubmit").disabled=false;
+  setMsg("info","Press Submit to lock in "+ch+".");
+}
+function clearSelection(){
+  selected=null; $("btnSubmit").disabled=true;
+  $("kbd").querySelectorAll(".key.sel").forEach(b=>b.classList.remove("sel"));
+  const cc=$("centerCell"); if(cc && !revealed){ cc.textContent="◆"; cc.classList.remove("staged"); }
+}
+function submitGuess(){
+  if(over||!started||selected==null) return;
+  const ch=selected; clearSelection(); guess(ch);
+}
 
 function guess(ch){
   if(over||!started) return; ch=ch.toUpperCase();
@@ -340,16 +391,23 @@ function renderArchive(){
 function openHelp(){ $("helpModal").classList.add("show"); }
 function closeHelp(){ $("helpModal").classList.remove("show"); }
 
+$("btnSubmit").addEventListener("click",submitGuess);
 $("btnSecond").addEventListener("click",revealSecond);
 $("btnGiveUp").addEventListener("click",giveUp);
 $("btnNext").addEventListener("click",next);
 $("btnStart").addEventListener("click",startGame);
+$("btnRules").addEventListener("click",openHelp);
 $("btnHelp").addEventListener("click",openHelp);
 $("btnHelp2").addEventListener("click",openHelp);
 $("btnHelpClose").addEventListener("click",closeHelp);
 $("helpModal").addEventListener("click",e=>{ if(e.target.id==="helpModal") closeHelp(); });
 $("btnCopy").addEventListener("click",()=>{navigator.clipboard.writeText($("shareText").textContent).then(()=>{$("btnCopy").textContent="Copied!";setTimeout(()=>$("btnCopy").textContent="Copy share text",1400);}).catch(()=>{});});
-document.addEventListener("keydown",e=>{ if(started && /^[a-zA-Z]$/.test(e.key)) guess(e.key); });
+document.addEventListener("keydown",e=>{
+  if(!started) return;
+  if(/^[a-zA-Z]$/.test(e.key)) selectLetter(e.key);
+  else if(e.key==="Enter"){ e.preventDefault(); submitGuess(); }
+  else if(e.key==="Backspace"){ e.preventDefault(); clearSelection(); }
+});
 
 // ---- which edition: ?id override (editor/email), else today's daily edition ----
 function dailyIndex(){
