@@ -615,7 +615,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
           <input type="email" name="fields[email]" placeholder="you@email.com" aria-label="Email address" required>
           <input type="hidden" name="ml-submit" value="1">
           <input type="hidden" name="anticsrf" value="true">
-          <input type="hidden" name="fields[source]" value="">
+          <input type="hidden" name="fields[heard_via]" value="">
           <button class="cta primary" type="submit">Get the Pulse — free</button>
         </form>
         <div class="hero-sublabel">Your next reason to get out — in your inbox Wednesday. No spam · unsubscribe anytime.</div>
@@ -697,7 +697,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
         <input type="hidden" name="ml-submit" value="1">
         <input type="hidden" name="anticsrf" value="true">
         <button class="cta primary" type="submit">Subscribe</button>
-        <select name="fields[source]" class="ml-source" aria-label="Where did you hear about us?" style="flex-basis:100%;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;font-size:14px;font-family:inherit;color:var(--mute);background:#fff">
+        <select name="fields[heard_via]" class="ml-source" aria-label="Where did you hear about us?" style="flex-basis:100%;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;font-size:14px;font-family:inherit;color:var(--mute);background:#fff">
           <option value="" selected>Where'd you hear about us? (optional)</option>
           <option value="neighbor">A neighbor or friend</option>
           <option value="facebook">Facebook</option>
@@ -793,7 +793,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
         <input type="hidden" name="ml-submit" value="1">
         <input type="hidden" name="anticsrf" value="true">
         <button class="cta primary" type="submit">Subscribe</button>
-        <select name="fields[source]" class="ml-source" aria-label="Where did you hear about us?" style="flex-basis:100%;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;font-size:14px;font-family:inherit;color:var(--mute);background:#fff">
+        <select name="fields[heard_via]" class="ml-source" aria-label="Where did you hear about us?" style="flex-basis:100%;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;font-size:14px;font-family:inherit;color:var(--mute);background:#fff">
           <option value="" selected>Where'd you hear about us? (optional)</option>
           <option value="neighbor">A neighbor or friend</option>
           <option value="facebook">Facebook</option>
@@ -1707,7 +1707,7 @@ function forwardToNeighbor(){
   const map={fb:'facebook',facebook:'facebook',ig:'instagram',instagram:'instagram',
              nextdoor:'nextdoor',reddit:'reddit',referral:'neighbor',share:'neighbor'};
   const v=map[src]||'other';
-  document.querySelectorAll('.ml-form [name="fields[source]"]').forEach(function(el){
+  document.querySelectorAll('.ml-form [name="fields[heard_via]"]').forEach(function(el){
     if(el.tagName==='SELECT'){ if(!el.value) el.value=v; }
     else if(!el.value) el.value=v;
   });
