@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://theashburnpulse.com/sitemap.xml
