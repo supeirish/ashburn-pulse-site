@@ -612,59 +612,22 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
 <main>
 <section class="page on" id="page-home">
   <div class="wrap hero">
-    <div class="grid">
-      <div>
-        <div class="eyebrow c">Ashburn Pulse · a weekly local read</div>
-        <h1>Find your next reason<br>to get out — <em>together.</em></h1>
-        <p class="tag">Every Wednesday, a four-minute read on great things to do in Ashburn — where to go and how to make the most of the weekend. Free.</p>
-        <form class="ml-form hero-signup" action="" method="post" target="ml-sink" onsubmit="return mlSubmit(this)">
-          <input type="email" name="fields[email]" placeholder="you@email.com" aria-label="Email address" required>
-          <input type="hidden" name="ml-submit" value="1">
-          <input type="hidden" name="anticsrf" value="true">
-          <input type="hidden" name="fields[heard_via]" value="">
-          <button class="cta primary" type="submit">Get the Pulse — free</button>
-        </form>
-        <div class="hero-sublabel">Your next reason to get out — in your inbox Wednesday. No spam · unsubscribe anytime.</div>
-        <div class="cta-row" style="margin-top:18px">
-          <button class="cta ghost" onclick="go('weekend')">Plan this weekend →</button>
-          <button class="cta ghost" onclick="go('play')">Play today's game →</button>
-        </div>
+    <div style="max-width:720px;margin:0 auto;text-align:center">
+      <div class="eyebrow c">Your four-minute guide to Ashburn</div>
+      <h1>Find your next reason<br>to get out — <em>together.</em></h1>
+      <p class="tag" style="margin-left:auto;margin-right:auto;max-width:54ch">The weekend plan, what actually matters, and what's opening around Ashburn — and the nearby places worth the drive.</p>
+      <form class="ml-form hero-signup" style="margin-left:auto;margin-right:auto;justify-content:center" action="" method="post" target="ml-sink" onsubmit="return mlSubmit(this)">
+        <input type="email" name="fields[email]" placeholder="you@email.com" aria-label="Email address" required>
+        <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
+        <input type="hidden" name="fields[heard_via]" value="">
+        <button class="cta primary" type="submit">Get Wednesday's Pulse →</button>
+      </form>
+      <div class="hero-sublabel">Free, every Wednesday. No spam · unsubscribe anytime.</div>
+      <div class="cta-row" style="justify-content:center;margin-top:18px">
+        <button class="cta ghost" onclick="go('weekend')">Plan this weekend →</button>
+        <button class="cta ghost" onclick="go('play')">Play today's game →</button>
       </div>
-      <div class="hero-card">
-        <div class="hc-top">
-          <div class="eyebrow">What's in the Pulse</div>
-          <div class="pill"><span class="sw" style="background:var(--leaf)"></span>Every Wed</div>
-        </div>
-        <div class="hc-body">
-          <div style="display:flex;flex-direction:column;gap:13px">
-            <div style="display:flex;align-items:center;gap:11px;font-size:14.5px;color:var(--ink)"><span style="width:8px;height:8px;border-radius:50%;background:var(--sky);flex:none"></span>Where to go this weekend</div>
-            <div style="display:flex;align-items:center;gap:11px;font-size:14.5px;color:var(--ink)"><span style="width:8px;height:8px;border-radius:50%;background:var(--coral);flex:none"></span>Local notes worth knowing</div>
-            <div style="display:flex;align-items:center;gap:11px;font-size:14.5px;color:var(--ink)"><span style="width:8px;height:8px;border-radius:50%;background:var(--leaf);flex:none"></span>A place or person to support</div>
-            <div style="display:flex;align-items:center;gap:11px;font-size:14.5px;color:var(--ink)"><span style="width:8px;height:8px;border-radius:50%;background:var(--sun);flex:none"></span>Today's puzzle 🔥</div>
-          </div>
-          <div class="hc-row">
-            <span class="s">A 4-minute read</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- mission (above the stats, so it's seen early) -->
-  <div class="wrap" style="padding:42px 22px 10px">
-    <div class="mission">
-      <div class="eyebrow c">Why we're here</div>
-      <h2 class="sec">People are made for connection.</h2>
-      <p class="mission-lede">The best moments happen when they're shared with other people — but life is busy. So every week we curate things to do out and about in Ashburn, to make it a little easier to get out and enjoy where you live.</p>
-    </div>
-  </div>
-
-  <!-- stat band -->
-  <div class="statband">
-    <div class="wrap">
-      <div class="stat"><div class="n">Wed</div><div class="l">New issue, every week</div></div>
-      <div class="stat"><div class="n">4<em>min</em></div><div class="l">Start to finish</div></div>
-      <div class="stat"><div class="n"><em>Free</em></div><div class="l">Every issue, always</div></div>
     </div>
   </div>
 
@@ -700,6 +663,24 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
         <p>From Farmwell, a quiet farm town on a rail line, to Metro and Data Center Alley — the whole arc, in six short chapters.</p>
       </div>
       <button class="cta ghost" onclick="go('history')">Read the story of Ashburn →</button>
+    </div>
+  </div>
+
+  <!-- mission (above the stats, so it's seen early) -->
+  <div class="wrap" style="padding:42px 22px 10px">
+    <div class="mission">
+      <div class="eyebrow c">Why we're here</div>
+      <h2 class="sec">People are made for connection.</h2>
+      <p class="mission-lede">The best moments happen when they're shared with other people — but life is busy. So every week we curate things to do out and about in Ashburn, to make it a little easier to get out and enjoy where you live.</p>
+    </div>
+  </div>
+
+  <!-- stat band -->
+  <div class="statband">
+    <div class="wrap">
+      <div class="stat"><div class="n">Wed</div><div class="l">New issue, every week</div></div>
+      <div class="stat"><div class="n">4<em>min</em></div><div class="l">Start to finish</div></div>
+      <div class="stat"><div class="n"><em>Free</em></div><div class="l">Every issue, always</div></div>
     </div>
   </div>
 
