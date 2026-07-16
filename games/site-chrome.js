@@ -86,7 +86,9 @@
         '<nav class="apc-menu" id="apc-menu">' +
           '<a class="apc-tab" href="/#home">Newsletter</a>' +
           '<a class="apc-tab" href="/#weekend">This Weekend</a>' +
+          '<a class="apc-tab" href="/#big-events">Big Events</a>' +
           '<a class="apc-tab" href="/#play">Play</a>' +
+          '<a class="apc-tab" href="/#eats">Food &amp; Deals</a>' +
           '<a class="apc-tab" href="/#guide">Local Links</a>' +
           '<a class="apc-tab" href="/#history">Ashburn History</a>' +
           '<a class="apc-tab apc-tab-sub" href="/#home">Subscribe</a>' +
@@ -121,17 +123,19 @@
       '<div class="apc-fwrap">' +
         '<div class="apc-fgrid">' +
           '<div><div class="apc-fname">Ashburn <b>Pulse</b></div>' +
-            '<p class="apc-fblurb">Your four minutes on Ashburn — news, weekends, a daily puzzle, and the only local reference you’ll bookmark.</p></div>' +
+            '<p class="apc-fblurb">Your four minutes on Ashburn — news, weekends, a daily puzzle, and the local reference worth keeping close.</p></div>' +
           '<div><h5>The site</h5><ul>' +
-            '<li><a href="/#home">Newsletter</a></li><li><a href="/#weekend">This Weekend</a></li><li><a href="/#play">Play</a></li>' +
+            '<li><a href="/#home">Newsletter</a></li><li><a href="/#weekend">This Weekend</a></li><li><a href="/#big-events">Big Events</a></li>' +
+            '<li><a href="/#play">Play</a></li><li><a href="/#eats">Food &amp; Deals</a></li>' +
             '<li><a href="/#guide">Local Links</a></li><li><a href="/#history">Ashburn History</a></li></ul></div>' +
           '<div><h5>Games</h5><ul>' +
             '<li><a href="wod.html">W&amp;OD</a></li><li><a href="interchange.html">The Interchange</a></li>' +
             '<li><a href="leaderboard.html">Leaderboard</a></li></ul></div>' +
           '<div><h5>Community</h5><ul>' +
-            '<li><a href="/#about">About</a></li><li><a href="/#home">Subscribe</a></li></ul></div>' +
+            '<li><a href="/#about">About</a></li><li><a href="/#home">Subscribe</a></li>' +
+            '<li><a href="/privacy.html">Privacy</a></li><li><a href="/privacy.html#corrections">Corrections</a></li></ul></div>' +
         '</div>' +
-        '<div class="apc-fbar"><span>© 2026 Ashburn Pulse · Built for ZIP 20147</span><span>Made in Ashburn · ZIP 20147</span></div>' +
+        '<div class="apc-fbar"><span>© 2026 Ashburn Pulse · Built in Ashburn, Virginia</span><span>Made in Ashburn, Virginia</span></div>' +
       '</div>' +
       '<div class="apc-sunrise"><i></i><i></i><i></i><i></i></div>';
     document.body.appendChild(footer);
