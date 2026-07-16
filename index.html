@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ashburn Pulse — Things to Do in Ashburn, VA This Weekend</title>
-<meta id="metaDesc" name="description" content="Things to do in Ashburn, VA this weekend — the local weekend plan, restaurant deals, big events, and a daily puzzle for Ashburn (ZIP 20147). Free, four-minute read every week.">
+<meta id="metaDesc" name="description" content="Things to do in Ashburn, VA this weekend — the local weekend plan, restaurant deals, big events, and a daily puzzle for Ashburn, Virginia. Free, four-minute read every week.">
 <meta name="theme-color" content="#0F3D4C">
 <link rel="canonical" href="https://theashburnpulse.com/">
 <meta name="geo.region" content="US-VA">
@@ -18,14 +18,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ashburn Pulse">
 <meta property="og:title" content="Ashburn Pulse — your four minutes on Ashburn">
-<meta property="og:description" content="One sharp local brief, the weekend plan, a daily local puzzle, and the only Ashburn reference you'll bookmark. Free.">
+<meta property="og:description" content="One sharp local brief, the weekend plan, a daily local puzzle, and the local reference worth keeping close. Free.">
 <meta property="og:url" content="https://theashburnpulse.com/">
 <meta property="og:image" content="https://theashburnpulse.com/share-card.png">
 
 <!-- Social share preview (X / Twitter) -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ashburn Pulse — your four minutes on Ashburn">
-<meta name="twitter:description" content="One sharp local brief, the weekend plan, a daily local puzzle, and the only Ashburn reference you'll bookmark. Free.">
+<meta name="twitter:description" content="One sharp local brief, the weekend plan, a daily local puzzle, and the local reference worth keeping close. Free.">
 <meta name="twitter:image" content="https://theashburnpulse.com/share-card.png">
 
 <!-- Favicon: the pulse mark, drawn inline so there's no extra file to host -->
@@ -594,7 +594,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
       <button class="tab" data-p="weekend" onclick="go('weekend')">This Weekend</button>
       <button class="tab" data-p="big-events" onclick="go('big-events')">Big Events <span class="dot"></span></button>
       <button class="tab" data-p="play" onclick="go('play')">Play <span class="dot"></span></button>
-      <button class="tab" data-p="eats" onclick="go('eats')">Eats Deals <span class="dot"></span></button>
+      <button class="tab" data-p="eats" onclick="go('eats')">Food &amp; Deals <span class="dot"></span></button>
       <button class="tab" data-p="guide" onclick="go('guide')">Local Links</button>
       <button class="tab" data-p="history" onclick="go('history')">Ashburn History</button>
       <button class="tab tab-sub" onclick="go('home')">Subscribe →</button>
@@ -626,8 +626,8 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
         </form>
         <div class="hero-sublabel">Your next reason to get out — in your inbox Wednesday. No spam · unsubscribe anytime.</div>
         <div class="cta-row" style="margin-top:18px">
-          <button class="cta ghost" onclick="go('weekend')">See this weekend →</button>
-          <button class="cta ghost" onclick="scrollToId('archive')">See past issues ↓</button>
+          <button class="cta ghost" onclick="go('weekend')">Plan this weekend →</button>
+          <button class="cta ghost" onclick="go('play')">Play today's game →</button>
         </div>
       </div>
       <div class="hero-card">
@@ -668,28 +668,38 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
     </div>
   </div>
 
-  <!-- games teaser -->
-  <div class="wrap" style="padding:8px 22px 0">
-    <div class="guide-help" style="margin-top:0">
-      <div>
-        <h4>A quick daily puzzle, built to share</h4>
-        <p>Two local word games — W&amp;OD and The Interchange. Build a streak, compare scores, no account needed.</p>
+  <!-- three doorways: Plan / Use / Play (H4, front-door simplification) -->
+  <div class="wrap" style="padding:18px 22px 4px">
+    <div style="display:flex;flex-wrap:wrap;gap:14px">
+      <div style="flex:1 1 210px;border:1px solid var(--line);border-radius:14px;padding:18px;border-top:4px solid var(--sun)">
+        <div style="font:800 12px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">Plan</div>
+        <h4 style="margin:7px 0 4px;font-size:18px">This weekend &amp; big events</h4>
+        <p style="font-size:13.5px;color:var(--mute);margin:0 0 12px">The curated weekend plan, plus the fairs and festivals worth putting on the calendar.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="cta ghost" onclick="go('weekend')">This weekend →</button><button class="cta ghost" onclick="go('big-events')">Big events →</button></div>
       </div>
-      <button class="cta primary" onclick="go('play')">Play today's game →</button>
+      <div style="flex:1 1 210px;border:1px solid var(--line);border-radius:14px;padding:18px;border-top:4px solid var(--leaf)">
+        <div style="font:800 12px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">Use</div>
+        <h4 style="margin:7px 0 4px;font-size:18px">Local links &amp; food deals</h4>
+        <p style="font-size:13.5px;color:var(--mute);margin:0 0 12px">140+ hand-checked local links and this week's restaurant specials, all in one place.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="cta ghost" onclick="go('guide')">Local Links →</button><button class="cta ghost" onclick="go('eats')">Food &amp; Deals →</button></div>
+      </div>
+      <div style="flex:1 1 210px;border:1px solid var(--line);border-radius:14px;padding:18px;border-top:4px solid var(--sky)">
+        <div style="font:800 12px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">Play</div>
+        <h4 style="margin:7px 0 4px;font-size:18px">Daily games &amp; leaderboard</h4>
+        <p style="font-size:13.5px;color:var(--mute);margin:0 0 12px">Two quick local word games, a streak to protect, and a neighborhood leaderboard. No account needed.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="cta primary" onclick="go('play')">Play today's game →</button></div>
+      </div>
     </div>
   </div>
 
-  <!-- more than an inbox -->
-  <div class="wrap" style="padding:14px 22px 0">
+  <!-- history teaser (H5): a taste, not the whole timeline -->
+  <div class="wrap" style="padding:16px 22px 0">
     <div class="guide-help" style="margin-top:0">
       <div>
-        <h4>More than an inbox</h4>
-        <p>Useful local references, Ashburn history, schools, parks, churches, and places to go — all in one place.</p>
+        <h4>How a burning tree became Ashburn</h4>
+        <p>From Farmwell, a quiet farm town on a rail line, to Metro and Data Center Alley — the whole arc, in six short chapters.</p>
       </div>
-      <div class="cta-row" style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="cta ghost" onclick="go('guide')">Browse Local Links →</button>
-        <button class="cta ghost" onclick="go('history')">Explore Ashburn History →</button>
-      </div>
+      <button class="cta ghost" onclick="go('history')">Read the story of Ashburn →</button>
     </div>
   </div>
 
@@ -989,7 +999,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
       <div>
         <div class="eyebrow y">The story of a place</div>
         <h2 class="sec">How a burning tree<br>became the Ashburn we know today</h2>
-        <p class="lede">Ashburn's story begins before it was called Ashburn — as Farmwell, a quiet Loudoun farm town on a rail line. Two hundred years later, a town named for a creek (or maybe a lightning strike) carries a major share of the world's internet traffic — alongside a thriving set of neighborhoods, schools, parks, and things to do. Here's the whole arc.</p>
+        <p class="lede">Ashburn's story begins before it was called Ashburn — as Farmwell, a quiet Loudoun farm town on a rail line. Two hundred years later, a town named for a creek (or maybe a lightning strike) sits at the center of one of the world's largest concentrations of data centers, through which a significant share of global internet traffic passes — alongside a thriving set of neighborhoods, schools, parks, and things to do. Here's the whole arc.</p>
       </div>
     </div>
   </div>
@@ -1005,7 +1015,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
       <div class="tl leaf"><div class="yr">1968</div><h4>The last train — and the trail era begins</h4><p>W&amp;OD trains, which had run since 1859, stop in 1968. The rail bed later becomes the W&amp;OD Trail — its first segment opened in 1974 and the route reached Purcellville by 1988 — now ridden by thousands.</p></div>
       <div class="tl coral"><div class="yr">1985</div><h4>The boom is approved</h4><p>Loudoun approves Ashburn Village, a 5,000-home planned community. It opens in 1988 and grows past 5,300 homes, followed by Ashburn Farm, Broadlands, and Brambleton.</p></div>
       <div class="tl sky"><div class="yr">1992</div><h4>Redskins Park opens</h4><p>Washington's NFL team — now the Commanders — opens its Ashburn headquarters and training facility in 1992, putting the town's name on national broadcasts.</p></div>
-      <div class="tl sun"><div class="yr">late&nbsp;1990s</div><h4>AOL, and Data Center Alley</h4><p>Building on MAE-East, a key early internet exchange, and AOL's late-1990s presence, data centers begin clustering in Ashburn — growing into one of the world's densest hubs, carrying a major share of global internet traffic.</p></div>
+      <div class="tl sun"><div class="yr">late&nbsp;1990s</div><h4>AOL, and Data Center Alley</h4><p>Building on MAE-East, a key early internet exchange, and AOL's late-1990s presence, data centers begin clustering in Ashburn — growing into one of the world's largest concentrations of data centers, through which a significant share of global internet traffic passes.</p></div>
       <div class="tl"><div class="yr">2020</div><h4>46,349 neighbors</h4><p>The census counts an Ashburn of 46,349 — a community that was just a few hundred people in 1980.</p></div>
       <div class="tl leaf"><div class="yr">2022</div><h4>Metro reaches Ashburn</h4><p>On November 15, 2022, the Silver Line extension opens, bringing Metrorail to Ashburn — the western end of the line.</p></div>
     </div>
@@ -1037,12 +1047,12 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
 
     <details class="era" data-c="sun">
       <summary><span class="chip">05</span><span class="et">Data Center Alley</span><span class="ar">›</span></summary>
-      <div class="ebody"><p>Ashburn's second transformation was nearly invisible until the buildings grew too big to ignore. Thanks to early-internet fiber, cheap land, AOL's presence, and proximity to Washington, data centers began clustering here in the 1990s and accelerated sharply after 2013. Loudoun now hosts roughly 200 data centers with 100+ more in development, and by many accounts a major share of the world's internet traffic flows through "Data Center Alley". The industry pays a remarkable share of the county's taxes — and drives its loudest debates over power lines, land use, and what Ashburn should become next.</p></div>
+      <div class="ebody"><p>Ashburn's second transformation was nearly invisible until the buildings grew too big to ignore. Thanks to early-internet fiber, cheap land, AOL's presence, and proximity to Washington, data centers began clustering here in the 1990s and accelerated sharply after 2013. As of 2026, Loudoun hosts one of the world's largest concentrations of data centers — on the order of 200 operating campuses with dozens more approved or in development, though published counts vary with how a "data center" is defined — and a significant share of global internet traffic passes through Northern Virginia's "Data Center Alley". The industry pays a remarkable share of the county's taxes — and drives its loudest debates over power lines, land use, and what Ashburn should become next.</p></div>
     </details>
 
     <details class="era" data-c="teal">
       <summary><span class="chip">06</span><span class="et">Metro, and Ashburn today</span><span class="ar">›</span></summary>
-      <div class="ebody"><p>The Silver Line's Ashburn Metro station opened in November 2022, making this the end of the line — or the beginning, depending on your direction. One Loudoun has become the de facto downtown. A town named for a burning tree (or maybe just a creek) now carries a major share of the world's internet traffic — while still running youth basketball leagues, packing the trail on Saturday mornings, and arguing about school boundaries like any other town.</p></div>
+      <div class="ebody"><p>The Silver Line's Ashburn Metro station opened in November 2022, making this the end of the line — or the beginning, depending on your direction. One Loudoun has become the de facto downtown. A town named for a burning tree (or maybe just a creek) now anchors one of the world's largest concentrations of data centers — while still running youth basketball leagues, packing the trail on Saturday mornings, and arguing about school boundaries like any other town.</p></div>
     </details>
   </div>
 
@@ -1052,6 +1062,8 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
       Virginia Dept. of Historic Resources — Ashburn Historic District nomination · <a href="https://www.dhr.virginia.gov" target="_blank" rel="noopener">dhr.virginia.gov</a><br>
       The Washington Post / Eugene Scheel, “Ashburn’s Agrarian Roots” · <a href="https://www.washingtonpost.com" target="_blank" rel="noopener">washingtonpost.com</a><br>
       Loudoun County historical society · <a href="https://www.loudounhistory.org" target="_blank" rel="noopener">loudounhistory.org</a><br>
+      Loudoun County Economic Development — data center overview (accessed 2026) · <a href="https://biz.loudoun.gov" target="_blank" rel="noopener">biz.loudoun.gov</a><br>
+      Piedmont Environmental Council — data center tracking (accessed 2026) · <a href="https://www.pecva.org" target="_blank" rel="noopener">pecva.org</a><br>
       Ashburn Magazine (railroad &amp; the 1985 decision) · <a href="https://www.ashburnmagazine.com" target="_blank" rel="noopener">ashburnmagazine.com</a><br>
       The Burn, “How Ashburn Got Its Name” · <a href="https://theburn.com" target="_blank" rel="noopener">theburn.com</a><br>
       Friends of the W&amp;OD Trail / NOVA Parks · <a href="https://wodfriends.org" target="_blank" rel="noopener">wodfriends.org</a><br>
@@ -1068,7 +1080,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
   <div class="wrap section-pad" style="padding-bottom:36px">
     <div class="eyebrow c">About</div>
     <h2 class="sec">A simple way to know<br>what to do in Ashburn</h2>
-    <p class="lede">The Ashburn Pulse is a free, independent newsletter and local guide for ZIP 20147 and the neighborhoods around it — Ashburn, Brambleton, Broadlands, Lansdowne, Sterling, and Leesburg. One scannable place to catch what's happening, find the local link you actually need, learn how the area got here, and play a quick daily word game.</p>
+    <p class="lede">The Ashburn Pulse is a free, independent newsletter and local guide for Ashburn and the nearby places worth the drive — built in Ashburn, primarily for Ashburn, Brambleton, Broadlands, and Lansdowne, with selected Loudoun and Northern Virginia spots worth leaving town for. One scannable place to catch what's happening, find the local link you actually need, learn how the area got here, and play a quick daily word game.</p>
 
     <div class="about-cols">
       <div>
@@ -1133,7 +1145,7 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
 </style>
 <section class="page" id="page-eats">
   <div class="wrap section-pad" style="padding-bottom:36px">
-    <div class="eyebrow c">Eats Deals</div>
+    <div class="eyebrow c">Food &amp; Deals</div>
     <h2 class="sec" id="eats-h1">Yum &amp; Value</h2>
     <p class="lede">The neighborly way to eat out for less — daily specials and happenings at Ashburn &amp; Brambleton restaurants, based on each spot's website. Go have a bite or a drink — together.</p>
 
@@ -1196,7 +1208,7 @@ const EATS_UPDATED="Updated Jul 13, 2026";
     <div class="fgrid">
       <div>
         <div class="name">Ashburn <b>Pulse</b></div>
-        <p class="f">Your four minutes on Ashburn — news, weekends, a daily puzzle, and the only local reference you'll bookmark.</p>
+        <p class="f">Your four minutes on Ashburn — news, weekends, a daily puzzle, and the local reference worth keeping close.</p>
         <div class="fsocial">
           <a href="https://www.facebook.com/profile.php?id=61591076739042" target="_blank" rel="noopener" aria-label="Ashburn Pulse on Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073Z"/></svg></a>
           <a href="https://www.instagram.com/theashburnpulse/" target="_blank" rel="noopener" aria-label="Ashburn Pulse on Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.336 3.608 1.311.975.975 1.249 2.242 1.311 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.336 2.633-1.311 3.608-.975.975-2.242 1.249-3.608 1.311-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.336-3.608-1.311-.975-.975-1.249-2.242-1.311-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.336-2.633 1.311-3.608.975-.975 2.242-1.249 3.608-1.311 1.266-.058 1.646-.07 4.85-.07Zm0 1.802c-3.15 0-3.522.012-4.764.069-1.15.052-1.774.243-2.19.405-.55.214-.943.469-1.356.882-.413.413-.668.806-.882 1.356-.162.416-.353 1.04-.405 2.19-.057 1.242-.069 1.614-.069 4.764s.012 3.522.069 4.764c.052 1.15.243 1.774.405 2.19.214.55.469.943.882 1.356.413.413.806.668 1.356.882.416.162 1.04.353 2.19.405 1.242.057 1.614.069 4.764.069s3.522-.012 4.764-.069c1.15-.052 1.774-.243 2.19-.405.55-.214.943-.469 1.356-.882.413-.413.668-.806.882-1.356.162-.416.353-1.04.405-2.19.057-1.242.069-1.614.069-4.764s-.012-3.522-.069-4.764c-.052-1.15-.243-1.774-.405-2.19-.214-.55-.469-.943-.882-1.356-.413-.413-.806-.668-1.356-.882-.416-.162-1.04-.353-2.19-.405-1.242-.057-1.614-.069-4.764-.069Zm0 3.064A4.971 4.971 0 1 1 7.029 12 4.977 4.977 0 0 1 12 7.029Zm0 8.2A3.229 3.229 0 1 0 8.771 12 3.233 3.233 0 0 0 12 15.229Zm6.336-8.418a1.162 1.162 0 1 1-1.162-1.162 1.162 1.162 0 0 1 1.162 1.162Z"/></svg></a>
@@ -1231,12 +1243,14 @@ const EATS_UPDATED="Updated Jul 13, 2026";
           <li><a onclick="openForm('listing')">Submit a listing</a></li>
           <li><a onclick="openForm('correction')">Send a correction</a></li>
           <li><a onclick="go('about')">About</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/privacy.html#corrections">Corrections policy</a></li>
         </ul>
       </div>
     </div>
     <div class="fbar">
-      <span>© 2026 Ashburn Pulse · Built for ZIP 20147</span>
-      <span>Made in Ashburn · ZIP 20147</span>
+      <span>© 2026 Ashburn Pulse · Built in Ashburn, Virginia</span>
+      <span>Made in Ashburn, Virginia</span>
     </div>
   </div>
   <div class="sunrise"><i></i><i></i><i></i><i></i></div>
@@ -1264,7 +1278,7 @@ const EATS_UPDATED="Updated Jul 13, 2026";
 <script>
 /* ============ page routing ============ */
 var TAB_META={
- home:{t:"Ashburn Pulse — Things to Do in Ashburn, VA This Weekend",d:"Things to do in Ashburn, VA this weekend — the local weekend plan, restaurant deals, big events, and a daily puzzle for Ashburn (ZIP 20147). Free, four-minute read every week."},
+ home:{t:"Ashburn Pulse — Things to Do in Ashburn, VA This Weekend",d:"Things to do in Ashburn, VA this weekend — the local weekend plan, restaurant deals, big events, and a daily puzzle for Ashburn, Virginia. Free, four-minute read every week."},
  weekend:{t:"This Weekend in Ashburn, VA — Things to Do | Ashburn Pulse",d:"The best things to do in Ashburn and Loudoun County this weekend — events, live music, and family outings."},
  "big-events":{t:"Big Events in Ashburn & Loudoun, VA | Ashburn Pulse",d:"Fairs, festivals and marquee events coming up in Ashburn and Loudoun County, Virginia."},
  eats:{t:"Ashburn Restaurant Deals & Happy Hours | Ashburn Pulse",d:"Current daily specials, happy hours and restaurant deals in Ashburn and Brambleton, VA."},
