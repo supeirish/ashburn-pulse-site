@@ -1,0 +1,108 @@
+{
+  "edition_date": "2026-07-22",
+  "generated_at": "2026-07-22T01:57:24",
+  "assets": [
+    {
+      "purpose": "weekend-main",
+      "platform_size": "ig-square",
+      "file": "2026-07-22_weekend-main_ig-square.png",
+      "title": "This weekend in Ashburn",
+      "picks": [
+        "Bob Dylan at Wolf Trap",
+        "Levi Stephens",
+        "Loudoun County Fair",
+        "Party Fowl"
+      ]
+    },
+    {
+      "purpose": "weekend-main",
+      "platform_size": "ig-story",
+      "file": "2026-07-22_weekend-main_ig-story.png",
+      "title": "This weekend in Ashburn",
+      "picks": [
+        "Bob Dylan at Wolf Trap",
+        "Levi Stephens",
+        "Loudoun County Fair",
+        "Party Fowl"
+      ]
+    },
+    {
+      "purpose": "weekend-main",
+      "platform_size": "fb-landscape",
+      "file": "2026-07-22_weekend-main_fb-landscape.png",
+      "title": "This weekend in Ashburn",
+      "picks": [
+        "Bob Dylan at Wolf Trap",
+        "Levi Stephens",
+        "Loudoun County Fair",
+        "Party Fowl"
+      ]
+    },
+    {
+      "purpose": "game-of-week",
+      "platform_size": "ig-square",
+      "file": "2026-07-22_game-of-week_ig-square.png",
+      "title": "Play this week's puzzles",
+      "picks": [
+        "The W&OD \u2014 the trail word game",
+        "The Interchange \u2014 daily local puzzle"
+      ]
+    },
+    {
+      "purpose": "game-of-week",
+      "platform_size": "ig-story",
+      "file": "2026-07-22_game-of-week_ig-story.png",
+      "title": "Play this week's puzzles",
+      "picks": [
+        "The W&OD \u2014 the trail word game",
+        "The Interchange \u2014 daily local puzzle"
+      ]
+    },
+    {
+      "purpose": "game-of-week",
+      "platform_size": "fb-landscape",
+      "file": "2026-07-22_game-of-week_fb-landscape.png",
+      "title": "Play this week's puzzles",
+      "picks": [
+        "The W&OD \u2014 the trail word game",
+        "The Interchange \u2014 daily local puzzle"
+      ]
+    },
+    {
+      "purpose": "beat-family",
+      "platform_size": "ig-square",
+      "file": "2026-07-22_beat-family_ig-square.png",
+      "title": "Family this week",
+      "picks": [
+        "Volcano Island Waterpark",
+        "Great Country Farms",
+        "The Parent Trap",
+        "Rocknoceros at One Loudoun"
+      ]
+    },
+    {
+      "purpose": "beat-family",
+      "platform_size": "ig-story",
+      "file": "2026-07-22_beat-family_ig-story.png",
+      "title": "Family this week",
+      "picks": [
+        "Volcano Island Waterpark",
+        "Great Country Farms",
+        "The Parent Trap",
+        "Rocknoceros at One Loudoun"
+      ]
+    },
+    {
+      "purpose": "beat-family",
+      "platform_size": "fb-landscape",
+      "file": "2026-07-22_beat-family_fb-landscape.png",
+      "title": "Family this week",
+      "picks": [
+        "Volcano Island Waterpark",
+        "Great Country Farms",
+        "The Parent Trap",
+        "Rocknoceros at One Loudoun"
+      ]
+    }
+  ]
+}
