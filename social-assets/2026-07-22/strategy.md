@@ -146,4 +146,3 @@ A few to put on the calendar 📅 — Peach Fuzztival at Great Country Farms (Au
 
 ---
 
-*Reminder: there's no direct FB/IG posting connector wired up, so these post through Meta Business Suite (or I can drive your browser to post/schedule them if you'd like). The `_to_delete/` folder in social_assets/2026-07-22 is a scratch file — safe to delete.*
