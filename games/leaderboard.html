@@ -81,6 +81,7 @@ h1{font-size:clamp(24px,5vw,34px);letter-spacing:-.03em;margin:4px 0 2px;color:v
 .empty{text-align:center;padding:34px 18px;color:var(--mute)}
 .empty .ic{font-size:40px}.empty h3{margin:12px 0 4px;color:var(--ink)}
 .cta{display:inline-block;margin-top:12px;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:12px}
+button.cta{border:none;cursor:pointer;font:inherit;font-weight:800}
 .loading{text-align:center;padding:40px;color:var(--mute);font-size:14px}
 
 /* history drawer */
@@ -219,6 +220,32 @@ function renderBoard(rows,preview){
   host.innerHTML=html;
 }
 
+/* ---- the scoreboard can be asleep or unreachable: never spin forever ----
+   Pulse.leaderboard() hands back a promise from the database client. If that
+   service is paused or down, the promise can simply never settle, and the old
+   code awaited it with nothing to stop the wait. The page sat on "Loading the
+   board..." indefinitely. Race it against a clock instead, and say plainly
+   when we could not reach it. ---- */
+const BOARD_TIMEOUT_MS = 8000;
+function withTimeout(p, ms){
+  return Promise.race([
+    Promise.resolve(p),
+    new Promise(function(_,reject){ setTimeout(function(){ reject(new Error("timeout")); }, ms); })
+  ]);
+}
+function renderBoardUnavailable(){
+  document.getElementById('board').innerHTML =
+    '<div class="empty">'+
+      '<div class="ic">&#128225;</div>'+
+      '<h3>The board is taking a break</h3>'+
+      '<p>We could not reach the scoreboard just now. Your scores and streaks are safe, '+
+      'and every puzzle still plays as normal.</p>'+
+      '<button class="cta" id="boardRetry">Try again</button>'+
+    '</div>';
+  var b=document.getElementById('boardRetry');
+  if(b) b.onclick=function(){ draw(); };
+}
+
 async function draw(){
   setAccent(SEG);
   var host=document.getElementById('board');
@@ -227,7 +254,16 @@ async function draw(){
     return;
   }
   host.innerHTML='<div class="loading">Loading the board…</div>';
-  var rows=await Pulse.leaderboard(SEG,TAB,100);
+  var rows;
+  try{
+    rows = await withTimeout(Pulse.leaderboard(SEG,TAB,100), BOARD_TIMEOUT_MS);
+  }catch(e){
+    renderBoardUnavailable();
+    return;
+  }
+  // rows === null means the client never came up. An empty array is different:
+  // that is a working board with nobody on it yet, and keeps its own message.
+  if(rows===null){ renderBoardUnavailable(); return; }
   (rows||[]).forEach(function(r){r.sub=subFor(TAB);});
   renderBoard(rows||[]);
 }
