@@ -34,8 +34,16 @@
       pend.push(r);
       this._savePending(pend);                   // survives the OAuth redirect / reload
       if (this.user) this._flush();
-      else if (!document.body.classList.contains("embed"))
+      else if (!document.body.classList.contains("embed") && this.accountsOn())
         this._toast("👋 Sign in to save this score to the leaderboard");
+    },
+
+    /* Is sign-in offered at all? Set ACCOUNTS:false in pulse-config.js to hide
+       every sign-in control. Defaults to true when the key is absent, so an
+       older config file keeps working exactly as before. */
+    accountsOn: function () {
+      var c = window.PULSE_CONFIG || {};
+      return c.ACCOUNTS !== false;
     },
 
     onChange: function (cb) { this._listeners.push(cb); return this; },
@@ -248,7 +256,10 @@
       lb.className = "pulse-btn"; lb.href = this._base() + "leaderboard.html"; lb.innerHTML = "🏆 Leaderboard";
       host.appendChild(lb);
       if (!this.user) {
-        host.appendChild(this._btn("Sign in to save", "solid", this.openSignIn.bind(this)));
+        // With accounts off, the Leaderboard link stays (it explains itself)
+        // but the sign-in button does not, because it cannot complete.
+        if (this.accountsOn())
+          host.appendChild(this._btn("Sign in to save", "solid", this.openSignIn.bind(this)));
       } else {
         var chip = document.createElement("button");
         chip.className = "pulse-chip";
@@ -283,6 +294,9 @@
     },
 
     openSignIn: function () {
+      // Belt and braces: even if something still calls this, honour the switch
+      // rather than opening a dialog that cannot complete.
+      if (!this.accountsOn()) return;
       var self = this;
       var ov = this._overlay();
       var g = CFG.GOOGLE ? '<button class="pulse-btn pulse-g" id="pulse-google" style="width:100%;justify-content:center;padding:13px"><svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.8-6.8C35.6 2.4 30.2 0 24 0 14.6 0 6.5 5.4 2.5 13.3l7.9 6.1C12.3 13.3 17.6 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.1 5.3-4.6 6.9l7.1 5.5C43.4 37.5 46.1 31.5 46.1 24.5z"/><path fill="#FBBC05" d="M10.4 28.6c-.5-1.4-.8-2.9-.8-4.6s.3-3.2.8-4.6l-7.9-6.1C.9 16.5 0 20.1 0 24s.9 7.5 2.5 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.2 0 11.4-2 15.2-5.5l-7.1-5.5c-2 1.3-4.5 2.1-8.1 2.1-6.4 0-11.7-3.8-13.6-9.1l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg> Continue with Google</button><div class="pulse-or">OR</div>' : "";

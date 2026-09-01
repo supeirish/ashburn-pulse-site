@@ -380,10 +380,24 @@ function finish(solved){
   renderArchive();
 }
 
+// The archive must never show a puzzle that has not been published yet.
+// Until 2026-09-01 the bank ended in the past, so listing all of it was
+// harmless. The bank now runs ~60 days ahead, and listing everything handed
+// readers every unpublished puzzle and its answer count. The newest thing a
+// reader may see is TODAY's puzzle.
+function archiveLimit(){
+  const d = dailyIndex();
+  if(d < 0) return -1;                       // before launch day: nothing published
+  if(d >= PUZZLES.length) return PUZZLES.length - 1;  // bank lapped: all have run
+  return d;                                  // otherwise today's puzzle is the newest
+}
 function renderArchive(){
   const el=document.getElementById("archive");
   if(!el) return;
-  el.innerHTML = PUZZLES.map((p,i)=>{
+  const lim = archiveLimit();
+  if(lim < 0){ el.innerHTML = ""; return; }
+  // slice(0, lim+1) keeps array position == real PUZZLES index, so data-i stays valid
+  el.innerHTML = PUZZLES.slice(0, lim+1).map((p,i)=>{
     const done = stats.done[p.id];
     return `<div class="arch" data-i="${i}"><div class="t">#${String(p.number).padStart(3,"0")} ${p.title} ${done?'<span class="done">✓</span>':''}</div>`+
            `<div class="m">${p.word_count}w · ${p.letter_count}L · ${p.difficulty}</div></div>`;
@@ -421,7 +435,10 @@ function findStart(){
   if(q.has("embed") && q.get("embed")!=="0") document.body.classList.add("embed");
   const want = (q.get("id") || q.get("n") || "").toLowerCase().trim();
   if(want){
-    if(want==="latest") return PUZZLES.length-1;
+    // "latest" means the newest PUBLISHED puzzle, i.e. today's. It used to mean
+    // the last puzzle in the bank, which after the 2026-08-31 refill was two
+    // months in the future — a link that handed out an unpublished puzzle.
+    if(want==="latest") return Math.max(0, archiveLimit());
     let i = PUZZLES.findIndex(p => (p.id||"").toLowerCase() === want);
     if(i>=0) return i;
     const m = want.match(/(\d+)\s*$/);

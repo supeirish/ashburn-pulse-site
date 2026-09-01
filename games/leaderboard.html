@@ -272,6 +272,11 @@ function banner(){
   var b=document.getElementById('banner');
   if(!window.Pulse || !Pulse.enabled){
     b.innerHTML='<div class="banner"><div>👀 <b>Preview mode.</b> You’re seeing sample standings. Real leaderboards switch on the moment Supabase keys are added in <code>pulse-config.js</code> — no other changes needed.</div></div>';
+  } else if(Pulse.accountsOn && !Pulse.accountsOn()){
+    // Accounts are switched off in pulse-config.js. Do not invite a sign-in
+    // that cannot complete — say plainly that the board is paused and that
+    // nothing about playing has changed.
+    b.innerHTML='<div class="banner info"><div>⏸️ <b>Standings are paused.</b> Accounts are switched off for now, so nobody is being added to the board. Every puzzle still plays, and your streak is still kept on this device.</div><button class="x" onclick="this.parentNode.remove()">✕</button></div>';
   } else if(!Pulse.user){
     b.innerHTML='<div class="banner info"><div>🎟️ <b>Sign in to join.</b> Your scores save to your account and you’ll appear on the board.</div><button class="x" onclick="this.parentNode.remove()">✕</button></div>';
   } else { b.innerHTML=''; }

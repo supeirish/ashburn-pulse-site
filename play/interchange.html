@@ -341,8 +341,21 @@ function editionSummary(){
   $("btnNext").style.display="none";
   setMsg("good","That's the full edition. Come back tomorrow.");
 }
+// The archive must never list an edition that has not been published yet.
+// Until 2026-09-01 the bank ended in the past, so listing all of it was
+// harmless. The bank now runs ~60 days ahead, and listing everything exposed
+// every unpublished edition. The newest a reader may see is TODAY's.
+function archiveLimit(){
+  const d = dailyIndex();
+  if(d < 0) return -1;                    // before launch day
+  if(d >= EDS.length) return EDS.length-1; // bank lapped: all have run
+  return d;
+}
 function renderArchive(){
-  $("archive").innerHTML=EDS.map((e,i)=>{
+  const lim = archiveLimit();
+  if(lim < 0){ $("archive").innerHTML=""; return; }
+  // slice(0, lim+1) keeps array position == real EDS index, so data-i stays valid
+  $("archive").innerHTML=EDS.slice(0, lim+1).map((e,i)=>{
     const t=stats.done[e.number];
     return `<div class="arch" data-i="${i}"><div class="t">#${String(e.number).padStart(3,"0")} ${t!=null?`<span style="color:var(--ok)">${t}/15</span>`:""}</div>`+
       `<div class="m">${e.date||""}</div></div>`;
@@ -375,7 +388,9 @@ function findStart(){
   if(q.has("embed")&&q.get("embed")!=="0") document.body.classList.add("embed");
   let want=(q.get("id")||"").toLowerCase().trim();
   let ei=null, pz=0;
-  if(want==="latest"){ ei=EDS.length-1; }
+  // "latest" means the newest PUBLISHED edition, i.e. today's — not the last
+  // one in the bank, which after the 2026-08-31 refill sits two months out.
+  if(want==="latest"){ ei=Math.max(0, archiveLimit()); }
   else if(want){
     const tm=want.match(/-(easy|medium|hard)$/); if(tm){ pz=TIER[tm[1]]; want=want.replace(/-(easy|medium|hard)$/,""); }
     const m=want.match(/(\d+)\s*$/);
