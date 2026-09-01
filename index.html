@@ -892,11 +892,15 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
     </style>
     <div class="eyebrow c">The daily habit</div>
     <h2 class="sec">Play Ashburn Pulse</h2>
-    <p class="lede">Two daily local word games, built to share. Play free on any device — or sign in to save your scores, keep a streak, and climb the neighborhood leaderboard.</p>
+    <p class="lede">Two daily local word games, built to share. Free on any device, with nothing to download and no account needed. Your streak keeps itself.</p>
 
     <div class="play-toolbar">
       <a class="play-btn primary" href="games/leaderboard.html">🏆 Leaderboard</a>
-      <a class="play-btn" id="ap-signin" href="games/leaderboard.html#signin">🎟️ Sign in to save</a>
+      <!-- Hidden by default on purpose. renderSignin() reveals it only when
+           accounts are actually available (ACCOUNTS is not false in
+           games/pulse-config.js). If that script never runs, the button stays
+           hidden rather than offering a sign-in that cannot complete. -->
+      <a class="play-btn" id="ap-signin" href="games/leaderboard.html#signin" style="display:none">🎟️ Sign in to save</a>
     </div>
 
     <div class="play-cards">
@@ -1775,6 +1779,12 @@ renderBigEvents();
   function renderSignin(P) {
     var btn = document.getElementById('ap-signin');
     if (!btn) return;
+    // Accounts switched off in games/pulse-config.js (ACCOUNTS:false). Hide the
+    // button rather than showing one that cannot complete a sign-in. Flipping
+    // ACCOUNTS back to true brings it straight back, no code change needed.
+    var cfg = window.PULSE_CONFIG || {};
+    if (cfg.ACCOUNTS === false) { btn.style.display = 'none'; return; }
+    btn.style.display = '';   // markup ships hidden; this is the only thing that reveals it
     if (P && P.user) {
       var u = P.user;
       btn.innerHTML = (u.avatar_emoji || '🟢') + ' ' + (u.handle || 'My scores');
