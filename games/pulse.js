@@ -62,10 +62,29 @@
     signOut: function () { return this._sb.auth.signOut(); },
 
     /* ---- data reads (used by leaderboard.html) ---- */
+    /* A failed read returns null, NOT an empty array.
+       ------------------------------------------------------------------
+       This line used to read `r.error ? [] : r.data`, which threw the error
+       away and handed back an empty list. leaderboard.html cannot tell an
+       empty list from a real one, so a dead backend rendered as the cheerful
+       "No scores here yet - be the first on this board" message. On
+       2026-08-31 the Supabase project was returning 503 and the live board
+       was telling every visitor that nobody plays the games.
+
+       That erased the exact distinction the 2026-08-16 leaderboard fix was
+       written to make: an empty board is a working board with nobody on it,
+       an unreachable board is a failure and must say so. The check for it
+       (`if (rows === null) renderBoardUnavailable()`) could never fire,
+       because the failure was flattened one layer below the page.
+
+       null now means "we could not reach the scoreboard". An empty array
+       still means "the board works and nobody is on it yet". The .catch
+       covers a rejected promise, which .then alone would let escape. */
     leaderboard: function (game, win, limit) {
       if (!this.enabled || !this._sb) return Promise.resolve(null);
       return this._sb.rpc("leaderboard", { p_game: game || "pulse", p_window: win || "today", p_limit: limit || 100 })
-        .then(function (r) { return r.error ? [] : r.data; });
+        .then(function (r) { return r.error ? null : r.data; })
+        .catch(function () { return null; });
     },
     myHistory: function (limit) {
       if (!this.enabled || !this._sb || !this.user) return Promise.resolve([]);
