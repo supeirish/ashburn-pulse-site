@@ -130,7 +130,13 @@
             '<li><a href="/#guide">Local Links</a></li><li><a href="/#history">Ashburn History</a></li></ul></div>' +
           '<div><h5>Games</h5><ul>' +
             '<li><a href="wod.html">W&amp;OD</a></li><li><a href="interchange.html">The Interchange</a></li>' +
-            '<li><a href="leaderboard.html">Leaderboard</a></li></ul></div>' +
+            // LEADERBOARD LINK REMOVED 2026-09-01. Scores are switched off
+            // (ACCOUNTS:false in pulse-config.js) so the board cannot fill up.
+            // This file cannot read that flag — it loads on pages that never
+            // include pulse-config.js — so the link is removed by hand rather
+            // than gated. TO RESTORE, put this line back:
+            //   '<li><a href="leaderboard.html">Leaderboard</a></li>' +
+            '</ul></div>' +
           '<div><h5>Community</h5><ul>' +
             '<li><a href="/#about">About</a></li><li><a href="/#home">Subscribe</a></li>' +
             '<li><a href="/privacy.html">Privacy</a></li><li><a href="/privacy.html#corrections">Corrections</a></li></ul></div>' +

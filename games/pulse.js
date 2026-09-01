@@ -252,9 +252,13 @@
       if (!this.enabled) return;
       var host = this._barHost; if (!host) return;
       host.innerHTML = "";
-      var lb = document.createElement("a");
-      lb.className = "pulse-btn"; lb.href = this._base() + "leaderboard.html"; lb.innerHTML = "🏆 Leaderboard";
-      host.appendChild(lb);
+      // No leaderboard link while scores are switched off — the board cannot
+      // fill up without accounts, so pointing at it only disappoints.
+      if (this.accountsOn()) {
+        var lb = document.createElement("a");
+        lb.className = "pulse-btn"; lb.href = this._base() + "leaderboard.html"; lb.innerHTML = "🏆 Leaderboard";
+        host.appendChild(lb);
+      }
       if (!this.user) {
         // With accounts off, the Leaderboard link stays (it explains itself)
         // but the sign-in button does not, because it cannot complete.

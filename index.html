@@ -630,8 +630,8 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
       </div>
       <div style="flex:1 1 210px;border:1px solid var(--line);border-radius:14px;padding:18px;border-top:4px solid var(--sky)">
         <div style="font:800 12px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)">Play</div>
-        <h4 style="margin:7px 0 4px;font-size:18px">Daily games &amp; leaderboard</h4>
-        <p style="font-size:13.5px;color:var(--mute);margin:0 0 12px">Two quick local word games, a streak to protect, and a neighborhood leaderboard. No account needed.</p>
+        <h4 style="margin:7px 0 4px;font-size:18px">Two daily games</h4>
+        <p style="font-size:13.5px;color:var(--mute);margin:0 0 12px">Two quick local word games and a streak to protect. No account needed.</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="cta primary" onclick="go('play')">Play today's game →</button></div>
       </div>
     </div>
@@ -895,7 +895,9 @@ a.gcl:hover,.gcell:focus .gcl{color:var(--coral);text-decoration:underline;text-
     <p class="lede">Two daily local word games, built to share. Free on any device, with nothing to download and no account needed. Your streak keeps itself.</p>
 
     <div class="play-toolbar">
-      <a class="play-btn primary" href="games/leaderboard.html">🏆 Leaderboard</a>
+      <!-- Ships hidden. renderSignin() reveals it only when ACCOUNTS is not
+           false in games/pulse-config.js. Off since 2026-09-01. -->
+      <a class="play-btn primary" id="ap-leaderboard" href="games/leaderboard.html" style="display:none">🏆 Leaderboard</a>
       <!-- Hidden by default on purpose. renderSignin() reveals it only when
            accounts are actually available (ACCOUNTS is not false in
            games/pulse-config.js). If that script never runs, the button stays
@@ -1783,7 +1785,15 @@ renderBigEvents();
     // button rather than showing one that cannot complete a sign-in. Flipping
     // ACCOUNTS back to true brings it straight back, no code change needed.
     var cfg = window.PULSE_CONFIG || {};
-    if (cfg.ACCOUNTS === false) { btn.style.display = 'none'; return; }
+    var lb = document.getElementById('ap-leaderboard');
+    if (cfg.ACCOUNTS === false) {
+      // Scores are switched off entirely: no sign-in AND no leaderboard, since
+      // a board that nobody can be added to is not worth linking to.
+      btn.style.display = 'none';
+      if (lb) lb.style.display = 'none';
+      return;
+    }
+    if (lb) lb.style.display = '';
     btn.style.display = '';   // markup ships hidden; this is the only thing that reveals it
     if (P && P.user) {
       var u = P.user;

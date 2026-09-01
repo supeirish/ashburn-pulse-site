@@ -61,8 +61,11 @@
 <main class="wrap">
   <div class="eyebrow">Pulse Games</div>
   <h1>Two-minute puzzles, made for Ashburn</h1>
-  <p class="lede">Free daily brain breaks with a local twist — play in a couple of minutes, then see where you land on the neighborhood leaderboard.</p>
-  <p class="meta">New puzzles daily · <b>free to play</b> · neighborhood leaderboard</p>
+  <!-- Leaderboard wording removed 2026-09-01: scores are switched off
+       (ACCOUNTS:false in pulse-config.js), so promising a leaderboard here
+       would not be true. Restore the old copy when accounts come back. -->
+  <p class="lede">Free daily brain breaks with a local twist. Play in a couple of minutes, keep a streak going, and come back tomorrow for a new one.</p>
+  <p class="meta">New puzzles daily · <b>free to play</b> · no account needed</p>
 
   <div class="grid">
     <section class="card wod">
@@ -83,7 +86,8 @@
   </div>
 
   <div class="strip">
-    <a href="leaderboard.html">View the leaderboard →</a>
+    <!-- Leaderboard link removed 2026-09-01 (ACCOUNTS:false). TO RESTORE:
+         <a href="leaderboard.html">View the leaderboard &rarr;</a> -->
     <a href="/#home">Subscribe to the newsletter →</a>
     <span class="slogan">Live life, together.</span>
   </div>

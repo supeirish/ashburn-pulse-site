@@ -249,6 +249,22 @@ function renderBoardUnavailable(){
 async function draw(){
   setAccent(SEG);
   var host=document.getElementById('board');
+  /* Accounts switched off (ACCOUNTS:false in pulse-config.js). A score only
+     reaches the database from a signed-in player, so with accounts off the
+     board can never fill up. Do not call the backend, do not make the reader
+     wait, and do not show an error — none of that is true. Say it is paused,
+     immediately, and point them back to the games. */
+  if(window.Pulse && Pulse.accountsOn && !Pulse.accountsOn()){
+    host.innerHTML =
+      '<div class="empty">'+
+        '<div class="ic">&#9208;&#65039;</div>'+
+        '<h3>Standings are paused</h3>'+
+        '<p>Scores are not being collected right now. Both puzzles still play as normal, '+
+        'and your streak is kept right here on this device.</p>'+
+        '<a class="cta" href="wod.html">Play today\'s W&amp;OD &rarr;</a>'+
+      '</div>';
+    return;
+  }
   if(!window.Pulse || !Pulse.enabled){
     renderBoard(sampleRows(SEG,TAB),true);
     return;
@@ -318,15 +334,62 @@ document.querySelectorAll('#tabSeg button').forEach(function(b){b.onclick=functi
 
 /* boot */
 (function(){
-  function start(){
+  // start() removed 2026-09-01 — replaced by boot() + wireSession() below,
+  // which race the session check instead of waiting on it indefinitely.
+  /* Do not stack two waits before telling the reader anything.
+     ------------------------------------------------------------------
+     This page used to do `Pulse.whenReady().then(start)`. Reading standings
+     needs no account, but that made the board wait on the session check
+     anyway, and when the backend is unreachable that check does not fail
+     fast. Measured on the live site 2026-09-01 with Supabase paused: the
+     session check took about 15 seconds to give up, and only then did the
+     board's own 8-second timeout start. The page showed "Loading the board…"
+     for roughly 23 seconds before it admitted anything was wrong.
+
+     Drawing instantly is NOT the answer either: Pulse builds its database
+     client inside a dynamic import, so for the first moment there is no client
+     and a board read returns null. Painting straight away would flash "the
+     board is taking a break" at everyone, including when the backend is
+     perfectly healthy.
+
+     So race the session check against a short clock. If it answers, boot
+     normally. If it does not answer in SESSION_TIMEOUT_MS, the backend is not
+     responding, and there is no sense stacking another 8-second board wait on
+     top of a wait that already failed. Say so, and keep listening in case it
+     comes back. */
+  var SESSION_TIMEOUT_MS = 5000;
+
+  function wireSession(){
     Pulse.mountAuthChip(document.getElementById('acct'));
-    Pulse.onChange(function(){banner();draw();});
-    banner(); draw();
+    Pulse.onChange(function(){ banner(); draw(); });
     if(location.hash==='#me') setTimeout(openHistory,400);
-    else if(location.hash==='#signin') setTimeout(function(){ if(window.Pulse&&Pulse.enabled&&!Pulse.user&&Pulse.openSignIn) Pulse.openSignIn(); },400);
+    else if(location.hash==='#signin') setTimeout(function(){
+      if(window.Pulse&&Pulse.enabled&&!Pulse.user&&Pulse.openSignIn&&Pulse.accountsOn&&Pulse.accountsOn()) Pulse.openSignIn();
+    },400);
   }
-  if(window.Pulse) Pulse.whenReady().then(start);
-  else window.addEventListener('DOMContentLoaded',function(){ if(window.Pulse) Pulse.whenReady().then(start); else { banner(); draw(); } });
+
+  function boot(){
+    if(!window.Pulse){ banner(); draw(); return; }
+    Promise.race([
+      Pulse.whenReady().then(function(){ return "ready"; }),
+      new Promise(function(res){ setTimeout(function(){ res("timeout"); }, SESSION_TIMEOUT_MS); })
+    ]).then(function(how){
+      if(how === "timeout"){
+        banner();
+        renderBoardUnavailable();
+        // If the session does eventually land, repaint with the real thing.
+        Pulse.whenReady().then(function(){ banner(); draw(); });
+        wireSession();
+      } else {
+        wireSession();
+        banner();
+        draw();
+      }
+    });
+  }
+
+  if(window.Pulse) boot();
+  else window.addEventListener('DOMContentLoaded',function(){ if(window.Pulse) boot(); else { banner(); draw(); } });
 })();
 </script>
 </body>
